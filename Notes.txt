@@ -106,3 +106,126 @@ Builder side → Data Scientist
 User side → Software Developer
 
 AI Engineer = Intersection of both sides
+
+# Introduction to LangChain
+(Alternatives → LlamaIndex, Haystack)
+
+It is an open-source framework for developing applications powered by large language models.
+
+For example:
+E-book PDF Reader (Application)
+
+User → PDF insight → Application
+
+
+User has uploaded the PDF into the application.
+
+User asked the question:
+
+Query = "What are the assumptions of Linear Regression?"
+
+We need to perform a search operation → in the whole document (PDF), where this thing is talked about.
+
+There are two types of search:
+
+1. Keyword Search
+   - It takes keywords and searches for them.
+   - It returns all the pages where those keywords are present.
+
+2. Semantic Search
+   - We try to understand the meaning of the query.
+
+
+System Query → Result + Query
+
+It needs NLU (Natural Language Understanding) to understand the query.
+
+For generating the answer, it needs:
+"Context-aware Text Generation"
+
+Context-aware Text Generation
+↓
+Brain / LLM
+↓
+Final Output
+
+
+# Understanding Semantic Search
+
+Embeddings → Vector
+
+Example:
+
+Paragraph about Virat Kohli
+→ [2.0, 2.2, ...]
+→ Vector → 100 dimensions
+
+Query:
+"How many runs has King Kohli scored?"
+
+Paragraph about Jasprit Bumrah
+→ [ ... ]
+
+Paragraph about Shubman Gill
+→ [ ... ]
+
+The query is also converted into an embedding/vector.
+
+Query Vector
+↓
+Compare with document vectors
+
+The vector with the smallest angle is considered the most relevant result.
+
+This is called:
+Cosine Similarity
+
+Smallest angle
+↓
+Correct / most similar result
+
+
+# RAG / PDF Question Answering Flow
+
+PDF
+↓
+Upload
+↓
+AWS S3
+↓
+PDF
+
+Document Loader
+↓
+Text Splitter
+↓
+Pages / Chunks
+
+Page 1 → Embedding 1
+Page 2 → Embedding 2
+...
+Page 100 → Embedding 100
+
+Embeddings
+↓
+Database / Vector Database
+
+
+User Query
+↓
+Embedding
+↓
+Semantic Search
+↓
+Database
+↓
+Relevant Pages
+
+User Query ──────────────────────┐
+                                 ↓
+                       System Query
+                       Pages + User Query
+                                 ↓
+                              Brain
+                                 ↓
+                           Final Output
