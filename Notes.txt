@@ -35,3 +35,23 @@ iii) Expert Systems
 It is an AI system designed to solve problems or make decisions like a human expert in a specific domain.
 
 E.g.: Medical expert system.
+
+# Generative AI impact areas
+
+(i)Customer Support
+One of the major problems Generative AI has helped solve is customer support. Earlier, whenever customers faced a problem, they usually had to call a customer support helpline, so companies needed a large number of support agents to handle these queries.
+
+Nowadays, companies use AI-powered chatbots as the first level of support. The chatbot can understand the customer's question and provide an immediate response for common problems. If the chatbot cannot solve the issue, the conversation is transferred to a human support agent.
+
+For example, instead of having 10 employees handling all customer queries, a company might have only 2–3 employees handling complex issues while the AI chatbot handles the routine queries.
+
+So, Generative AI helps companies **reduce workload and response time while allowing human employees to focus on more complex problems.**
+
+(ii)Content Creation
+Another major application of Generative AI is content creation. Earlier, creating content such as videos, images, scripts, voice-overs, and music required a lot of human effort, time, and different tools. With Generative AI, we can simply provide a prompt or description, and AI models can generate the required content. For example, a video generation model can take a text prompt describing a scene and generate a video based on it. This helps creators and companies reduce the time and cost of content production while making the process much more efficient
+
+(iii)Education
+Generative AI is also useful in education because it can provide personalized learning. For example, students can ask an AI model to explain a difficult concept, generate examples, create quizzes, or summarize study material. Since the response can be adapted according to the student's level, it can work like a personal tutor.
+
+(iv)Software Development
+Generative AI has also transformed software development. Developers can use AI models to generate code, explain existing code, identify bugs, create test cases, and generate documentation. For example, a developer can describe a requirement in natural language, and the AI can generate the initial code. This improves developer productivity and reduces the time spent on repetitive tasks.
