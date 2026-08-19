@@ -55,3 +55,54 @@ Generative AI is also useful in education because it can provide personalized le
 
 (iv)Software Development
 Generative AI has also transformed software development. Developers can use AI models to generate code, explain existing code, identify bugs, create test cases, and generate documentation. For example, a developer can describe a requirement in natural language, and the AI can generate the initial code. This improves developer productivity and reduces the time spent on repetitive tasks.
+
+
+# FOUNDATION MODELS (Core and engine of Gen AI)
+
+It is a large, pre-trained AI model trained on huge and diverse datasets so that it can be adapted to perform many different tasks. (LLM)
+
+Traditional Models vs Foundation Models:
+
+Traditional Models:
+Dataset
+↓
+Train model
+↓
+One specific problem
+
+Foundation Models:
+Huge + diverse data
+↓
+Large-scale pretraining
+↓
+Generalized model
+(Gen AI)
+
+FOUNDATION MODELS
+
+User Perspective                    Builder Perspective
+Prompt / RAG / Fine-tuning          Huge data + GPUs
+
+
+(i) Foundation Model Builder
+
+You actually build/train the foundation model.
+
+(Massive datasets, huge CPU/TPU compute, large-scale
+training, distributed infrastructure, a lot of money
+and engineering.)
+
+(ii) Foundation Model User
+
+You use an existing foundation model to build your
+own application.
+
+Note:
+Both fields are different and require different
+roadmaps to study.
+
+Builder side → Data Scientist
+
+User side → Software Developer
+
+AI Engineer = Intersection of both sides
