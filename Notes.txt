@@ -1,0 +1,37 @@
+Generative AI
+
+Generative AI is a type of artificial intelligence that creates new content — such as text, images, music or code — by learning patterns from existing data, mimicking human creativity.
+
+AI → ML → DL → Generative AI
+
+AI → Symbolic AI, Fuzzy Logic and Expert Systems
+(Older techniques)
+
+i) Symbolic AI (Rules + Logic)
+
+Represent knowledge using rules, logic and symbols.
+
+E.g.:
+
+If temperature > 38°C
+Then person has fever
+
+ii) Fuzzy Logic
+
+Instead of only T/F, something can be partially true.
+
+Normal Logic:
+
+Temperature = 30°C
+Hot = True
+
+Fuzzy Logic:
+
+Temperature = 30°C
+Hot = 0.7
+
+iii) Expert Systems
+
+It is an AI system designed to solve problems or make decisions like a human expert in a specific domain.
+
+E.g.: Medical expert system.
