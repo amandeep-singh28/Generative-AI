@@ -1,0 +1,384 @@
+Generative AI
+
+Generative AI is a type of artificial intelligence that creates new content — such as text, images, music or code — by learning patterns from existing data, mimicking human creativity.
+
+AI → ML → DL → Generative AI
+
+AI → Symbolic AI, Fuzzy Logic and Expert Systems
+(Older techniques)
+
+i) Symbolic AI (Rules + Logic)
+
+Represent knowledge using rules, logic and symbols.
+
+E.g.:
+
+If temperature > 38°C
+Then person has fever
+
+ii) Fuzzy Logic
+
+Instead of only T/F, something can be partially true.
+
+Normal Logic:
+
+Temperature = 30°C
+Hot = True
+
+Fuzzy Logic:
+
+Temperature = 30°C
+Hot = 0.7
+
+iii) Expert Systems
+
+It is an AI system designed to solve problems or make decisions like a human expert in a specific domain.
+
+E.g.: Medical expert system.
+
+# Generative AI impact areas
+
+(i)Customer Support
+One of the major problems Generative AI has helped solve is customer support. Earlier, whenever customers faced a problem, they usually had to call a customer support helpline, so companies needed a large number of support agents to handle these queries.
+
+Nowadays, companies use AI-powered chatbots as the first level of support. The chatbot can understand the customer's question and provide an immediate response for common problems. If the chatbot cannot solve the issue, the conversation is transferred to a human support agent.
+
+For example, instead of having 10 employees handling all customer queries, a company might have only 2–3 employees handling complex issues while the AI chatbot handles the routine queries.
+
+So, Generative AI helps companies **reduce workload and response time while allowing human employees to focus on more complex problems.**
+
+(ii)Content Creation
+Another major application of Generative AI is content creation. Earlier, creating content such as videos, images, scripts, voice-overs, and music required a lot of human effort, time, and different tools. With Generative AI, we can simply provide a prompt or description, and AI models can generate the required content. For example, a video generation model can take a text prompt describing a scene and generate a video based on it. This helps creators and companies reduce the time and cost of content production while making the process much more efficient
+
+(iii)Education
+Generative AI is also useful in education because it can provide personalized learning. For example, students can ask an AI model to explain a difficult concept, generate examples, create quizzes, or summarize study material. Since the response can be adapted according to the student's level, it can work like a personal tutor.
+
+(iv)Software Development
+Generative AI has also transformed software development. Developers can use AI models to generate code, explain existing code, identify bugs, create test cases, and generate documentation. For example, a developer can describe a requirement in natural language, and the AI can generate the initial code. This improves developer productivity and reduces the time spent on repetitive tasks.
+
+
+# FOUNDATION MODELS (Core and engine of Gen AI)
+
+It is a large, pre-trained AI model trained on huge and diverse datasets so that it can be adapted to perform many different tasks. (LLM)
+
+Traditional Models vs Foundation Models:
+
+Traditional Models:
+Dataset
+↓
+Train model
+↓
+One specific problem
+
+Foundation Models:
+Huge + diverse data
+↓
+Large-scale pretraining
+↓
+Generalized model
+(Gen AI)
+
+FOUNDATION MODELS
+
+User Perspective                    Builder Perspective
+Prompt / RAG / Fine-tuning          Huge data + GPUs
+
+
+(i) Foundation Model Builder
+
+You actually build/train the foundation model.
+
+(Massive datasets, huge CPU/TPU compute, large-scale
+training, distributed infrastructure, a lot of money
+and engineering.)
+
+(ii) Foundation Model User
+
+You use an existing foundation model to build your
+own application.
+
+Note:
+Both fields are different and require different
+roadmaps to study.
+
+Builder side → Data Scientist
+
+User side → Software Developer
+
+AI Engineer = Intersection of both sides
+
+# Introduction to LangChain
+(Alternatives → LlamaIndex, Haystack)
+
+It is an open-source framework for developing applications powered by large language models.
+
+For example:
+E-book PDF Reader (Application)
+
+User → PDF insight → Application
+
+
+User has uploaded the PDF into the application.
+
+User asked the question:
+
+Query = "What are the assumptions of Linear Regression?"
+
+We need to perform a search operation → in the whole document (PDF), where this thing is talked about.
+
+There are two types of search:
+
+1. Keyword Search
+   - It takes keywords and searches for them.
+   - It returns all the pages where those keywords are present.
+
+2. Semantic Search
+   - We try to understand the meaning of the query.
+
+
+System Query → Result + Query
+
+It needs NLU (Natural Language Understanding) to understand the query.
+
+For generating the answer, it needs:
+"Context-aware Text Generation"
+
+Context-aware Text Generation
+↓
+Brain / LLM
+↓
+Final Output
+
+
+# Understanding Semantic Search
+
+Embeddings → Vector
+
+Example:
+
+Paragraph about Virat Kohli
+→ [2.0, 2.2, ...]
+→ Vector → 100 dimensions
+
+Query:
+"How many runs has King Kohli scored?"
+
+Paragraph about Jasprit Bumrah
+→ [ ... ]
+
+Paragraph about Shubman Gill
+→ [ ... ]
+
+The query is also converted into an embedding/vector.
+
+Query Vector
+↓
+Compare with document vectors
+
+The vector with the smallest angle is considered the most relevant result.
+
+This is called:
+Cosine Similarity
+
+Smallest angle
+↓
+Correct / most similar result
+
+
+# RAG / PDF Question Answering Flow
+
+PDF
+↓
+Upload
+↓
+AWS S3
+↓
+PDF
+
+Document Loader
+↓
+Text Splitter
+↓
+Pages / Chunks
+
+Page 1 → Embedding 1
+Page 2 → Embedding 2
+...
+Page 100 → Embedding 100
+
+Embeddings
+↓
+Database / Vector Database
+
+
+User Query
+↓
+Embedding
+↓
+Semantic Search
+↓
+Database
+↓
+Relevant Pages
+
+User Query ──────────────────────┐
+                                 ↓
+                       System Query
+                       Pages + User Query
+                                 ↓
+                              Brain
+                                 ↓
+                           Final Output
+
+# Why do we need LangChain?
+
+Suppose you are building an application using Claude.
+
+Without LangChain:
+
+Your Application
+       ↓
+Anthropic SDK
+       ↓
+Claude
+
+Anthropic → Company name
+Claude → Product
+
+You write code specifically for Anthropic.
+
+Now, six months later your company says:
+
+"We want to move from Claude to OpenAI."
+
+Now your architecture becomes:
+
+Your Application
+       ↓
+OpenAI SDK
+       ↓
+GPT
+
+The provider's SDK, API structure and response handling
+can differ.
+
+So, you may need to modify your application code.
+
+--------------------------------------------------
+
+→ LangChain's Solution:
+
+LangChain provides a common interface for interacting
+with different LLM providers.
+
+Your Application
+       ↓
+LangChain
+       ↓
+Common Model Interface
+       ↙              ↘
+   OpenAI           Anthropic
+      ↓                ↓
+     GPT             Claude
+
+# EVOLUTION OF CHATBOTS
+
+1. Chatbots before LLMs
+
+Chatbots were already popular during the traditional NLP era, but they faced two major challenges:
+
+1. NLU — Natural Language Understanding
+
+The chatbot needed to understand what the user was asking.
+
+Example:
+User: "Can you tell me my account balance?"
+
+The chatbot needed to understand that the user wants to check their account balance.
+
+2. Context-aware Response Generation
+
+After understanding the question, the chatbot needed to provide an appropriate and relevant response.
+
+Example:
+User: "What about my savings account?"
+
+The chatbot should understand that "my savings account" is related to the previous conversation.
+
+So:
+
+Problem 1 → Understand the user (NLU)
+Problem 2 → Generate an appropriate response
+
+
+2. LLMs Entered the Picture
+
+Large Language Models significantly improved both capabilities.
+
+LLMs are trained on huge and diverse datasets, which allows them to learn:
+
+- Language patterns
+- Context
+- Relationships between words
+- General knowledge
+- Different ways of expressing ideas
+
+Therefore:
+
+NLU → Much better understanding
+Response generation → Much more natural and contextual
+
+
+3. A New Problem — Huge Models
+
+Modern LLMs are very large and require significant computational resources.
+
+They can contain billions of parameters and require:
+
+- Large storage
+- Powerful GPUs
+- High memory
+- Expensive computation
+
+Therefore, running these models locally can be difficult and expensive for ordinary users and many companies.
+
+Important:
+LLMs are not necessarily huge because they were trained on the "full internet." Their size is related to factors such as their architecture, number of parameters, training data, and training objectives.
+
+
+4. Solution — APIs
+
+Companies such as Google, OpenAI, Anthropic, etc. host their models on their own infrastructure.
+
+Instead of downloading the entire model, users can interact with it through an API.
+
+Flow:
+
+User Application
+       ↓
+      API
+       ↓
+Company's Server
+       ↓
+     LLM
+       ↓
+   Response
+       ↓
+User Application
+
+Example:
+
+You send:
+"Explain Generative AI."
+
+through an API.
+
+The company's server runs the model and sends the generated response back to you.
+
+
+REMEMBER THE WHOLE EVOLUTION
+
+Traditional Chatbots → NLU + Response problems
+LLMs → Better understanding + Better generation
+LLMs → Huge computational requirements
+APIs → Access powerful models without running them yourself
