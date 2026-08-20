@@ -280,3 +280,105 @@ Common Model Interface
    OpenAI           Anthropic
       ↓                ↓
      GPT             Claude
+
+# EVOLUTION OF CHATBOTS
+
+1. Chatbots before LLMs
+
+Chatbots were already popular during the traditional NLP era, but they faced two major challenges:
+
+1. NLU — Natural Language Understanding
+
+The chatbot needed to understand what the user was asking.
+
+Example:
+User: "Can you tell me my account balance?"
+
+The chatbot needed to understand that the user wants to check their account balance.
+
+2. Context-aware Response Generation
+
+After understanding the question, the chatbot needed to provide an appropriate and relevant response.
+
+Example:
+User: "What about my savings account?"
+
+The chatbot should understand that "my savings account" is related to the previous conversation.
+
+So:
+
+Problem 1 → Understand the user (NLU)
+Problem 2 → Generate an appropriate response
+
+
+2. LLMs Entered the Picture
+
+Large Language Models significantly improved both capabilities.
+
+LLMs are trained on huge and diverse datasets, which allows them to learn:
+
+- Language patterns
+- Context
+- Relationships between words
+- General knowledge
+- Different ways of expressing ideas
+
+Therefore:
+
+NLU → Much better understanding
+Response generation → Much more natural and contextual
+
+
+3. A New Problem — Huge Models
+
+Modern LLMs are very large and require significant computational resources.
+
+They can contain billions of parameters and require:
+
+- Large storage
+- Powerful GPUs
+- High memory
+- Expensive computation
+
+Therefore, running these models locally can be difficult and expensive for ordinary users and many companies.
+
+Important:
+LLMs are not necessarily huge because they were trained on the "full internet." Their size is related to factors such as their architecture, number of parameters, training data, and training objectives.
+
+
+4. Solution — APIs
+
+Companies such as Google, OpenAI, Anthropic, etc. host their models on their own infrastructure.
+
+Instead of downloading the entire model, users can interact with it through an API.
+
+Flow:
+
+User Application
+       ↓
+      API
+       ↓
+Company's Server
+       ↓
+     LLM
+       ↓
+   Response
+       ↓
+User Application
+
+Example:
+
+You send:
+"Explain Generative AI."
+
+through an API.
+
+The company's server runs the model and sends the generated response back to you.
+
+
+REMEMBER THE WHOLE EVOLUTION
+
+Traditional Chatbots → NLU + Response problems
+LLMs → Better understanding + Better generation
+LLMs → Huge computational requirements
+APIs → Access powerful models without running them yourself
