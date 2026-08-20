@@ -1,0 +1,114 @@
+# LangChain Components
+(i) Models
+(ii) Prompts
+(iii) Chains
+(iv) Memory
+(v) Indexes
+(vi) Agents
+
+# Models
+
+In LangChain, "models" are the core interfaces through which you interact with AI models.
+
+## Why do we need LangChain for Models?
+
+### 1. Directly Using OpenAI
+
+OpenAI provides its own SDK/API to communicate with its models.
+
+Current Python approach:
+
+from openai import OpenAI
+
+client = OpenAI()
+
+response = client.responses.create(
+    model="gpt-5.6",
+    input="Write a one-sentence bedtime story about a unicorn."
+)
+
+print(response.output_text)
+
+
+What happens?
+
+Your Application
+       ↓
+OpenAI SDK
+       ↓
+OpenAI API
+       ↓
+GPT Model
+       ↓
+Response
+
+
+### 2. Different Providers Have Different Implementations
+
+Different LLM providers provide different SDKs and API structures.
+
+For example:
+
+OpenAI
+client.responses.create(...)
+
+Anthropic
+client.messages.create(...)
+
+Gemini
+Gemini-specific API / SDK
+
+
+Their:
+
+- Methods can be different
+- Parameters can be different
+- Request formats can be different
+- Response formats can be different
+
+Therefore, if we directly use a provider's SDK and later switch providers, we may need to modify our application code.
+
+
+### 3. LangChain's Solution
+
+LangChain provides a common interface for interacting with different LLM providers.
+
+Instead of directly depending on each provider's SDK:
+
+Your Application
+       ↓
+Provider SDK
+       ↓
+LLM
+
+
+We can use:
+
+Your Application
+       ↓
+LangChain
+       ↓
+Common Model Interface
+       ↓
+OpenAI / Gemini / Anthropic
+
+
+For example:
+
+response = llm.invoke("Hello")
+
+The underlying implementation can be different for OpenAI, Gemini, or Anthropic, but our application can interact with the model through a similar interface.
+
+
+## Remember
+
+Provider SDK → Provider-specific implementation
+
+LangChain → Common interface for different LLM providers
+
+
+### Main Idea
+
+LangChain does not replace the LLM.
+
+It provides an abstraction layer that makes it easier to build applications that interact with different LLM providers.
