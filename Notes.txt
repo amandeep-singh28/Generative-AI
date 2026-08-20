@@ -229,3 +229,54 @@ User Query ──────────────────────┐
                               Brain
                                  ↓
                            Final Output
+
+# Why do we need LangChain?
+
+Suppose you are building an application using Claude.
+
+Without LangChain:
+
+Your Application
+       ↓
+Anthropic SDK
+       ↓
+Claude
+
+Anthropic → Company name
+Claude → Product
+
+You write code specifically for Anthropic.
+
+Now, six months later your company says:
+
+"We want to move from Claude to OpenAI."
+
+Now your architecture becomes:
+
+Your Application
+       ↓
+OpenAI SDK
+       ↓
+GPT
+
+The provider's SDK, API structure and response handling
+can differ.
+
+So, you may need to modify your application code.
+
+--------------------------------------------------
+
+→ LangChain's Solution:
+
+LangChain provides a common interface for interacting
+with different LLM providers.
+
+Your Application
+       ↓
+LangChain
+       ↓
+Common Model Interface
+       ↙              ↘
+   OpenAI           Anthropic
+      ↓                ↓
+     GPT             Claude
