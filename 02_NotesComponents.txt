@@ -183,3 +183,160 @@ vector = embeddings.embed_query(
 )
 
 print(vector)
+
+# Model Parameters
+
+## 1. Temperature
+
+Temperature controls the randomness/creativity of the model's output.
+
+For example:
+
+temperature = 0
+
+means the model behaves more deterministically.
+
+Higher temperature:
+
+More randomness
+       ↓
+More variation
+       ↓
+Potentially more creative responses
+
+Lower temperature:
+
+Less randomness
+       ↓
+More predictable responses
+
+For tasks like:
+
+- Factual answering
+- Classification
+- Structured extraction
+
+we generally prefer lower randomness.
+
+For:
+
+- Brainstorming
+- Creative writing
+- Idea generation
+
+we may want more variation.
+
+### 🧠 Remember
+
+Temperature = How random/creative?
+
+
+## 2. max_output_tokens
+
+max_output_tokens controls the maximum amount of output the model can generate.
+
+For example:
+
+max_output_tokens = 500
+
+This does NOT mean:
+
+"The model will always produce exactly 500 tokens."
+
+It means:
+
+"The model can generate up to the specified output limit."
+
+### 🧠 Remember
+
+max_output_tokens = How much output?
+
+
+## 3. invoke() vs stream()
+
+These are two ways to receive the model's response.
+
+### invoke()
+
+With invoke(), we wait for the model to generate the complete response.
+
+Flow:
+
+Request
+   ↓
+[Model generates]
+   ↓
+Complete response
+
+Example:
+
+response = model.invoke(
+    "Explain Generative AI in simple words."
+)
+
+print(response.content)
+
+
+### stream()
+
+With stream(), the response is received incrementally in chunks as it is generated.
+
+Flow:
+
+Request
+   ↓
+"Generative"
+   ↓
+" AI"
+   ↓
+" is"
+   ↓
+" a"
+   ↓
+" branch"
+   ↓
+...
+
+
+Example:
+
+for chunk in model.stream(
+    "Explain Generative AI in simple words."
+):
+    print(chunk.content, end="")
+
+
+Streaming is useful for:
+
+- ChatGPT-style interfaces
+- Real-time chat
+- Streaming UI
+
+### 🧠 Remember
+
+invoke()
+    ↓
+Complete response
+
+stream()
+    ↓
+Response arrives incrementally
+
+
+# 🔥 Quick Memory Trick
+
+temperature
+    ↓
+HOW RANDOM / CREATIVE?
+
+max_output_tokens
+    ↓
+HOW MUCH OUTPUT?
+
+invoke()
+    ↓
+GIVE ME THE COMPLETE RESPONSE
+
+stream()
+    ↓
+GIVE ME THE RESPONSE AS IT IS GENERATED
