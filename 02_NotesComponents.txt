@@ -112,3 +112,74 @@ LangChain → Common interface for different LLM providers
 LangChain does not replace the LLM.
 
 It provides an abstraction layer that makes it easier to build applications that interact with different LLM providers.
+
+
+# Models in LangChain
+
+There are mainly two types of models:
+
+(i) Chat Models
+(ii) Embedding Models
+
+Chat models take messages as input and return messages.
+
+While embedding models convert text into vectors representing semantic meaning.
+
+
+# Chat Models
+
+It is used when we want the AI to understand input and generate a response.
+
+User
+  ↓
+"What is RAG?"
+  ↓
+Chat Model
+  ↓
+"RAG stands for Retrieval-Augmented Generation"
+
+Example in LangChain include:
+
+- ChatOpenAI
+- ChatGoogleGenerativeAI
+- ChatAnthropic
+- ChatGroq
+
+from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+load_dotenv()
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash"
+)
+
+response = llm.invoke("Explain Generative AI in simple words")
+
+print(response.content)
+
+
+# Embedding Models
+
+They convert text into a vector of numbers that represents its semantic meaning.
+
+"ML is a subset of AI"
+          ↓
+    Embedding Model
+          ↓
+[0.21, -0.43, 0.87, 0.12, .....]
+
+from dotenv import load_dotenv
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+load_dotenv()
+
+embeddings = GoogleGenerativeAIEmbeddings(
+    model="gemini-embedding-001"
+)
+
+vector = embeddings.embed_query(
+    "What is Generative AI?"
+)
+
+print(vector)
