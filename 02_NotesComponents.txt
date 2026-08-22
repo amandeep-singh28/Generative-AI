@@ -567,3 +567,42 @@ audience = Beginner
 
 
 Both the topic and audience can change at runtime.
+
+# Practical Example
+
+llm = ChatOpenAI()
+
+topic = input("Enter the topic: ")
+audience = input("Enter the audience: ")
+
+prompt = f"""
+Explain {topic} to a {audience}.
+Use simple language and give a practical example.
+"""
+
+response = llm.invoke(prompt)
+
+print(response.content)
+
+# Flow
+
+User Input
+    ↓
+Topic + Audience
+    ↓
+Python f-string
+    ↓
+Dynamic Prompt
+    ↓
+LLM
+    ↓
+Response
+
+# Note (Important)
+We don't use f-strings for dynamic prompts.
+
+We can use f-strings for simple dynamic prompts,
+but in LangChain applications, we generally
+prefer:
+
+PromptTemplate / ChatPromptTemplate
