@@ -474,3 +474,96 @@ LangChain recognizes message roles in tuple syntax:
 ("system", "...") → SystemMessage
 ("human", "...")  → HumanMessage
 ("ai", "...")     → AIMessage
+
+# Dynamic Prompts
+
+It is a prompt whose content changes according to user input,
+variables, or external data.
+
+(This is the key difference from static prompting.)
+
+
+# Static vs Dynamic
+
+Static:
+
+"You are a College Research Assistant.
+Generate information about colleges."
+
+(The instruction remains fixed)
+
+
+Dynamic:
+
+"You are a College Research Assistant.
+Generate 5 points about {college_name}."
+
+(Here {college_name} is a variable)
+
+
+If the user selects "IIT Delhi", the prompt becomes:
+
+"Generate 5 points about IIT Delhi."
+
+
+The template remains the same,
+but the variable value changes.
+
+
+# Why Dynamic Prompts?
+
+With a static prompt, you would have to create separate
+prompts for:
+
+IIT Delhi
+VIT
+SRM
+LPU
+
+That's inefficient.
+
+Instead:
+
+Prompt Template
+      ↓
+{college_name}
+      ↓
+IIT Delhi / VIT / SRM / LPU
+      ↓
+Model
+
+
+One prompt can handle many inputs.
+
+
+So dynamic prompts give us:
+
+- Reusability
+- Personalization
+- Flexibility
+- Easier application development
+
+
+"A prompt becomes dynamic when part of its content is
+determined at runtime using variables, user input,
+or external data."
+
+
+# Example
+
+"Explain {topic} to a {audience}."
+
+Here both topic and audience can change at runtime.
+
+
+For example:
+
+topic = Machine Learning
+audience = Beginner
+
+↓
+
+"Explain Machine Learning to a Beginner."
+
+
+Both the topic and audience can change at runtime.
