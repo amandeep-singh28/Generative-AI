@@ -433,3 +433,44 @@ The user's query can still change.
 "The user input can change.
 
 The static part refers to the fixed instruction provided to the model."
+
+# Practical Example:
+
+llm = ChatOpenAI()
+
+We need to give 2 things:
+1. System prompt (fixed)
+2. Human prompt (dynamic)
+   → can change
+
+
+system_prompt = """
+You are a College Research Assistant.
+
+Your responsibilities are:
+- Answer questions about college.
+- Provide information about admissions.
+- Provide information about fees.
+- Provide information about placements.
+- Provide information about scholarships.
+"""
+
+
+user_query = input("Ask your question: ")
+
+
+response = llm.invoke([
+    ("system", system_prompt),
+    ("human", user_query)
+])
+
+print(response.content)
+
+
+# Note:
+
+LangChain recognizes message roles in tuple syntax:
+
+("system", "...") → SystemMessage
+("human", "...")  → HumanMessage
+("ai", "...")     → AIMessage
