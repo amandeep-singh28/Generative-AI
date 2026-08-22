@@ -340,3 +340,38 @@ GIVE ME THE COMPLETE RESPONSE
 stream()
     ↓
 GIVE ME THE RESPONSE AS IT IS GENERATED
+
+# Prompts (2nd Component)
+
+A prompt is an instruction or input that you give to an LLM so it knows what task to perform.
+
+User / Application
+       ↓
+    Prompt
+       ↓
+      LLM
+       ↓
+   Response
+
+
+# Classification of Prompts
+
+Prompts
+   │
+   ├── Single Message Prompts
+   │       │
+   │       ├── (i) Static Prompts
+   │       │
+   │       └── (ii) Dynamic Prompts
+   │
+   └── Multi Message Prompts
+           │
+           ├── (i) Messages (Manual)
+           │       │
+           │       ├── System
+           │       ├── Human
+           │       └── AI
+           │
+           └── (ii) Chat
+                   │
+                   └── Chat Prompt Template
