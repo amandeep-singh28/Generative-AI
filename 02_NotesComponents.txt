@@ -375,3 +375,61 @@ Prompts
            └── (ii) Chat
                    │
                    └── Chat Prompt Template
+
+# Single Message Prompts
+
+A single message prompt means we're essentially working with one prompt/input sent to the model.
+
+## (i) Static Prompts
+
+A static prompt means we're working with one prompt/instruction that remains constant.
+
+The instructions given to the LLM remain constant every time the application runs.
+
+### Example
+
+You are a college research assistant.
+
+Your responsibilities are:
+
+- Answer questions about college.
+- Provide information about admission.
+- Provide information about fees.
+- Provide information about placement.
+- Provide information about scholarships.
+
+The instruction doesn't change.
+
+
+## Why Static Prompts?
+
+When we want the LLM to have a specific responsibility.
+
+LLM
+  ↕
+Fixed Instructions
+  ↕
+College Assistant
+
+The static prompt establishes the behaviour and scope of the application.
+
+If question → College related
+        ↓
+      Answer
+
+If question → Unrelated
+        ↓
+"I am a college research assistant..."
+
+
+## Note
+
+Static does not mean that the entire input to the LLM never changes.
+
+The instruction / prompt template is static.
+
+The user's query can still change.
+
+"The user input can change.
+
+The static part refers to the fixed instruction provided to the model."
