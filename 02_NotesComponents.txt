@@ -752,3 +752,32 @@ prompt2 = prompt_template.format(topic="games")
 
 print(type(prompt1)) // <class 'langchain_core.prompt...>
 print(type(prompt2)) //<class 'str'>
+
+# Explicit PromptTemplate
+
+There's another way to create the template:
+
+prompt_template = PromptTemplate(
+    input_variables=["topic"],
+    template="Explain {topic} in simple words."
+)
+
+Then:
+
+prompt = prompt_template.invoke({
+    "topic": "RAG"
+})
+
+This is essentially the more explicit version.
+
+You can think:
+
+from_template()
+      ↓
+Convenient way
+
+PromptTemplate(...)
+      ↓
+Explicit way
+
+For most simple cases, from_template() is cleaner.
