@@ -711,3 +711,44 @@ separate the prompt structure from runtime
 data, making prompts easier to reuse and maintain.
 The template formats the prompt which is then
 passed to the LLM for generating the response.
+
+
+
+-PromptTemplate - Important methods→
+
+There are three things:
+
+    ↳ from_template()
+    ↳ format()
+    ↳ invoke()
+
+
+- from_template() → It is the blueprint creator - it
+sets up the prompt text and define where {variables}
+go
+
+
+- format() & invoke() → They are the value injectors -
+they take your real data, fill in those placeholders and
+generate the final prompt to send to the LLM.
+
+
+format()                         invoke()
+   ↓                                ↓
+Formatted string                Specialized LangChain object
+
+
+-<Example:>
+
+prompt_template = PromptTemplate.from_template(
+    "Write 5 points on {topic}"
+)
+
+prompt1 = prompt_template.invoke({
+    "topic": "games"
+})
+
+prompt2 = prompt_template.format(topic="games")
+
+print(type(prompt1)) // <class 'langchain_core.prompt...>
+print(type(prompt2)) //<class 'str'>
