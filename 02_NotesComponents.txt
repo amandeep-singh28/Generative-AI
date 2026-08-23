@@ -687,3 +687,27 @@ Then:
 llm.invoke(prompt)
 
 actually sends it to the model.
+
+
+- <Example:>
+
+llm = ChatOpenAI()
+
+prompt_template = PromptTemplate.from_template(
+    "Explain this {topic}"
+)
+
+prompt = prompt_template.invoke({
+    "topic": "morning"
+})
+
+response = llm.invoke(prompt)
+print(response.content)
+
+
+PromptTemplate in langchain is used to create reusable
+prompts with placeholders for dynamic values. It
+separate the prompt structure from runtime
+data, making prompts easier to reuse and maintain.
+The template formats the prompt which is then
+passed to the LLM for generating the response.
