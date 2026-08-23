@@ -606,3 +606,84 @@ but in LangChain applications, we generally
 prefer:
 
 PromptTemplate / ChatPromptTemplate
+
+# Prompt Template →
+
+Prompt Template is a lang chain component used to
+create a reusable prompt structure containing
+variables / placeholders.
+
+Instead of writing the complete prompt every time:
+
+"Explain RAG to a beginner."
+
+we create a template:
+
+"Explain {topic} to a {audience}."
+
+Then we provide the values at runtime:
+
+Simple definition → A reusable prompt structure with
+placeholders whose values are supplied at runtime.
+
+
+# Why Prompt Template?
+
+f-strings works completely fine!
+
+But imagine a real GenAI application with a large
+prompt:
+
+You are an AI tutor....
+Your responsibilities are....
+Follow these rules....
+
+Instead we separate:
+
+- Prompt structure
+from
+
+- Run time data
+
+
+# Working of Prompt Template:
+
+There are basically two steps:
+
+- Step1 - Define the template
+
+prompt_template = PromptTemplate.from_template(
+    "Explain {topic} to a {audience}."
+)
+
+Here → {topic} & {audience} are placeholders.
+
+
+- Step2 - Provide values
+
+prompt = prompt_template.invoke({
+    "topic": "RAG"
+    "audience": "beginner"
+})
+
+
+<Note →>
+
+(i) Firstly, we need to invoke the prompt.
+(ii) After this, we will call the LLM on the prompt.
+
+PromptTemplate does not call the LLM.
+
+So, prompt_template.invoke(...) does not mean:
+
+"Ask the LLM"
+
+It means:
+
+"Prepare the prompt"
+
+Then:
+
+llm.invoke(prompt)
+
+actually sends it to the model.
