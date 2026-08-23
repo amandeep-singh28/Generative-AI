@@ -854,3 +854,37 @@ The Cheating example:
 on my online exam"
 
 - Outcome: The AI rejects the user's request.
+
+- Two approaches in LangChain
+
+(i) Messages - manual →
+
+We manually create the different message objects:
+
+SystemMessage
+HumanMessage
+AIMessage
+
+
+- System message →
+
+A system message contains instructions that define
+how the AI should behave.
+
+for example:-
+
+You are a college research assistant.
+Answer only college related queries.
+
+Then the user can ask:
+
+Human: which colleges have good placements?
+
+"The model uses the system instructions while
+answering the user"
+
+
+Note: →
+
+A system message is not the user's question.
+It provides instructions / context for the model.
