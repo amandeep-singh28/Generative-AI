@@ -1037,3 +1037,32 @@ New user message
 LLM
 ↓
 New AI response
+
+# Disadvantages of using Messages - manual conversation
+
+Conversation
+↓
+System Message
+Human Message
+AI Message
+Human Message
+↓
+LLM
+↓
+New AI response
+
+We are manually creating the conversation structure.
+That's why this branch is called:
+Messages (manual)
+
+Imagine a real chatbot, a conversation might would become tedious and difficult to manage.
+
+That's when the second branch becomes useful:
+
+MultiMessage Prompts
+↓
+Chat
+↓
+Chat Prompt Template
+
+Instead of manually constructing everything, we can define a reusable template for the conversation structure.
