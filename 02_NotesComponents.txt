@@ -888,3 +888,46 @@ Note: →
 
 A system message is not the user's question.
 It provides instructions / context for the model.
+
+# Human message →
+
+Human message represents the input or request coming
+from the user.
+
+For example:
+
+Explain RAG in simple words.
+
+In Langchain:
+
+from langchain_core.messages import HumanMessage
+
+message = HumanMessage(
+    content = "Explain RAG in simple words."
+)
+
+
+- Why do we need HumanMessage?
+
+In a chat application, the model need to distinguish
+b/w:
+
+System: Instructions for AI.
+
+Human: User's request.
+
+AI: AI's previous response.
+
+So, message roles help the model understand the
+structure of the conversation.
+
+
+- System Message vs Human Message →
+
+System message → What should the AI do?
+              → How should it behave?
+              → What rules should it follow?
+
+
+Human message → What does the user's want?
+              → What question is the user asking?
