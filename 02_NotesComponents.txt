@@ -1066,3 +1066,47 @@ Chat
 Chat Prompt Template
 
 Instead of manually constructing everything, we can define a reusable template for the conversation structure.
+
+# Chat Prompt Template
+
+It is a langchain component used to create a reusable
+template for a sequence of chat messages.
+
+# Why do we need Chat Prompt Template?
+
+Feature | Manual Message | Chat Prompt Template
+
+(i) Piping operation (|) → Cannot pipe → Built for LCEL pipe
+(ii) Reusability → Tied to immediate data → Reusable
+(iii) Variable validation → No built in checks → Enforces key schema
+(iv) Chat history support → Manual list appending → Msg placeholders integrate
+
+
+# Basic structure
+
+Chat Prompt Template
+↓
+Message Template
+↓
+System + Human + AI
+↓
+Runtime Variables
+↓
+Final messages
+↓
+Chat Model → Response
+
+
+For example:-
+
+chat_prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a {role}."),
+    ("human", "Explain {topic} to me.")
+])
+
+At runtime:-
+
+{
+    "role": "Python Tutor",
+    "topic": "decorators"
+}
