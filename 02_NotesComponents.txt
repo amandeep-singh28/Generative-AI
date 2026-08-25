@@ -1110,3 +1110,22 @@ At runtime:-
     "role": "Python Tutor",
     "topic": "decorators"
 }
+
+# Example
+
+llm = ChatOpenAI()
+
+chat_prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are an AI tutor. Explain concepts in easy language."),
+    ("human", "Explain {topic} to me at a {level} level.")
+])
+
+prompt = chat_prompt.invoke({
+    "topic": "RAG",
+    "level": "beginner"
+})
+
+response = llm.invoke(prompt)
+print(response.content)
+
+ChatPromptTemplate allows us to create reusable and structured chat prompts using different roles such as system and human. We can also define variables inside the messages and provide their values at runtime. This makes prompt easier to reuse and maintain in chat-based applications.
