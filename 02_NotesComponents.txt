@@ -1169,3 +1169,60 @@ Together → ChatPromptTemplate.from_messages([
     ("system", "You are a {role}."),
     ("human", "Explain {topic}.")
 ])
+
+
+# Few-Shot Prompting
+
+Few-shot prompting is a prompt engineering technique where we give the LLM a few examples of a task before asking it to perform the actual task.
+
+Instead of only telling the model what to do, we provide example input-output pairs so that the model can understand the expected pattern.
+
+## Example
+
+Instruction:
+Classify the sentiment of this review.
+
+Example 1:
+Review: "The product is amazing!"
+Sentiment: "Positive"
+
+Example 2:
+Review: "The product is terrible."
+Sentiment: "Negative"
+
+The model can infer the pattern:
+
+Example 1 -> Input -> Output
+Example 2 -> Input -> Output
+              ↓
+        Learn the pattern
+              ↓
+       New Input -> Output
+
+## Why Do We Need Few-Shot Prompting?
+
+Sometimes simply giving instructions isn't enough.
+
+For example:
+Extract the name and age from the sentence.
+
+The model may return:
+Name: Amandeep
+Age: 22
+
+But our application may require:
+Amandeep | 22
+
+Instead of explaining the format with a long instruction, we can show the model an example.
+
+## Example: Structured Extraction
+
+Input:
+"My name is Rahul and I am 25 years old."
+
+Output:
+"Rahul | 25"
+
+The model learns the required output format:
+
+Name | Age
