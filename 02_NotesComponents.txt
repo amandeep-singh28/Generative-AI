@@ -1129,3 +1129,43 @@ response = llm.invoke(prompt)
 print(response.content)
 
 ChatPromptTemplate allows us to create reusable and structured chat prompts using different roles such as system and human. We can also define variables inside the messages and provide their values at runtime. This makes prompt easier to reuse and maintain in chat-based applications.
+
+# Role-Based Prompting
+
+It is a prompt engineering technique where we assign a specific role to the LLM to guide its:
+- Behaviour
+- Expertise
+- Tone
+- Response style
+
+Example:
+
+You are an AI Data Science Interviewer.
+Ask me one technical question at a time.
+Evaluate my answer after I respond.
+
+The role: "You are a data science interviewer"
+guides how the model behaves.
+
+Role-based prompting → Tell the LLM who it should behave like
+
+
+# Role Based Prompting vs ChatPromptTemplate
+
+Role Based Prompting:
+(i) Prompting technique
+(ii) Defines AI's role or behaviour
+(iii) Work together
+(iv) Eg: "You are a python tutor."
+
+ChatPromptTemplate:
+(i) LangChain component
+(ii) Structure reusable chat prompts
+(iii) Work together
+(iv) ChatPromptTemplate.from_messages(...)
+
+
+Together → ChatPromptTemplate.from_messages([
+    ("system", "You are a {role}."),
+    ("human", "Explain {topic}.")
+])
