@@ -1226,3 +1226,49 @@ Output:
 The model learns the required output format:
 
 Name | Age
+
+
+# Zero-Shot vs Few-Shot Prompting
+
+## Zero-Shot Prompting
+
+Zero-shot prompting means giving the LLM only the instruction without providing any examples.
+
+Example:
+Classify the sentiment:
+"I love this phone."
+
+The model has to perform the task without seeing any examples.
+
+## Few-Shot Prompting
+
+Few-shot prompting means giving the LLM an instruction along with a few examples before asking it to perform the actual task.
+
+Examples:
+"I love this phone." -> Positive
+"I hate this phone." -> Negative
+
+The model uses these examples to understand the expected pattern and then performs the task on a new input.
+
+## Key Difference
+
+Zero-Shot -> No examples
+Few-Shot -> Few examples
+
+## Structure
+
+Zero-Shot:
+Instruction
+    |
+   Task
+
+Few-Shot:
+Instruction + Examples
+        |
+       Task
+
+## Simple Way to Remember
+
+Zero-Shot -> Tell the model what to do.
+
+Few-Shot -> Tell the model what to do + show it how.
