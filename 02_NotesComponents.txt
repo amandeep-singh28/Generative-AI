@@ -1272,3 +1272,73 @@ Instruction + Examples
 Zero-Shot -> Tell the model what to do.
 
 Few-Shot -> Tell the model what to do + show it how.
+
+# Few-Shot Prompt Template
+
+It is a LangChain component that helps us build prompts containing multiple examples dynamically.
+
+Instead of manually writing:
+- Example 1
+- Example 2
+- ...
+- New input
+
+We can share the examples separately and let LangChain construct the final prompt.
+
+The basic structure is:
+Examples
+↓
+Example Prompt
+↓
+FewShotPromptTemplate
+↓
+Final Prompt
+↓
+LLM
+
+# Important Components
+
+A FewShotPromptTemplate mainly works with:
+Examples
+↓
+Example Prompt
+↓
+Prefix
+↓
+Suffix
+
+## Examples
+
+The actual example data:
+
+examples = [
+    {
+        "review": "The product is amazing",
+        "sentiment": "Positive"
+    },
+    {
+        "review": "The product is terrible",
+        "sentiment": "Negative"
+    }
+]
+
+## Example Prompt
+
+Defines how each example should be formatted.
+
+example_prompt = PromptTemplate.from_template(
+    "Review: {review}\nSentiment: {sentiment}"
+)
+
+So, each example becomes:
+
+Review: The product is amazing.
+Sentiment: Positive.
+
+## Prefix
+
+Text that comes before the examples.
+
+## Suffix
+
+Text that comes after the examples and usually contains the new input.
