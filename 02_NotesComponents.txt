@@ -1342,3 +1342,42 @@ Text that comes before the examples.
 ## Suffix
 
 Text that comes after the examples and usually contains the new input.
+
+# Example: Few-Shot Prompt Template
+
+llm = ChatOpenAI()
+
+examples = [
+    {
+        "review": "The product is amazing",
+        "sentiment": "Positive"
+    },
+    {
+        "review": "The product is terrible",
+        "sentiment": "Negative"
+    },
+    {
+        "review": "I really enjoyed using this product",
+        "sentiment": "Positive"
+    }
+]
+
+example_prompt = PromptTemplate.from_template(
+    "Review: {review}\n"
+    "Sentiment: {sentiment}\n"
+)
+
+few_shot_prompt = FewShotPromptTemplate(
+    examples=examples,
+    example_prompt=example_prompt,
+    prefix="Classify the sentiment of the following review as +ve or -ve.\n",
+    suffix="Review: {review}\nSentiment:",
+    input_variables=["review"]
+)
+
+prompt = few_shot_prompt.invoke({
+    "review": "The quality of this product is excellent."
+})
+
+response = llm.invoke(prompt)
+print(response.content)
