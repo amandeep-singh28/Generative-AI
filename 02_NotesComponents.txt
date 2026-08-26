@@ -1381,3 +1381,33 @@ prompt = few_shot_prompt.invoke({
 
 response = llm.invoke(prompt)
 print(response.content)
+
+# Language Models
+
+Language models are AI systems designed to process, generate, and understand natural language text.
+
+Language Models
+├── LLMs
+└── Chat Models
+
+## LLMs
+
+LLMs → General-purpose models that are used for raw text generation. They take a string (or plain text) as input and return a string (plain text) as output.
+
+These are traditionally older models and are not used much now.
+
+Example: OpenAI
+
+## Chat Models
+
+Chat models → Language models that are specialized for conversational tasks. They take a sequence of messages as input and return chat messages as outputs.
+
+These are traditionally newer models and are used more in comparison to LLMs.
+
+Example: ChatOpenAI
+
+## In Short
+
+LLMs → String input → String output
+
+Chat Models → Message list + role (System, Human) → AI Message
