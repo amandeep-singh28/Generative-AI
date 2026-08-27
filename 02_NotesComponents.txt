@@ -1513,3 +1513,78 @@ print(response.content)
 prompt = "Who is Virat Kohli?"
 response = model.invoke(prompt)
 print(response.content)
+
+# Hugging Face Locally
+
+In the local approach, the model is downloaded to your computer and runs locally.
+
+Your Application
+↓
+LangChain
+↓
+Local Hugging Face Model
+↓
+Your CPU/GPU
+↓
+Response
+
+# Important Parameters
+
+1. model_id
+   - Specifies the Hugging Face model that should be downloaded and used.
+
+2. task
+   - Specifies what we are using the model for, e.g. text generation.
+
+# Invoking the Local Model
+
+Once the model has been created, the model runs locally and generates the response.
+
+result = llm.invoke(
+    "What is the capital of India?"
+)
+
+print(result)
+
+# Hugging Face Endpoint vs Hugging Face Pipeline
+
+## Hugging Face Endpoint (HFE)
+
+HFE
+↓
+API
+↓
+Remote Model
+
+## Hugging Face Pipeline (HFP)
+
+HFP
+↓
+Local
+↓
+Local Model
+
+# Hugging Face Locally
+
+## Setting Hugging Face Cache Location
+
+import os
+
+os.environ["HF_HOME"] = "D:/huggingface-cache"
+
+This tells Hugging Face to use D:/huggingface-cache as its Hugging Face home/cache location.
+
+# Hugging Face Pipeline
+
+For downloading models locally, use the Hugging Face Pipeline.
+
+from langchain_huggingface import HuggingFacePipeline
+
+llm = HuggingFacePipeline.from_model_id(
+    model_id = "Qwen/Qwen2.5-1.5B-Instruct",
+    task = "text-generation",
+    pipeline_kwargs = {
+        "max_new_tokens": 100,
+        "temperature": 0.3
+    }
+)
