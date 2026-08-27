@@ -1588,3 +1588,23 @@ llm = HuggingFacePipeline.from_model_id(
         "temperature": 0.3
     }
 )
+
+# Embedding Models via Hugging Face Locally
+
+An embedding model converts text into a numerical vector that represents its semantic meaning.
+
+With Hugging Face Embeddings, we can load a Hugging Face embedding model and run it locally instead of calling an embedding API.
+
+# Code
+
+from langchain_huggingface import HuggingFaceEmbeddings
+
+embedding = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+
+prompt = "What is the capital of India?"
+
+vector = embedding.embed_query(prompt)
+
+print(vector)
