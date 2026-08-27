@@ -1441,3 +1441,27 @@ Unlike closed source models such as OpenAI's GPT-4, Anthropic's Claude, or Googl
 
 4. BLOOM-176B (BigScience)
    - Multilingual text generation
+
+   # Where to Find Them?
+
+Hugging Face → The largest repository of open-source LLMs.
+
+# Ways to Use Open-Source Models
+
+Open-source models
+├── Using Hugging Face Inference API
+└── Running locally
+
+# Disadvantages
+
+1. High Hardware Requirement
+   - Running large models (e.g., Llama-2-70B) requires expensive GPUs.
+
+2. Setup Complexity
+   - Requires installation of dependencies.
+
+3. Lack of RLHF
+   - Most open-source models don't have fine-tuning with human feedback, making them weaker in instruction following.
+
+4. Limited Multimodal Abilities
+   - Open models don't support images, audio, or videos like GPT-4V.
