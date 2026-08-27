@@ -1411,3 +1411,33 @@ Example: ChatOpenAI
 LLMs → String input → String output
 
 Chat Models → Message list + role (System, Human) → AI Message
+
+# Open Source Models
+
+Open source language models are freely available AI models that can be downloaded, modified, fine-tuned, and deployed without restrictions from the central provider.
+
+Unlike closed source models such as OpenAI's GPT-4, Anthropic's Claude, or Google's Gemini, open source models allow full control and customization.
+
+## Open Source Models vs Closed Source Models
+
+| Feature | Open Source Models | Closed Source Models |
+|---|---|---|
+| (i) Cost | Free to use (no API costs) | Paid API usage |
+| (ii) Control | Can modify, fine-tune, and deploy anywhere | Locked to provider's infrastructure |
+| (iii) Data Privacy | Runs locally (no data sent to external servers) | Sends queries to provider's servers |
+| (iv) Customization | Can fine-tune on specific datasets | No access to fine-tuning in most cases |
+| (v) Deployment | Can be deployed on on-premise servers or cloud | Must use vendor's API |
+
+# Some Famous Open Source Models
+
+1. Llama-2 - 7B/13B/70B (Meta AI)
+   - General-purpose text generation
+
+2. Mistral-7B (Mistral AI)
+   - Best small-scale model (outperforms Llama)
+
+3. Falcon-7B/40B (TII UAE)
+   - High-speed inference
+
+4. BLOOM-176B (BigScience)
+   - Multilingual text generation
