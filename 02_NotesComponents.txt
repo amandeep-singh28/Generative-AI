@@ -1465,3 +1465,51 @@ Open-source models
 
 4. Limited Multimodal Abilities
    - Open models don't support images, audio, or videos like GPT-4V.
+
+# Hugging Face via API
+
+Your Application
+↓
+LangChain
+↓
+Hugging Face API
+↓
+Hugging Face Model
+↓
+Response
+
+- The model is not running directly on your computer.
+
+## Code
+
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+
+llm = HuggingFaceEndpoint(
+    repo_id="openai/gpt-oss-120b",
+    task="text-generation"
+)
+
+model = ChatHuggingFace(llm=llm)
+
+prompt = "Who is Virat Kohli?"
+
+response = model.invoke(prompt)
+
+print(response.content)
+
+## Parameters
+
+1. `repo_id`
+   - Specifies which Hugging Face model to use.
+
+2. `task`
+   - Specifies the task that the model will perform.
+
+3. `HuggingFaceEndpoint`
+   - Connects the application to open-source models.
+
+## Example
+
+prompt = "Who is Virat Kohli?"
+response = model.invoke(prompt)
+print(response.content)
