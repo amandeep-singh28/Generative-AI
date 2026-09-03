@@ -1,0 +1,105 @@
+# What is Streamlit?
+
+Streamlit is a Python framework used to quickly create interactive web applications for Python/ML/GenAI projects.
+
+It allows us to create a UI directly from Python code.
+
+# 1. Import Streamlit
+
+import streamlit as st
+
+st is the conventional alias used for Streamlit.
+
+# 2. Display Heading
+
+st.header("Researcher Tool")
+
+Displays a heading in the web application.
+
+Other commonly used functions:
+- st.title()
+- st.subheader()
+- st.write()
+
+# 3. Select Box
+
+paper_input = st.selectbox(
+    "Select Research Paper Name",
+    ["Paper 1", "Paper 2", "Paper 3"]
+)
+
+Creates a dropdown menu.
+
+The selected value is stored in:
+paper_input
+
+Similarly:
+- style_input = st.selectbox(...)
+- length_input = st.selectbox(...)
+
+# 4. Text Input
+
+user_input = st.text_input("Enter your prompt")
+
+Creates a text field where the user can enter input.
+
+The entered value is stored in:
+user_input
+
+# 5. Button
+
+if st.button("Run"):
+    result = llm.invoke(prompt)
+    st.write(result.content)
+
+st.button() creates an interactive button.
+
+The code inside the if block executes when the user clicks the button.
+
+# 6. Display Output
+
+st.write(result.content)
+
+Displays the result in the Streamlit UI.
+
+# Overall Flow
+
+User
+↓
+Streamlit UI
+↓
+Select Paper
+↓
+Select Style
+↓
+Select Length
+↓
+PromptTemplate
+↓
+LLM
+↓
+Response
+↓
+st.write()
+↓
+User sees output
+
+# Important Concept
+
+Streamlit is mainly responsible for the UI layer.
+
+- Streamlit → User Interface
+- LangChain → Prompt + LLM handling
+- LLM → Generates response
+
+So in a GenAI project:
+
+Frontend/UI
+↓
+Streamlit
+↓
+LangChain
+↓
+LLM
+↓
+Response
