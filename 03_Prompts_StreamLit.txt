@@ -103,3 +103,61 @@ LangChain
 LLM
 ↓
 Response
+
+# Why Use PromptTemplate Over f-strings?
+
+1. Default validation
+2. Reusable
+3. LangChain ecosystem
+
+## Default Validation (validate_template=True)
+
+It checks whether the variables used in the prompt template match the variables provided in "input_variables".
+
+Example:
+
+from langchain_core.prompts import PromptTemplate
+
+prompt = PromptTemplate(
+    template="Explain {topic} to a {audience}",
+    input_variables=["topic", "audience"],
+    validate_template=True
+)
+
+If a required variable is missing or incorrectly defined, LangChain can raise an error.
+
+## Reusable
+
+A PromptTemplate can be saved as a JSON file:
+
+template.save("template.json")
+
+This allows the prompt template to be shared separately from the Python code.
+
+The saved template can later be loaded:
+
+from langchain_core.prompts import load_prompt
+
+template = load_prompt("template.json")
+
+Then we can use it normally:
+
+prompt_template.invoke({
+    "paper_input": paper_input,
+    "style_input": style_input,
+    "length_input": length_input
+})
+
+## Flow
+
+PromptTemplate
+↓
+save()
+↓
+template.json
+↓
+load_prompt()
+↓
+PromptTemplate
+↓
+invoke()
