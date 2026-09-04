@@ -161,3 +161,42 @@ load_prompt()
 PromptTemplate
 ↓
 invoke()
+
+# Chatbot with Previous Context
+
+llm = ChatOpenAI()
+chat_history = []
+
+while True:
+    user_input = input("You: ")
+    chat_history.append(user_input)
+
+    if user_input == "exit":
+        break
+
+    result = llm.invoke(chat_history)
+    chat_history.append(result.content)
+
+    print("AI:", result.content)
+
+print(chat_history)
+
+# Problems with This Chatbot
+
+This is not a perfect chatbot. It has many problems:
+
+1. No Message Roles
+   - If we check the "chat_history", there are "no message roles".
+   - We cannot interpret who said what.
+
+2. Growing Memory
+   - chat_history keeps increasing throughout the conversation.
+
+3. Token Limit Problem
+   - Sending the entire history every time can eventually exceed the model's context window.
+
+4. Higher Costs
+   - More tokens are sent with every request, increasing API usage/cost.
+
+5. No Persistent Storage
+   - History is lost when the program stops.
