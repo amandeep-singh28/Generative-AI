@@ -80,3 +80,40 @@ For example:
     parser = StrOutputParser()
     response = llm.invoke(prompt)
     result = parser.invoke(response)
+
+- How to use with_structured_output()
+with_structured_output()
+        │
+        ├── (i) TypedDict
+        ├── (ii) Pydantic
+        └── (iii) JSON Schema
+(i) TypedDict
+Defines the expected keys and their types using Python's TypedDict.
+
+(ii) Pydantic
+Defines the structure using a Pydantic BaseModel.
+Advantage: It provides validation and gives you a structured Python object.
+
+(iii) JSON Schema
+Defines the expected structure using a JSON Schema dictionary.
+Advantage: Useful when the schema needs to be represented in a standard JSON-based format.
+
+# TypedDict
+It is a way to define the dictionary in python where you specify what keys and values should exist. It helps ensure that your dictionary follows a specific structure
+
+- Why not dictionary?
+A normal dictionary only stores data, whereas TypedDict defines the expected keys and their data types, providing a clear structure/schema for the output.
+For example:-
+    Suppose you and your teammate are working on a project and you have data like this:
+        person = {
+            "name" : "Amandeep",
+            "age" : 21
+        }
+    The other person can might treat the age data as string. To avoid these things we use TypedDict.
+
+class Person:
+    name : str
+    age : int
+
+But if we pass age = "24", it would still run. Because TypedDict doesn't necessarily enforced the data type. There is no validation at the runtime if we are using TypedDict(while Pydantic allows validation).
+
