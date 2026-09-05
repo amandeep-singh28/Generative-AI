@@ -1,0 +1,50 @@
+# Structured Output
+The prompt that we give to the LLM was in TEXT format and what LLM gives it is also in TEXT format, but most probably in unstructured form
+
+In LangChain, structured output refers to the practice of having language model return responses in a well-defined data format (for example, JSON), rather than free-form text. This makes the model output easier to parse and work with programmatically.
+
+For example:
+[Prompt] - Can you create a one-day travel time table for Paris?
+[LLM's unstructured Response]
+Here's a suggested time table: Morning : Visit the Eiffel tower
+Afternoon: Walk through the Louvre Museum
+Evening: Enjoy dinner at a Seine riverside cafe
+[JSON enforced output]
+[
+    {"time": "Morning", "activity": "Visit the Eiffel Tower"},
+    {"time": "Afternoon", "activity": "Walk through the Louvre Museum"},
+    {"time": "Evening", "activity": "Enjoy dinner at a Seine riverside café"}
+]
+
+- Why do we need Structured Output
+(i) Data Extraction
+    Suppose if we are making Naukri.com website. What key values we can extract from the data would be:
+        Name
+        10th Marks
+        12th Marks
+        College
+        etc
+    And than we can also insert the data into the database easily
+(ii) API building
+(iii) Agents
+    For working with Agents we required Structured Output
+    LLM generates the data, while structured output gives that data a predictable format so the agent/application can reliably process and use it.
+
+    1. LLM generates the information
+
+    "What city does the user want?"
+            ↓
+          Delhi
+
+    2. Structured output tells the program how to interpret/use that information
+
+    {
+        "city": "Delhi"
+    }
+
+    That's why structured output becomes useful in agentic workflows.
+
+
+The main reason is when we were getting the information from the LLM. That information was not in the structured form. Due to this we were not able to do many things like Storing the data into the database, APIs, etc.
+That's why we require Structured output
+
