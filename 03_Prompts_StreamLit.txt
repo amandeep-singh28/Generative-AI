@@ -200,3 +200,13 @@ This is not a perfect chatbot. It has many problems:
 
 5. No Persistent Storage
    - History is lost when the program stops.
+
+# Message Placeholders
+
+A message Placeholder in LangChain is a special placeholder used inside a ChatPromptTemplate to dynamically insert chat history of a list of message at runtime
+
+Now suppose our customer has only talked to the chatbot 1 time only:
+    HumanMessage(content = "I want to request a refund for my order #12345")
+    AIMessage(content = "Your refund request for order #12345 has been initiated. It will be processed in 3-5 business day.")
+This text has stored in a .txt file. But ideally this text is stored on the cloud.
+But now the customer has no patience, he came again on the next day to talk to the chatbot asking for the refund. For this task, the chatbot needs to get the history of what they had talk about previously. So we need to load those previous messages that can be done through MessagePlaceholder concept.
