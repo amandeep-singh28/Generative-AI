@@ -231,3 +231,105 @@ class ProductReview(TypedDict):
     summary: Annotated[str, "Brief summary of the review"]
     sentiment: Literal["positive", "negative", "neutral"]
     rating: int
+
+
+# Pydantic
+It is a data validation and data parsing library for Python. It ensures that the data you work with is correct, structured, and type-safe.
+It is useful when we create APIs
+For example:-
+We are writing a code in which we validate the "name"
+
+    from pydantic import BaseModel
+    class Student(BaseModel):
+        name : str
+
+    new_student = {"name" : "Amandeep"}
+    student = Student(**new_student) # dictionary unpacking
+    print(student)
+
+If we pass integer value, than it will throw an error at the run time
+
+- Default values
+We can pass default values also. For example:
+    from pydantic import BaseModel
+
+    class Student(BaseModel):
+        name : str = "Amandeep"
+
+    new_student = {}
+    student = Student(**new_student) 
+    print(student)
+    print(student.name)
+
+- Optional Fields
+This is used when the required information is not there.
+    from typing import Optional
+    class Student(BaseModel):
+        name : str = "Amandeep"
+        age : Optional[int] = None
+
+    new_student = {}
+    student = Student(**new_student) 
+    print(student)
+    print(student.name)
+
+- Type coercing
+Pydantic automatically converts compatible input data into the type defined in the model.
+For example:
+    from pydantic import BaseModel
+
+    class Student(BaseModel):
+        name: str
+        age: int
+
+    student = Student(
+        name="Amandeep",
+        age="21"
+    )
+
+    print(student)
+    print(type(student.age))
+
+You provided:
+    age="21"
+which is a string.
+
+But the model says:
+    age: int
+
+Pydantic can convert the compatible string "21" into the integer 21.
+
+- Builtin validation
+Pydantic supports many builtin validation. For example:
+from pydantic import EmailStr
+class Student(BaseModel):
+        name : str = "Amandeep"
+        age : Optional[int] = None
+        email : EmailStr
+
+    new_student = {"email" : "abc"} # It will throw an error
+    student = Student(**new_student) 
+    print(student)
+    print(student.name)
+
+-  Field Functions (default values, constraints, descriptions, regex expressions)
+CGPA should be in range between (0 - 10)
+from pydantic import EmailStr, Field
+class Student(BaseModel):
+        name : str = "Amandeep"
+        age : Optional[int] = None
+        email : EmailStr
+        cgpa : float = Field(gt = 0, lt = 10)
+
+    new_student = {"cgpa" : 12} # It will throw an error
+    student = Student(**new_student) 
+    print(student)
+    print(student.name)
+
+We can also give default values. For example:
+    cgpa : float = Field(gt = 0, lt = 10, default = 5)
+
+We can add custom descriptions also. For example:
+    cgpa : float = Field(gt = 0, lt = 10, default = 5, description = "A decimal value representing the cgpa of the student")
+
+We can add regex expression also for PHONE NUMBER
