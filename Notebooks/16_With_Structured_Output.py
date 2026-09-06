@@ -3,7 +3,7 @@ import os
 load_dotenv()
 
 from langchain_openai import ChatOpenAI
-from typing import TypedDict, Annotated, Optional
+from typing import TypedDict, Annotated, Optional, Literal
 
 llm = ChatOpenAI(
     model = "openai/gpt-oss-20b",
@@ -14,7 +14,7 @@ llm = ChatOpenAI(
 # schema
 class Review(TypedDict):
     summary : Annotated[str, "A brief summary of the review"]
-    sentiment : Annotated[str, "Return sentiment of the review either negative, positive or neutral"]
+    sentiment : Annotated[Literal["pos", "neg", "neutral"], "Return sentiment of the review either negative, positive or neutral"]
     pros : Annotated[Optional[list[str]], "Write down all the pros inside the list"]
     cons : Annotated[Optional[list[str]], "Write down all the cons inside the list"]
     name : Annotated[Optional[str], "Return the name of the reviewer"]
