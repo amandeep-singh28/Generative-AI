@@ -139,3 +139,95 @@ Behind the scenes -> The llm itself is sending the prompt like this:
         - Summary: A brief overview of the main points.
         - Sentiment: Overall tone of the review (positive, neutral, or negative).
     Return the response in JSON format.
+
+# TypedDict Schemas
+TypedDict schemas can progress from simple to more controlled and complex schemas:
+
+TypedDict
+    ↓
+Annotated TypedDict
+    ↓
+Literal
+    ↓
+More Complex Schemas
+    ↓
+Pros & Cons
+
+(i) Simple TypedDict
+
+The basic version of TypedDict.
+
+from typing import TypedDict
+
+class Review(TypedDict):
+    summary : str
+    sentiment : str
+
+It tells the LLM:
+
+- summary → string
+- sentiment → string
+
+structured_llm = llm.with_structured_output(Person)
+
+But there is a limitation, as we are just passing the attributes name like summary and review. The LLM cannot gurantee that it will always extract the summary from the prompt as we have not given anything extra that "You have to extract the summary"
+
+(ii) Annotated TypedDict
+It allows us to attach additional information when we are defining the keys inside the class.
+For example:
+from typing import Annotated
+class Review(TypedDict):
+    summary : Annotated[str, "A brief summary of the review"]
+    sentiment : Annotated[str, "Return sentiment of the review either negative, positive or neutral"]
+
+The Annotated represents the additional information about what the field/key represents
+
+There is also one more parameter which is "Optional". It can be used with the Annotated and if the required information is not there in the prompt than it will not generate it.
+For example:
+    class Review(TypedDict):
+        summary : Annotated[str, "A brief summary of the review"]
+        sentiment : Annotated[str, "Return sentiment of the review either negative, positive or neutral"]
+        pros : Annotated[Optional[list[str]], "Write down all the pros inside the list"]
+        cons : Annotated[Optional[list[str]], "Write down all the cons inside the list"]
+        name : Annotated[Optional[str], "Return the name of the reviewer"]
+
+Since the name is not present it will print "Anonymous"
+
+(iii) Literal
+
+Literal is used when a field should contain one of a fixed set of values.
+
+from typing import TypedDict, Literal
+
+class Review(TypedDict):
+    summary: str
+    sentiment: Literal["positive", "negative", "neutral"]
+
+The sentiment field is not just any string. It should be one of:
+
+- positive
+- negative
+- neutral
+
+Example:
+
+{
+    "summary": "The product is excellent.",
+    "sentiment": "positive"
+}
+
+Valid → "positive"
+
+Invalid → "happy"
+
+(iv) More Complex Schemas
+
+We can combine these concepts.
+
+from typing import TypedDict, Annotated, Literal
+
+class ProductReview(TypedDict):
+    product_name: Annotated[str, "Name of the product"]
+    summary: Annotated[str, "Brief summary of the review"]
+    sentiment: Literal["positive", "negative", "neutral"]
+    rating: int
