@@ -117,3 +117,25 @@ class Person:
 
 But if we pass age = "24", it would still run. Because TypedDict doesn't necessarily enforced the data type. There is no validation at the runtime if we are using TypedDict(while Pydantic allows validation).
 
+
+For example:
+class Review(TypedDict):
+    summary : str
+    sentiment : str
+
+structured_model = llm.with_structured_output(Review)
+
+result = structured_model.invoke(
+    "The hardware is great, but the software feels bloated. There are too many pre-installed apps that I can't remove. Also, the UI looks outdated compared to other brands. Hoping for a software update to fix this"
+)
+
+print(result)
+print(result['summary'])
+print(result['sentiment'])
+
+Its not magically happening that we are getting the output in a strcutured way.
+Behind the scenes -> The llm itself is sending the prompt like this:
+    You are an AI assistant that extracts structured insights from text. Given a product review, extract:
+        - Summary: A brief overview of the main points.
+        - Sentiment: Overall tone of the review (positive, neutral, or negative).
+    Return the response in JSON format.
