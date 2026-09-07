@@ -333,3 +333,24 @@ We can add custom descriptions also. For example:
     cgpa : float = Field(gt = 0, lt = 10, default = 5, description = "A decimal value representing the cgpa of the student")
 
 We can add regex expression also for PHONE NUMBER
+
+
+# Json Schema
+It is used when our project is not made using same language
+JSON Schema is language-independent, so it is especially useful when different parts of a project are written in different languages.
+
+For example:
+
+Python Backend
+     ↓
+   JSON
+     ↓
+JavaScript Frontend
+
+Both Python and JavaScript can understand JSON, and JSON Schema can describe exactly what that JSON should contain.
+
+- Difference
+Method	        What we define
+TypedDict	    Structure using Python type hints
+Pydantic	    Structure + validation using Python classes
+JSON Schema	    Structure + types + constraints using JSON
