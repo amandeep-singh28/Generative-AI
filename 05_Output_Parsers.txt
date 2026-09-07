@@ -1,0 +1,9 @@
+# Output Parsers ( Can use "Can models" & "Can't models")
+It is used when the model does not support with_structured_output(), an Output Parser can be an alternative for getting the structured data
+They help convert raw LLM responses into structured formats like JSON, CSV, Pydantic models and more. They ensure consistency, validation, and ease of use in applications
+There are many type of output parsers in langchain. But here are 4 important parsers:-
+(i) String Output Parser
+(ii) JSON Output Parser
+(iii) Structured Output Parser
+(iv) Pydantic Output Parser
+
