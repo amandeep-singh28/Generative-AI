@@ -21,3 +21,26 @@ Now the question is, even if our work was getting complete with "response.conten
 
 The main advantage of StrOutputParser is not simply replacing response.content. Its major benefit becomes clear when building chains, because it converts the LLM output into a string that can be directly passed to the next component.
 
+# JSON Output Parser
+JsonOutputParser is an Output Parser in LangChain that parses the LLM's response into JSON-compatible data.
+The main purpose is to get the LLM's output in a structured JSON format rather than plain text.
+
+We gave JsonOutputParser when we define our template.
+In the template itself we give the instruction to the LLM that on which form we want our output.
+parser = JsonOutputParser()
+
+template = PromptTemplate(
+    template = "Give me the name, age and city of a fictional person \n {format_instruction}",
+    input_variables = [],
+    partial_variables = {
+        'format_instruction' : parser.get_format_instructions()
+    }
+)
+
+If we print the prompt than it would be like this:
+    Give me the name, age and city of a fictional person 
+    Return a JSON object.
+
+- Disadvantage of JsonOutputParser
+(i) We cannot define the schema. The LLM itself will create the schema on its own.
+
