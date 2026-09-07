@@ -7,3 +7,17 @@ There are many type of output parsers in langchain. But here are 4 important par
 (iii) Structured Output Parser
 (iv) Pydantic Output Parser
 
+# String Output Parser
+It is the simplest output parser in langchain. It is used to parse the output of a language model (llm) and return it as a plain string
+For example:-
+Whenever we get a response from the LLM. We get this as a output (Content along with Meta data also):
+    A black hole is a region in space where gravity is so strong that nothing, not even light, can escape its pull. It is formed when a massive star collapses upon itself.
+    Metadata: Additional kwargs = {'refusal': None}; Response metadata = {'token_usage': {'completion_tokens': 37, 'prompt_tokens': 15, 'total_tokens': 52, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}; ID = 'run-a7b90203-58f8-47c5-a01b-01184b6aec14-0'; Usage metadata = {'input_tokens': 15, 'output_tokens': 37, 'total_tokens': 52, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}.
+
+Than we do "response.content" to extract the content part only. But if we use StringOutputParser than there is no need to do "response.content"
+
+Now the question is, even if our work was getting complete with "response.content" than why there was the need for "StringOutputParser". Let's take a problem statement:
+    Topic(Black Hole) -> LLM -> [Detailed Report] -> LLM -> 5 lines summary
+
+The main advantage of StrOutputParser is not simply replacing response.content. Its major benefit becomes clear when building chains, because it converts the LLM output into a string that can be directly passed to the next component.
+
