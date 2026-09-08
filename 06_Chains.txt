@@ -40,3 +40,53 @@ The | operator is part of LCEL — LangChain Expression Language.
 We use LCEL to construct chains.
 For example:
     chain = prompt | llm | StrOutputParser()
+
+# Sequential Chain
+A Sequential Chain is a chain in which multiple steps are executed one after another in a fixed sequence.
+The important idea is:
+    The output of one step becomes the input of the next step.
+
+Basic flow
+Input
+  ↓
+Step 1
+  ↓
+Output 1
+  ↓
+Step 2
+  ↓
+Output 2
+  ↓
+Step 3
+  ↓
+Final Output
+
+Suppose we want to build this chain:
+    Topic
+     ↓
+    LLM
+     ↓
+    Report
+     ↓
+    LLM
+     ↓
+    Summary
+
+
+prompt1 = PromptTemplate(
+    template = "Generate information about this {topic}",
+    input_variables = ['topic']
+)
+
+prompt2 = PromptTemplate(
+    template = "Generate 5 small points from the following text \n {text}",
+    input_variables = ['text']
+)
+
+chain = prompt1 | llm | parser | prompt2 | llm | parser
+
+- Note
+Sequential Chain using LCEL: Multiple components are connected using the | operator, where the output of each component automatically becomes the input of the next component.
+
+- For printing the graph of the chain
+chain.get_graph().print_ascii()
