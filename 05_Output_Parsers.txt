@@ -44,3 +44,13 @@ If we print the prompt than it would be like this:
 - Disadvantage of JsonOutputParser
 (i) We cannot define the schema. The LLM itself will create the schema on its own.
 
+# Structured Output Parser
+It is an Output Parser in LangChain that helps extract structured JSON data from LLM responses based on predefined field schemas.
+It works by defining a list of fields (ResponseSchema) that the model should return, ensuring the output follows a structured format.
+The only difference is this that we give a particular structure/format(Schema enforce).
+
+Advantage:-
+Fixed Schema
+
+Disadvantage:-
+No data validation
