@@ -90,3 +90,60 @@ Sequential Chain using LCEL: Multiple components are connected using the | opera
 
 - For printing the graph of the chain
 chain.get_graph().print_ascii()
+
+# Parallel Chains
+
+A Parallel Chain is a chain where multiple independent tasks are executed at the same time, instead of waiting for one task to finish before starting the next.
+
+Sequential vs Parallel
+
+Sequential:
+
+Input
+  ↓
+Task 1
+  ↓
+Task 2
+  ↓
+Task 3
+
+Parallel:
+                ┌→ Task 1 → Result 1
+    Input ───────┼→ Task 2 → Result 2
+                └→ Task 3 → Result 3
+
+The key idea:
+    In parallel chains, the tasks are independent, so they can run simultaneously.
+
+Example:
+    We will do two tasks independently.
+    First task would generate the "Notes" from the prompt that we have given
+    Second task would generate the "Quiz" based on the prompt
+
+prompt1 = PromptTemplate(
+    template = "Generate short and simple notes from the following text \n {text}",
+    input_variables = ['text']
+)
+
+prompt2 = PromptTemplate(
+    template = "Generate 5 short questions from the following text \n {text}",
+    input_variables = ['text']
+)
+
+prompt3 = PromptTemplate(
+    template = "Merge the provided notes and quiz into a single document \n notes -> {notes} & quiz -> {quiz}",
+    input_variables = ['notes', 'quiz']
+)
+
+parser = StrOutputParser()
+
+parallel_chain = RunnableParallel(
+    {
+        'notes' : prompt1 | llm | parser,
+        'quiz' : prompt2 | llm | parser
+    }
+)
+
+merge_chain = prompt3 | llm | parser
+
+chain = parallel_chain | merge_chain
