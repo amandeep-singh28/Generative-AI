@@ -54,3 +54,18 @@ Fixed Schema
 
 Disadvantage:-
 No data validation
+
+# Pydantic Output parser
+It is a structured ouput parser in LangChain that uses Pydantic models to enforce schema validation when processing LLM responses.
+- Why use PydanticOutputParser?
+(i) Strict Schema enforcement -> Ensures that LLM responses follow a well defined structured
+(ii) Type safety -> Automatically converts LLM outputs into Python object.
+(iii) Easy validation -> Uses Pydantic's built-in validation to catch incorrect or missing data
+(iv) Semaless Integration -> Works well with other LangChain components
+
+Output Parsers — Quick Revision
+Parser	                Output	                Schema?	Validation?	    Main Use
+StrOutputParser	        Plain String	           ❌	❌	        Convert LLM response to string; useful in chains
+JsonOutputParser	    JSON / Dict	               ❌	❌	        Get JSON-formatted structured data
+StructuredOutputParser	Structured JSON / Dict	   ✅	❌	        Get output according to predefined ResponseSchema
+PydanticOutputParser	Pydantic Object	           ✅	✅	        Structured + type-safe + validated output
