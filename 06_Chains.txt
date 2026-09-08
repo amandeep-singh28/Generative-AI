@@ -1,0 +1,42 @@
+# Chains
+A Chain is a sequence of components where the output of one component becomes the input of the next component.
+
+Instead of manually calling each component separately, we connect them together.
+
+Basic Flow
+Input
+  ↓
+Prompt
+  ↓
+LLM
+  ↓
+Output Parser
+  ↓
+Final Output
+
+- Why do we need Chains?
+
+Without a chain, we have to manually handle every step:
+    prompt = template.invoke({"topic": "Black Hole"})
+    result = llm.invoke(prompt)
+    output = parser.invoke(result)
+    print(output)
+
+With a chain:
+    chain = template | llm | parser
+    result = chain.invoke({
+        "topic": "Black Hole"
+    })
+    print(result)
+
+So chains make our code:
+    Shorter
+    Cleaner
+    Easier to understand
+    Easier to combine multiple components
+
+- LCEL
+The | operator is part of LCEL — LangChain Expression Language.
+We use LCEL to construct chains.
+For example:
+    chain = prompt | llm | StrOutputParser()
