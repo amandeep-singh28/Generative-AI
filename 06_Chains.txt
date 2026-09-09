@@ -147,3 +147,40 @@ parallel_chain = RunnableParallel(
 merge_chain = prompt3 | llm | parser
 
 chain = parallel_chain | merge_chain
+
+
+# Conditional Chain
+A Conditional Chain is a chain where the next step is selected dynamically based on the input or output of a previous step.
+Unlike a sequential chain, where the path is fixed:
+  A → B → C
+a conditional chain can choose:
+              ┌→ B
+  A → Condition┤
+              └→ C
+
+Simple real-world example
+Suppose the user enters a question.
+
+We first determine whether it is about Python or Java:
+                      ┌→ Python Chain
+  Question → Condition
+                      └→ Java Chain
+Only one branch is executed depending on the condition.
+
+- Syntax
+In modern LangChain, we commonly use RunnableBranch.
+from langchain_core.runnables import RunnableBranch
+Basic Syntax:
+  branch_chain = RunnableBranch(
+      (condition_1, chain_1),
+      (condition_2, chain_2),
+      default_chain
+  )
+
+Think of it like:
+  if condition_1:
+      chain_1
+  elif condition_2:
+      chain_2
+  else:
+      default_chain
