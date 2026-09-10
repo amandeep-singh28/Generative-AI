@@ -63,3 +63,17 @@ For example:
     chain = prompt | llm | parser
 
 Here, the components can work together because they follow the Runnable interface.
+
+- Note — Why Chains were introduced
+
+One thing became common in almost every LLM application: creating a prompt and sending it to the LLM.
+
+This process was often repetitive and manual. Developers had to repeatedly perform these steps and connect the output of one component to the next.
+
+So, the LangChain community introduced a new concept called Chain, which allows us to connect multiple components together and automate the workflow.
+
+For example:
+    Prompt → LLM → Output Parser
+
+Instead of manually calling each component one by one, we can connect them into a chain:
+    chain = prompt | llm | parser
