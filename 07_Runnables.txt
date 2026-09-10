@@ -1,0 +1,65 @@
+# Problems that led to LangChain and Runnables
+
+To understand why LangChain introduced Runnables, we need to understand the problems developers faced while building LLM applications.
+
+- Problem 1 — Different LLM providers and different APIs
+
+When ChatGPT became popular in 2022, developers started using LLMs to build different applications.
+
+Initially, OpenAI was one of the major LLM providers, but soon many other companies entered the market, such as Anthropic, Google, Meta, etc.
+
+The problem was that different LLM providers had different APIs and interfaces. Developers had to learn and handle different ways of interacting with each model.
+
+LangChain aimed to provide a common abstraction layer so developers could work with different LLM providers in a more consistent way.
+
+- Problem 2 — LLM applications require more than just an LLM
+
+Developers also realized that building a useful LLM application involves many components, not just an LLM.
+
+For example, consider a PDF Reader application.
+
+To build it, we may need:
+    PDF
+     ↓
+Document Loader
+     ↓
+Text Splitter
+     ↓
+Embedding Model
+     ↓
+Vector Database
+     ↓
+Retriever
+     ↓
+    LLM
+     ↓
+Output Parser
+
+As you can see, there are many different components involved.
+So LangChain's idea was:
+    Instead of focusing only on the LLM component, let's provide components for the entire LLM application workflow.
+
+Therefore, LangChain introduced abstractions/components such as:
+    Document Loaders
+    Text Splitters
+    Embedding Models
+    Vector Stores
+    Retrievers
+    Output Parsers
+    LLMs / Chat Models
+    And more
+    So where do Runnables come in?
+
+Now we have many different components, and we need a standard way to connect them together.
+For example:
+    Prompt → LLM → Parser
+or:
+    Document Loader → Text Splitter → Embedding → Vector DB → Retriever → LLM
+
+This is where Runnables become important.
+LangChain provides a common interface for components so that they can be combined, connected, and composed easily.
+
+For example:
+    chain = prompt | llm | parser
+
+Here, the components can work together because they follow the Runnable interface.
