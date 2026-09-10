@@ -77,3 +77,17 @@ For example:
 
 Instead of manually calling each component one by one, we can connect them into a chain:
     chain = prompt | llm | parser
+
+- Disadvantages of Chains
+(i) Fixed workflow — follows a predefined sequence.
+(ii) Less flexible for dynamic decisions, loops, and retries.
+(iii) Complex to maintain when many steps are involved.
+(iv) Not ideal for agentic workflows where the LLM decides what to do next.
+
+
+- Advantages of Chains
+(i) Automates workflows — reduces repetitive manual steps.
+(ii) Connects components easily — e.g., Prompt → LLM → Parser.
+(iii) Reusable — the same chain can be used multiple times.
+(iv) Easy to build — components can be connected using |.
+(v) Improves consistency — the same workflow is followed every time.
