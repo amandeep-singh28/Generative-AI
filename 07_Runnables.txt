@@ -91,3 +91,16 @@ Instead of manually calling each component one by one, we can connect them into 
 (iii) Reusable — the same chain can be used multiple times.
 (iv) Easy to build — components can be connected using |.
 (v) Improves consistency — the same workflow is followed every time.
+
+# What are Runnables?
+Runnables are like units of work in LangChain.
+
+A Runnable takes some input, processes it, and produces an output.
+Every Runnable in LangChain follows a common interface, meaning they provide common methods such as:
+    invoke()
+    batch()
+    stream()
+
+Since Runnables share a common interface, we can easily connect different Runnables together to create more complex workflows.
+For example:
+    Prompt → LLM → Output Parser
