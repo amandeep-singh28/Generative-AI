@@ -104,3 +104,47 @@ Every Runnable in LangChain follows a common interface, meaning they provide com
 Since Runnables share a common interface, we can easily connect different Runnables together to create more complex workflows.
 For example:
     Prompt → LLM → Output Parser
+
+- Types of Runnables
+(i) Task specific runnables
+(ii) Runnable primitives
+
+(i) Task specific runnables
+These are basically existing LangChain components that perform a specific task.
+
+ChatOpenAI
+Its job:
+    Input → Prompt
+            ↓
+        ChatOpenAI
+            ↓
+        AI Response
+It performs the LLM call.
+
+PromptTemplate
+Its job:
+    Input variables
+        ↓
+    PromptTemplate
+        ↓
+    Formatted Prompt
+It creates/formats the prompt.
+
+Retriever
+Its job:
+    Query
+    ↓
+    Retriever
+    ↓
+    Relevant Documents
+It retrieves relevant documents.
+
+So:
+    Task-Specific Runnables
+    │
+    ├── Chat Model → LLM task
+    ├── PromptTemplate → Prompt task
+    ├── Retriever → Retrieval task
+    └── Other LangChain components
+Easy way to remember:
+    Task-Specific Runnable = A Runnable that performs a particular task.
