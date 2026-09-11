@@ -148,3 +148,65 @@ So:
     └── Other LangChain components
 Easy way to remember:
     Task-Specific Runnable = A Runnable that performs a particular task.
+
+(ii) Runnable primitives
+Runnable Primitives are basic building blocks used to control and organize how Runnables execute.
+
+For example:
+RunnableSequence
+Runs things one after another.
+A → B → C
+Example:
+Prompt → LLM → Parser
+RunnableParallel
+
+Runs multiple Runnables at the same time.
+
+          → A
+Input ────┤
+          → B
+          → C
+
+For example:
+
+             → Notes
+Document ────┤
+             → Quiz
+RunnableBranch
+
+Used for conditional execution.
+
+Basically:
+
+              ┌→ Chain A
+Input → Condition
+              └→ Chain B
+
+Like:
+
+if sentiment == "positive":
+    ...
+else:
+    ...
+RunnableLambda
+
+Allows you to turn your own Python function into a Runnable.
+
+def double(x):
+    return x * 2
+
+You can convert it into a Runnable:
+
+RunnableLambda(double)
+
+Now your custom Python function can participate in a LangChain workflow.
+
+RunnablePassthrough
+
+Simply passes the input forward without changing it.
+
+Input
+  ↓
+RunnablePassthrough
+  ↓
+Same Input
