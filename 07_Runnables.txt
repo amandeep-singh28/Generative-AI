@@ -210,3 +210,49 @@ Input
 RunnablePassthrough
   ↓
 Same Input
+
+(i) RunnableSequence
+RunnableSequence is a sequential chain of runnables in LangChain that executes each step one after another, passing the output of one step as the input to the next.
+It is useful when you need to compose multiple runnables together in a structured workflow.
+For example:-
+Runnable1(Prompt)
+Runnable2(llm)
+We can connect these two runnables with the help of RunnableSequence.
+
+- How does it work? (PromptTemplate → LLM → Output Parser)
+Suppose we have three components:
+    PromptTemplate creates the prompt.
+    LLM generates the response.
+    StrOutputParser converts the response into a normal string.
+The workflow becomes:
+    User Input
+        ↓
+    PromptTemplate
+        ↓
+    Formatted Prompt
+        ↓
+    LLM
+        ↓
+    AIMessage
+        ↓
+    StrOutputParser
+        ↓
+    Final String
+Each step depends on the output of the previous step.
+
+- Two ways to create RunnableSequence
+(i) Method 1: Using the pipe operator |
+chain = prompt | llm | parser
+LangChain automatically creates a sequence from these Runnables.
+Conceptually:
+    RunnableSequence(prompt, llm, parser)
+
+(ii) Method 2: Using RunnableSequence directly
+from langchain_core.runnables import RunnableSequence
+chain = RunnableSequence(
+    prompt,
+    llm,
+    parser
+)
+
+The pipe operator is generally shorter and easier to read.
