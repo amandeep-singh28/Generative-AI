@@ -1,0 +1,23 @@
+# Introduction to RAG
+RAG stands for "RETRIEVAL AUGMENTED GENERATION".
+RAG is a a technique that combines information retrieval with language generation where a model retrieves relevant documents from a knowledge base and then uses them as context to generate accurate and grounded responses.
+Benefits of using RAG:
+    (i) Use of up-to-date information
+    (ii) Better privacy (RAG can help organizations use private data without exposing it publicly, but security depends on how the complete RAG system is designed and deployed.)
+    (iii) No limit of document size
+
+- Why RAG?
+
+If you use ChatGPT, there are certain things it may not be able to do accurately without access to external or private information. For example:
+
+(i) Latest Current Affairs
+If you ask ChatGPT about very recent events, such as information from the past one or two days, it may not provide an accurate or up-to-date response.
+
+This is because an LLM is trained on a specific collection of data and may not have access to the latest information.
+
+(ii) Personal Data
+If you ask an LLM to read your personal Gmail messages, it will not be able to do so unless you provide access to those messages through an appropriate integration.
+Similarly, if you ask questions about a company's private or confidential data, the LLM cannot answer accurately unless that information is provided to it.
+
+RAG helps address these limitations by retrieving relevant information from external sources or private documents and providing it to the LLM as context.
+
