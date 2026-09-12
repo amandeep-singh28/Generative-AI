@@ -287,3 +287,51 @@ Input Document
       ├──────────────→ Notes Prompt → LLM → Parser → Notes
       │
       └──────────────→ Quiz Prompt  → LLM → Parser → Quiz
+
+(iii) RunnablePassthrough
+It is a special Runnable primitive that simply returns the input as output without modifying it.
+It preserves the original input.
+It passes the input to the next step without changing it
+
+Input
+  ↓
+RunnablePassthrough
+  ↓
+Same Input
+
+For Example:
+    from langchain_core.runnables import RunnablePassthrough
+
+    runnable = RunnablePassthrough()
+
+    result = runnable.invoke("Hello")
+
+    print(result)
+Output:
+    Hello
+
+- Real-life example
+Suppose you have a document and want to create two outputs:
+    A summary of the document.
+    The original document.
+
+The summary branch changes the document, but the second branch should preserve it.
+
+                    ┌──→ Summary Chain → Summary
+Original Document ──┤
+                    └──→ RunnablePassthrough → Original Document
+
+Another example:
+In our RunnableSequence implementation, we have firstly generated the "joke" and then the "joke" is passed again to the "llm" to have its "explanation".
+So, in this case we were only getting the output of the "explanation part".
+If we want the "joke" also than we can use "RunnablePassthrough" here.
+
+Earlier:
+    Topic -> Joke -> explanation
+Now:
+                             -> RunnablePassthrough (as it is joke will be printed)
+                            |
+    Prompt -> LLM -> Parser->(RunnableParallel)
+                            |
+                             ->Prompt2 -> LLm -> Parser(Joke explanation)
+
