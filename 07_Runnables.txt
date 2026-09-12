@@ -335,3 +335,30 @@ Now:
                             |
                              ->Prompt2 -> LLm -> Parser(Joke explanation)
 
+
+(iv) RunnableLambda
+It is a runnable primitive that allows you to apply custom python functions within an AI pipeline.
+It acts as a middleware between different AI componentsm, enabling preprocessing transformation, API calls, filtering, and post-processing in a LangChain workflow.
+
+For example:
+    Suppose you are working on customer reviews in which you have to predict the sentiment of the review through LLM whether the review is positive, negative or neutral.
+Review -> LLM -> sentiment
+    But you have realized that the "reviews" are not clean, it contains some "html" tags, punctuation, emoji, etc.
+So we can create a function with the help of "RunnableLambda" which will do the "preprocessing" of the text.
+
+Another example:
+Topic -> Joke -> (We will count number of words)
+So,
+                             -> RunnablePassthrough(Print joke as it is)
+                             |
+    Prompt -> LLM -> Parser-->(RunnableParallel)
+                             |
+                             -> RunnableLambda -> words(Count number of words)
+                             
+Simple example:
+from langchain_core.runnables import RunnableLambda
+def word_counter(text):
+    return len(text.split())
+
+runnable = RunnableLambda(word_counter)
+print(runnable.invoke("Hi there how are you?"))
