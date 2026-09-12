@@ -21,3 +21,53 @@ Similarly, if you ask questions about a company's private or confidential data, 
 
 RAG helps address these limitations by retrieving relevant information from external sources or private documents and providing it to the LLM as context.
 
+# Components of RAG
+(i) Document loaders
+(ii) Text splitters
+(iii) Vector databases
+(iv) Retrievers
+
+# Document loaders
+There are 100s of document loaders in langchain, but we will study the 4 important ones.
+(i) TextLoader
+(ii) PyPDFLoader
+(iii) WebBaseLoader
+(iv) CSVLoader
+
+Document loaders are components in LangChain used to load data from various sources into a standardized format (usually as Document objects), which can then be used for chunking, embedding, retrieval, and generation.
+
+For every document, we have two things: page_content and meta_data.
+Document(
+    page_content = "The actual text content",
+    metadata = {
+        "source" : "filename.pdf",
+        ...
+    }
+)
+
+
+- Why do we need Document Loaders?
+An LLM cannot automatically read every file on your computer.
+For example, if you have a PDF containing company policies, you first need to:
+Read the PDF.
+Extract its text.
+Convert that text into a usable format.
+Pass it to the next RAG component.
+
+The Document Loader performs the first part of this process.
+
+- What is a Document?
+After loading, LangChain usually represents the extracted information using a Document object.
+A Document mainly contains two things:
+    Document(
+        page_content="The actual text...",
+        metadata={"source": "company_policy.pdf"}
+    )
+
+page_content -> Contains the actual extracted text.
+
+metadata -> Contains additional information about the text, such as:
+    File name
+    Page number
+    Source
+    Document type
