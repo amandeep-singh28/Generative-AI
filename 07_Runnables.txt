@@ -256,3 +256,34 @@ chain = RunnableSequence(
 )
 
 The pipe operator is generally shorter and easier to read.
+
+(ii) RunnableParallel
+RunnableParallel is a runnable primitive that allows multiple runnables to execute in parallel.
+Each runnable receives the same input and process it independently, producing a dictionary of outputs.
+
+It is useful when different tasks do not depend on each other.
+                 ┌──→ Runnable 1
+Input ───────────┼──→ Runnable 2
+                 └──→ Runnable 3
+
+For Example-
+Suppose we want to process a document in two different ways:
+    Generate short notes.
+    Generate quiz questions.
+Both tasks can use the same document independently.
+                    ┌──→ Notes
+Document ───────────┤
+                    └──→ Quiz
+
+The output is generally returned as a dictionary:
+    {
+        "notes": "...",
+        "quiz": "..."
+    }
+
+- Execution flow
+Input Document
+      │
+      ├──────────────→ Notes Prompt → LLM → Parser → Notes
+      │
+      └──────────────→ Quiz Prompt  → LLM → Parser → Quiz
