@@ -362,3 +362,36 @@ def word_counter(text):
 
 runnable = RunnableLambda(word_counter)
 print(runnable.invoke("Hi there how are you?"))
+
+(v) RunnableBranch (Conditional Chain)
+It is a control flow component in LangChain that allows you to conditionally route input data to different chains or runnables based on custom logic.
+It functions like an if/elif/else block for chains - where you define a set of condition functions, each associated with a runnable (e.g., LLM call, prompt chain, or tool). The first matching condition is executed. If no condition matches, a default runnable is used (if provided).
+
+- Why do we need it?
+A normal RunnableSequence follows the same path every time:
+    Input → Prompt 1 → LLM 1 → Output
+But sometimes we need different workflows for different inputs.
+For example:
+    If feedback is positive → Generate a thank-you response
+    If feedback is negative → Generate an apology response
+This is where RunnableBranch is useful.
+
+- Basic syntax
+from langchain_core.runnables import RunnableBranch
+
+branch = RunnableBranch(
+    (condition_1, runnable_1),
+    (condition_2, runnable_2),
+    default_runnable
+)
+The conditions are checked in order.
+If condition_1 is true, runnable_1 executes.
+Otherwise, condition_2 is checked.
+If no condition is true, the default_runnable executes.
+
+For example:
+                                     -> If greater than 500 words (Than we will pass the text again to LLM to summarize)
+                                     |
+    Topic -> Prompt -> LLM -> Parser->
+                                     |
+                                     -> If less than 500 words (Than we will print it as it is)
