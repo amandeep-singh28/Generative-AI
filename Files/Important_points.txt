@@ -1,0 +1,33 @@
+LLM: Generates human-like text based on learned patterns.
+
+LangChain: Framework for building LLM applications.
+
+PromptTemplate: Creates reusable prompts using placeholders like {topic}.
+
+Chat Models: Use SystemMessage, HumanMessage, and AIMessage.
+
+Prompt Engineering: Includes zero-shot, one-shot, few-shot, and role-based prompting.
+
+Structured Output: Makes LLM responses follow a fixed format or schema.
+
+Pydantic: Defines data fields and validates the output.
+
+Output Parsers: Convert LLM responses into usable formats.
+
+LCEL: Connects components using the | operator.
+
+RunnableSequence: Executes steps one after another.
+
+RunnableParallel: Runs multiple branches simultaneously.
+
+RunnableBranch: Selects a branch based on a condition.
+
+RunnablePassthrough: Passes input without changing it.
+
+RunnableLambda: Converts a Python function into a Runnable.
+
+Agent: LLM + tools for completing tasks.
+
+RAG: Retrieves relevant external information before generating an answer.
+
+Document Loader: Converts files or other data sources into LangChain Document objects.
