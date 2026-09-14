@@ -31,3 +31,44 @@ Agent: LLM + tools for completing tasks.
 RAG: Retrieves relevant external information before generating an answer.
 
 Document Loader: Converts files or other data sources into LangChain Document objects.
+
+
+invoke() is used for a single input.
+
+batch() processes multiple inputs together.
+
+stream() displays output gradually.
+
+ChatPromptTemplate is used for chat-based prompts.
+
+MessagesPlaceholder allows dynamic chat history.
+
+RunnableLambda wraps a normal Python function.
+
+RunnableParallel returns results in dictionary form.
+
+RunnableBranch works like if-else logic.
+
+RunnablePassthrough preserves the original input.
+
+Chains reduce repetitive coding.
+
+Agents can choose tools according to the task.
+
+Embeddings convert text into numerical vectors.
+
+Vector databases store and search embeddings.
+
+Retrievers find relevant information from stored documents.
+
+RAG combines retrieval with LLM generation.
+
+Metadata provides additional information about a document.
+
+page_content contains the actual document text.
+
+Document loaders support different data sources.
+
+Text splitters divide large documents into smaller chunks.
+
+Smaller chunks improve the relevance of retrieved information.
