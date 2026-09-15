@@ -72,3 +72,31 @@ Document loaders support different data sources.
 Text splitters divide large documents into smaller chunks.
 
 Smaller chunks improve the relevance of retrieved information.
+
+Chains: Connect multiple LangChain components into one workflow.
+
+Runnables: Units that take input, process it, and return output.
+
+RunnableSequence: Executes Runnables step by step.
+
+RunnableParallel: Executes independent tasks simultaneously.
+
+RunnableBranch: Selects a workflow based on a condition.
+
+RunnableLambda: Converts a custom Python function into a Runnable.
+
+RunnablePassthrough: Passes the original input without modification.
+
+Task-Specific Runnables: Perform specific tasks, such as prompting, calling an LLM, or retrieving documents.
+
+Runnable Primitives: Organize and control how Runnables execute.
+
+Chain vs Runnable Primitives: Chains are suitable for simple fixed workflows, while Runnable primitives support flexible and complex workflows.
+
+LCEL: Connects Runnables using the | operator.
+
+Sequential Workflow: The output of one step becomes the input of the next step.
+
+Parallel Workflow: Multiple branches receive the same input and produce separate outputs.
+
+Conditional Workflow: Different branches execute depending on the given condition.
