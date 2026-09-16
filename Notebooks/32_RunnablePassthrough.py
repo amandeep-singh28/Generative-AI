@@ -14,13 +14,13 @@ llm = ChatOpenAI(
 )
 
 prompt1 = PromptTemplate(
-    template = "Generate a tweet about {topic}",
+    template = "Generate a joke about {topic}",
     input_variables = ['topic']
 )
 
 prompt2 = PromptTemplate(
-    template = "Generate a LinkedIn post about {topic}",
-    input_variables = ["topic"]
+    template = "Explain the joke {text}",
+    input_variables = ["text"]
 )
 
 parser = StrOutputParser()
