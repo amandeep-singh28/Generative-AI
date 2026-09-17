@@ -1,0 +1,9 @@
+Our company, TechNova Solutions, provides software development and data science services.
+
+We develop web applications, mobile applications, and business analytics dashboards.
+
+Our main technologies include Python, Java, JavaScript, React, Django, SQL, and machine learning.
+
+Our mission is to help businesses improve productivity through innovative and reliable technology solutions.
+
+We focus on customer satisfaction, continuous learning, teamwork, and high-quality software development.
