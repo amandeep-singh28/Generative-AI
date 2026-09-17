@@ -71,3 +71,103 @@ metadata -> Contains additional information about the text, such as:
     Page number
     Source
     Document type
+
+# TextLoader
+
+## Definition
+
+TextLoader (works only with .txt files) is a simple and commonly used document loader in LangChain that reads plain text (.txt) files and converts them into LangChain document objects.
+
+## Working of TextLoader
+
+Text File
+    ↓
+TextLoader
+    ↓
+load()
+    ↓
+Document Object
+    ├── page_content
+    └── metadata
+
+## Code
+
+from langchain_community.document_loaders import TextLoader
+
+loader = TextLoader(r'file_path', encoding='utf-8')
+docs = loader.load()
+
+print(docs)  # It prints a list of documents.
+
+print(docs[0].page_content)
+
+print(docs[0].metadata)
+
+## Using the Loaded Text with an LLM
+
+We can pass the loaded text into the LLM. For example, we can give a prompt:
+
+"Write a short summary on the following document."
+
+
+# PyPDFLoader (Doesn't work well on scanned data)
+
+PyPDFLoader is a document loader in LangChain used to load content from PDF files and convert each page into a document object.
+
+## Structure
+
+[
+    Document(
+        page_content="Text from page1...",
+        metadata={
+            "page": 0,
+            "source": "filepath"
+        }
+    ),
+    Document(
+        page_content="Text from page2...",
+        metadata={
+            "page": 1,
+            "source": "filepath"
+        }
+    ),
+    ...
+]
+
+## Working
+
+PDF File
+    ↓
+PyPDFLoader
+    ↓
+documents = [
+    Document(page_content="Page1...", ...),
+    Document(page_content="Page2...", ...)
+]
+
+## Code
+
+from langchain_community.document_loaders import PyPDFLoader
+
+loader = PyPDFLoader(r'filename')
+docs = loader.load()
+
+print(len(docs))  # len = Number of pages
+print(docs[0].page_content)  # Print 1st page
+print(docs[1].page_content)  # Print 2nd page
+
+## Limitations
+
+1. It mainly extracts text, not the complete visual layout.
+2. It may not read scanned-based PDFs properly.
+3. Tables cannot be read properly.
+
+## Other PDF Loaders
+
+| Use Case | Recommended Loader |
+|---|---|
+| Simple, clean PDFs | PyPDFLoader |
+| PDFs with tables/columns | PDFPlumberLoader |
+| Scanned/image PDFs | UnstructuredPDFLoader |
+| Need layout and image data | PyMuPDFLoader |
+| Want the best structure extraction | UnstructuredPDFLoader |
