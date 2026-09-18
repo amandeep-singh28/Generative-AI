@@ -279,3 +279,40 @@ age: 21
 city: Delhi
 
 So, each row of the CSV generally becomes a Document.
+
+
+# Text Splitting
+
+Text splitting is the process of breaking large chunks of text (e.g., articles, PDFs, HTML pages, or books) into smaller, manageable pieces (chunks) that an LLM can handle effectively.
+
+## Why Text Splitting?
+
+When documents are large, we cannot efficiently use the entire document as a single unit in a RAG system. Text splitting breaks large documents into smaller chunks.
+
+### 1. Context Window Limitation
+
+LLMs have a limited context window, meaning they can process only a certain amount of text at once.
+
+Large document
+    ↓
+Split
+    ↓
+Small chunks
+    ↓
+Send only relevant chunks
+
+### 2. Better Retrieval
+
+If an entire document is stored as one unit, retrieving information means retrieving the whole document.
+
+Text splitting allows smaller and more relevant pieces of information to be retrieved.
+
+### 3. Efficient Embeddings
+
+In RAG, chunks are converted into embeddings and stored in a vector database.
+
+Smaller, meaningful chunks make it easier to represent and search for specific pieces of information.
+
+## Note
+
+We don't use text splitters because the LLM can't read long documents. We use them so the retrieval system can find the exact match, saving time and money and improving accuracy.
