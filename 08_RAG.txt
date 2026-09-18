@@ -316,3 +316,153 @@ Smaller, meaningful chunks make it easier to represent and search for specific p
 ## Note
 
 We don't use text splitters because the LLM can't read long documents. We use them so the retrieval system can find the exact match, saving time and money and improving accuracy.
+
+# Text Splitting
+
+## (a) Length-Based Text Splitter (or Character Splitter)
+
+It splits text into chunks based on the length of the text.
+
+Large text
+    ↓
+Check length
+    ↓
+Split when limit is reached
+    ↓
+Smaller chunks
+
+For example:
+- chunk_size = 100
+- The splitter tries to create chunks of around 100 units of text.
+
+## Disadvantages
+
+1. Can break sentences:
+   - It may split a sentence or paragraph in the middle.
+2. Can lose context:
+   - Related information may be separated into different chunks.
+3. Not meaning-aware.
+4. Poor for structured documents.
+
+## Code
+
+from langchain_text_splitters import CharacterTextSplitter
+
+text = """
+"""
+
+splitter = CharacterTextSplitter(
+    chunk_size=100,
+    chunk_overlap=0,
+    separator=" "
+)
+
+result = splitter.split_text(text)
+print(result)
+
+## Combining Document Loader and Text Splitter
+
+We can combine the logic of "Document Loader & TextSplitter".
+
+- DocumentLoader is responsible for loading the data.
+- TextSplitter is responsible for splitting the data.
+
+result = splitter.split_documents(text)
+
+If 5 pages (PyPDFLoader) are passed, more than 5 documents will be created because each page can be split into multiple chunks.
+
+# Chunk Overlap
+
+Imagine this text:
+
+A B C D E F G H I J K L
+
+Suppose:
+- chunk_size = 6
+- chunk_overlap = 2
+
+## Without Overlap
+
+- Chunk 1: A B C D E F
+- Chunk 2: G H I J K L
+
+## With Overlap
+
+- Chunk 1: A B C D E F
+- Chunk 2: E F G H I J
+- Chunk 3: I J K L
+
+Chunk overlap means repeating a small portion of one chunk in the next chunk.
+
+# (b) Text-Structure-Based Splitting (or Recursive Character Text Splitter)
+
+It splits text into chunks by trying different separators recursively, while keeping related text together as much as possible.
+
+## Order of Splitting
+
+Paragraph → Sentence → Word → Character
+
+- Paragraph: "\n\n"
+- Sentence: "\n"
+- Word: " "
+- Character: ""
+
+## Note
+
+If the text is too large for one chunk, the splitter tries to split at paragraph boundaries.
+
+If a paragraph itself is still too large, it recursively tries smaller separators.
+
+Long document
+    ↓
+Split by "\n\n"
+    ↓
+Still too large?
+    ↓
+Split by "\n"
+    ↓
+Still too large?
+    ↓
+Split by characters
+
+That's why it is called recursive.
+
+## Example
+
+chunk_size = 10
+
+Text:
+- My name is Aman (15)
+- I am 22 years old (17)
+- Paragraph
+- I live in Haridwar (18)
+- How are you (11)
+
+First, it splits on the basis of paragraphs.
+
+Then, if a chunk is still greater than the chunk size, it splits on the basis of lines.
+
+Then, if it is still too large, it splits on the basis of words.
+
+It can optimize further by joining words when possible.
+
+The resulting chunks can be:
+- ["my name is"] ...
+- ["Aman"] ...
+
+## Code
+
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+text = """
+"""
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=100,
+    chunk_overlap=0
+)
+
+result = splitter.split_text(text)
+
+print(len(result))
+print(result)
