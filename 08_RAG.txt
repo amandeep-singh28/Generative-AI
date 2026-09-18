@@ -524,3 +524,91 @@ splitter = RecursiveCharacterTextSplitter.from_language(
 )
 
 chunks = splitter.split_text(text)
+
+
+# How Do We Choose Chunk Size?
+
+## Main Real-World Question
+
+Suppose your Markdown is:
+
+# Project Name
+A simple Python-based project...
+
+## Features
+- Add students
+- View students
+- Check passing
+
+## Tech Stack
+- Python
+- No external dependencies
+
+Logically, you may see:
+- Section 1
+- Section 2
+- Section 3
+
+You might think:
+"Shouldn't I simply set chunk_size so that I get exactly 3 chunks?"
+
+No.
+
+The number of sections ≠ the number of chunks.
+
+The purpose isn't to force one section into one chunk.
+
+## Main Goal
+
+Create chunks that are:
+- Small enough for efficient retrieval.
+- Large enough to preserve the context needed to answer questions.
+
+# How Does a Real Application Choose Chunk Size?
+
+There is no universally perfect chunk size.
+
+Instead, you normally follow these steps:
+
+## Step 1: Identify the Data/Document Type
+
+Example:
+
+User uploads document
+↓
+PDF / Markdown / Python / HTML, etc.
+
+This helps determine the appropriate loader and splitting strategy.
+
+## Step 2: Start with a Reasonable Configuration
+
+For example:
+
+chunk_size = 500
+chunk_overlap = 50
+
+These values are starting points, not universal values.
+
+## Step 3: Create Representative Questions About Your Documents
+
+For example:
+- Q1: What is the refund policy?
+- Q2: Who is eligible?
+
+Then check:
+- Did the retriever find the correct chunk?
+- Was enough relevant context retrieved?
+
+## Step 4: Evaluate and Adjust
+
+Suppose:
+
+500/50 → Poor retrieval
+
+Try other configurations:
+
+300/50
+800/100
+1000/10
+
+Then evaluate again.
