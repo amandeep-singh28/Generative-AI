@@ -612,3 +612,70 @@ Try other configurations:
 1000/10
 
 Then evaluate again.
+
+
+# Semantic Meaning-Based Text Splitting
+
+It is different from previous methods.
+
+It divides text based on the meaning and similarity of the content rather than using a fixed character length or predefined document structure.
+
+## Why Do We Need It?
+
+Consider this text:
+
+- Python is a programming language.
+- Python is widely used in data science.
+- NumPy and Pandas are popular libraries.
+- The weather in Delhi is hot today.
+- Delhi has experienced high temperatures this week.
+- A fixed-size splitter might accidentally create:
+
+  Chunk 1 → Python + Python + NumPy
+
+  Chunk 2 → NumPy + Delhi
+
+- But the boundary might pass differently:
+
+  Chunk 1 → Python + Python + weather
+
+  Chunk 2 → NumPy + Delhi
+
+- The chunks may contain unrelated topics.
+
+## Working
+
+This is where embeddings come into the picture.
+
+Suppose we have:
+
+- Sentence 1 → "Python is a programming language."
+- Sentence 2 → "Python is used extensively in DS."
+- Sentence 3 → "The weather in Delhi is very hot."
+
+The process is:
+
+1. Convert sentences into vectors.
+2. For every two consecutive vectors, find similarity.
+3. Using similarity, calculate the similarity score (S.D.).
+
+Conceptually:
+
+- Python sentence → `[0.21, 0.72, 0.15, ...]`
+- Python sentence → `[0.19, 0.69, 0.17, ...]` → Almost same
+- Weather sentence → `[0.82, 0.12, 0.91, ...]` → Different
+
+So, the splitter can use similarity to determine where a new chunk should begin.
+
+## Code
+
+from langchain_experimental.text_splitter import SemanticChunker
+
+text_splitter = SemanticChunker(
+    embeddings,
+    breakpoint_threshold_type="standard_deviation",
+    breakpoint_threshold_amount=1
+)
+
+sample = "..."
+docs = text_splitter.create_documents([sample])
