@@ -171,3 +171,111 @@ print(docs[1].page_content)  # Print 2nd page
 | Scanned/image PDFs | UnstructuredPDFLoader |
 | Need layout and image data | PyMuPDFLoader |
 | Want the best structure extraction | UnstructuredPDFLoader |
+
+
+# DirectoryLoader
+
+It is used to load multiple files from a directory into LangChain document objects.
+
+Instead of loading files one by one (PyPDFLoader), it can load all matching files from a folder.
+
+## Parameters
+
+1. path → Directory path
+2. glob → Which files to load
+3. loader_cls → Loader to use for each file
+
+For example:
+
+glob = "*.pdf"
+
+with:
+
+loader_cls = PyPDFLoader
+
+would load PDF files from the directory.
+
+## Why use DirectoryLoader?
+
+Without it:
+
+TextLoader("file1.txt").load()
+TextLoader("file2.txt").load()
+TextLoader("file3.txt").load()
+
+With it:
+
+DirectoryLoader(
+    "documents",
+    glob = "*.txt",
+    loader_cls = TextLoader
+).load()
+
+Code:
+
+from langchain_community.document_loaders import DirectoryLoader, TextLoader
+
+loader = DirectoryLoader(
+    path = r"E:\Generative AI\Files",
+    glob = "*.txt",
+    loader_cls = TextLoader
+)
+
+docs = loader.load()
+
+We can use lazy_load() also:
+
+docs = loader.lazy_load()
+
+for document in docs:
+    print(document.page_content)
+
+# WebBaseLoader
+
+It is used to load and extract text content from web pages into LangChain document objects.
+
+## When to Use
+
+For blogs, news articles, and public websites where the content is primarily text-based and static.
+
+## Limitations
+
+1. Doesn't handle JavaScript-heavy pages well (use SeleniumURLLoader for that).
+2. Loads only static content.
+
+Code:
+
+from langchain_community.document_loaders import WebBaseLoader
+
+url = "https://..."
+loader = WebBaseLoader(url)
+docs = loader.load()
+
+print(docs[0].page_content)
+
+# CSVLoader
+
+It is used to load data from CSV files into LangChain document objects.
+
+## Example CSV
+
+name, age, city
+Aman, 22, Haridwar
+Rahul, 21, Dehradun
+
+Code:
+
+from langchain_community.document_loaders import CSVLoader
+
+loader = CSVLoader("students.csv")
+documents = loader.load()
+
+print(documents[0].page_content)
+
+The output for the first row will look roughly like:
+
+name: Aman
+age: 21
+city: Delhi
+
+So, each row of the CSV generally becomes a Document.
