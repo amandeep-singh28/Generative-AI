@@ -466,3 +466,61 @@ result = splitter.split_text(text)
 
 print(len(result))
 print(result)
+
+
+# Document Structure-Based Text Splitting
+
+It divides a document according to its natural structure or syntax, rather than simply splitting it based on character length.
+
+Different types of documents have different structures, so they can use different separators.
+
+## Why Do We Use It?
+
+A normal character-based splitter may break content at an inappropriate location.
+
+For example, in Python code:
+
+class Student:
+    def get_details(self):
+        return "Student"
+
+Random splitting could break a function in the middle.
+
+Structure-based splitting tries to preserve meaningful structures such as:
+
+Class → Function → Normal Lines → Words → Characters
+
+This helps maintain the meaning and context of the content.
+
+# Different Documents → Different Separators
+
+Each document/language can have its own structural separators:
+
+1. Python → class, def
+2. Markdown → Headings, code blocks, horizontal lines
+3. Java → Classes, methods
+4. HTML → HTML tags
+5. Other languages → Language-specific syntax
+
+## Example
+
+from langchain_text_splitters import RecursiveCharacterTextSplitter, Language
+
+text = """
+class Student:
+    def __init__(self, name, age, grade):
+        ...
+
+if student1.is_passing():
+    print("The student is passing")
+else:
+    print("The student is not passing")
+"""
+
+splitter = RecursiveCharacterTextSplitter.from_language(
+    language=Language.PYTHON,
+    chunk_size=300,
+    chunk_overlap=0
+)
+
+chunks = splitter.split_text(text)
