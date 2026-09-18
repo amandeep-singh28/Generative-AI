@@ -17,4 +17,4 @@ template = PromptTemplate(
     validate_template = True
 )
 
-template.save("template.json")
+template.save(r"E:\Generative AI\99_Config\template.json")

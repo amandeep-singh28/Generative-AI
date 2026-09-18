@@ -10,7 +10,7 @@ from langchain_classic.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 
-loader = TextLoader(r'E:\Generative AI\Files\company.txt', encoding = 'utf-8') # for special characters
+loader = TextLoader(r'E:\Generative AI\07_RAG\data\company.txt', encoding = 'utf-8') # for special characters
 
 docs = loader.load()
 

@@ -3,7 +3,7 @@ warnings.filterwarnings('ignore')
 
 from langchain_community.document_loaders import CSVLoader
 
-document = CSVLoader(r'E:\Generative AI\Files\Position_Salaries.csv')
+document = CSVLoader(r'E:\Generative AI\07_RAG\data\Position_Salaries.csv')
 
 loader = document.load()
 

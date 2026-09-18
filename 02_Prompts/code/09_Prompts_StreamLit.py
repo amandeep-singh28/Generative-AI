@@ -43,7 +43,7 @@ length_input = st.selectbox(
     ]
 )
 
-template = load_prompt("template.json")
+template = load_prompt(r"E:\Generative AI\99_Config\template.json")
 
 prompt = template.invoke({
     "paper_input" : paper_input,

@@ -130,7 +130,7 @@ If a required variable is missing or incorrectly defined, LangChain can raise an
 
 A PromptTemplate can be saved as a JSON file:
 
-template.save("template.json")
+template.save(r"E:\Generative AI\99_Config\template.json")
 
 This allows the prompt template to be shared separately from the Python code.
 
@@ -138,7 +138,7 @@ The saved template can later be loaded:
 
 from langchain_core.prompts import load_prompt
 
-template = load_prompt("template.json")
+template = load_prompt(r"E:\Generative AI\99_Config\template.json")
 
 Then we can use it normally:
 
@@ -154,7 +154,7 @@ PromptTemplate
 ↓
 save()
 ↓
-template.json
+99_Config/template.json
 ↓
 load_prompt()
 ↓

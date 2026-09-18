@@ -3,7 +3,7 @@ warnings.filterwarnings('ignore')
 
 from langchain_community.document_loaders import PyPDFLoader
 
-loader = PyPDFLoader(r'E:\Generative AI\Files\sample_3_to_4_page_text.pdf')
+loader = PyPDFLoader(r'E:\Generative AI\07_RAG\data\sample_3_to_4_page_text.pdf')
 
 docs = loader.load()
 

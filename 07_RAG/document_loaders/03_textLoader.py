@@ -4,7 +4,7 @@ warnings.filterwarnings('ignore')
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 
 loader = DirectoryLoader(
-    path = r'E:\Generative AI\Files',
+    path = r'E:\Generative AI\07_RAG\data',
     glob = '*.txt',
     loader_cls = TextLoader
 )

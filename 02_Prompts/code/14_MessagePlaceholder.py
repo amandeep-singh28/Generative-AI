@@ -20,7 +20,7 @@ chat_template = ChatPromptTemplate([
 
 # load chat history
 chat_history = []
-with open(r"D:\Generative AI\Files\chat_history.txt") as f:
+with open(r"E:\Generative AI\02_Prompts\data\chat_history.txt") as f:
     chat_history.extend(f.readlines())
 print(chat_history)
 
