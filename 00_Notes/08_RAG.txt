@@ -809,3 +809,28 @@ Display them
 → Find vectors most similar to a given vector.
 
 Vector stores are specialized around vector similarity search, while traditional databases are primarily designed around structured data and traditional query operations.
+
+# Vector Store vs Vector Database
+
+## 1. Vector Store (Storage & Retrieval)
+
+- Typically refers to a lightweight library or service that focuses on storing vectors (embeddings) and performing similarity search.
+- May not include many traditional database features like transactions, rich query languages, or role-based access control.
+- Ideal for prototyping and smaller-scale applications.
+- Example: FAISS.
+
+## 2. Vector Database
+
+- A full-fledged database system designed to store and query vectors.
+- Offers additional "database-like" features:
+  1. Distributed architecture for horizontal scaling.
+  2. Durability and persistence (replication, backup).
+  3. Metadata handling (schemas, filters).
+  4. Potential for ACID or near-ACID guarantees.
+  5. Authentication/authorization and more advanced security.
+- Created for production environments with significant scaling and large datasets.
+- Examples: Milvus, Qdrant, Weaviate, Pinecone.
+
+## Key Difference
+
+A vector database is effectively a vector store with extra database features, such as clustering, scaling, security, metadata filtering, and durability.
