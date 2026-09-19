@@ -710,3 +710,102 @@ A vector store is a system designed to store and retrieve data represented as nu
 - RAG
 - Recommender Systems
 - Image/Multimedia Search
+
+
+# Why We Need Vector Stores?
+
+Suppose we are building a movie recommendation system.
+
+Currently, we have:
+
+Movie API
+↓
+Movie Data
+↓
+Frontend
+
+Each movie has information like:
+- Title
+- Genre
+- Director
+- Year
+- Characters
+- Storyline
+
+Now the user clicks on a movie, and we want to recommend movies that are semantically similar to it.
+
+## Problem
+
+If you rely on fields like:
+- Genre = Action
+- Year = 2024
+- Director = X
+
+You may get movies that technically match these fields but aren't actually similar in story/content.
+
+## Solution: Semantic Similarity
+
+Take the storyline of every movie:
+
+Movie A Storyline
+↓
+Embedding Model
+↓
+Vector A
+
+Do the same for every movie:
+
+- Movie B → Vector B
+- Movie C → Vector C
+
+When the user selects Movie A:
+
+Movie A Vector
+↓
+Compare with Movie Vectors
+↓
+Similarity Calculation
+↓
+Most Similar Movies
+↓
+Recommendations
+
+## Problem with a Large Number of Movies
+
+Suppose you have 10,000 movies.
+
+You don't want to:
+
+User clicks Movie A
+↓
+Generate 10,000 embeddings
+↓
+Compare against everything from scratch
+
+Instead, generate the embeddings once and store them in a vector store.
+
+Then:
+
+User clicks Movie A
+↓
+Get Movie A embedding
+↓
+Search Vector Store
+↓
+Find nearest/similar vectors
+↓
+Return similar movies
+↓
+Display them
+
+# Why Not Traditional Databases?
+
+## Traditional Database
+
+→ Find records matching values/conditions.
+
+## Vector Store
+
+→ Find vectors most similar to a given vector.
+
+Vector stores are specialized around vector similarity search, while traditional databases are primarily designed around structured data and traditional query operations.
