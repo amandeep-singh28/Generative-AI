@@ -834,3 +834,103 @@ Vector stores are specialized around vector similarity search, while traditional
 ## Key Difference
 
 A vector database is effectively a vector store with extra database features, such as clustering, scaling, security, metadata filtering, and durability.
+
+
+# Advantages of Using Vector Stores in LangChain
+
+1. Multiple Vector Store Support
+   - LangChain supports different vector stores such as FAISS, Pinecone, Chroma, etc.
+   - They give us flexibility to choose the vector store according to our requirements.
+
+2. Common Interface
+   - We can switch from one vector store to another with minimal code changes.
+
+3. Metadata Handling
+   - It can store metadata along with embeddings.
+
+4. Common Operations
+   - from_documents(...)
+   - from_texts(...)
+   - add_documents(...)
+   - add_texts(...)
+   - Similarity search (query, k=...)
+   - Metadata-based filtering
+
+# Chroma Vector Store
+
+from langchain_chroma import Chroma
+from langchain_core.documents import Document
+
+doc1 = Document(
+    page_content="...",
+    metadata={"team": "CSE"}
+)
+
+doc2 = Document(
+    page_content="...",
+    metadata={"team": "CSE"}
+)
+
+doc3 = Document(
+    page_content="..."
+)
+
+docs = [doc1, doc2, doc3]
+
+vector_store = Chroma(
+    embedding_function=embeddings,
+    persist_directory="my_chroma_db",
+    collection_name="sample"
+)
+
+vector_store.add_documents(docs)
+
+# Viewing Documents
+
+vector_store.get(
+    include=["embeddings", "documents", "metadata"]
+)
+
+# Similarity Search
+
+vector_store.similarity_search(
+    query="...",
+    k=2
+)
+
+- k=2 → returns 2 results.
+
+# Similarity Search with Score
+
+vector_store.similarity_search_with_score(
+    query="...",
+    k=2
+)
+
+- Lower score = more similar result.
+
+# Metadata Filtering
+
+vector_store.similarity_search_with_score(
+    query="...",
+    filter={"team": "CSE"}
+)
+
+- We can perform metadata filtering along with similarity search.
+
+# Updating a Document
+
+vector_store.update_document(
+    document_id="...",
+    document=updated_doc
+)
+
+- Can update the document as well.
+
+# Deleting a Document
+
+vector_store.delete(
+    ids=["..."]
+)
+
+- Can delete documents from the vector store.
