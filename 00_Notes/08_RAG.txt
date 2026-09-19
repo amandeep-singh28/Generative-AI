@@ -679,3 +679,34 @@ text_splitter = SemanticChunker(
 
 sample = "..."
 docs = text_splitter.create_documents([sample])
+
+
+# Vector Stores
+
+A vector store is a system designed to store and retrieve data represented as numerical vectors.
+
+## Key Features
+
+1. **Storage**
+   - Ensures that vectors and their associated metadata are retained.
+   - Can be stored in memory for quick lookups or on disk for durability and large-scale use.
+
+2. **Similarity Search**
+   - Helps retrieve the vectors most similar to a query vector.
+
+3. **Indexing**
+   - Provides a data structure or method that enables fast similarity searches on high-dimensional vectors.
+
+4. **CRUD Operations**
+   - Manages the lifecycle of data:
+     - Adding new vectors
+     - Reading existing entries
+     - Updating existing entries
+     - Removing outdated vectors
+
+## Use Cases
+
+- Semantic Search
+- RAG
+- Recommender Systems
+- Image/Multimedia Search
