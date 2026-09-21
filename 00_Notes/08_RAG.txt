@@ -1119,3 +1119,80 @@ retriever = vectorstore.as_retriever(
         "lambda_mult" : 1 # if 0, than it will behave normally But if >0 that it will give diverse results.
     }
 )
+
+# MQR (Multi Query Retrieval) →
+
+Sometimes a single query might not capture all the ways information is phrased in your documents.
+
+For example:
+
+"How can I stay healthy?"
+
+It could mean:
+
+→ What should I eat?
+
+→ How often should I exercise?
+
+→ How can I manage stress?
+
+A simple similarity search might miss documents that talk about those things but don't use the word "healthy".
+
+## Steps:-
+
+(i) Takes your original query.
+
+(ii) Uses an LLM to generate multiple semantically different versions of that query.
+
+(iii) Performs retrieval for each sub query.
+
+(iv) Combines and deduplicates the results.
+
+query → LLM
+
+↓  
+
+q1 ⇒ What are the best foods to maintain good health?  
+→ Retrieve → o/p
+
+q2 ⇒ How often should I exercise to stay fit?  
+→ Retrieve → o/p
+
+q3 ⇒ How can I boost my immune system naturally?  
+→ Retrieve → o/p
+
+q4 ⇒ What daily routines support long term health?  
+→ Retrieve → o/p
+
+from langchain_classic.retrievers import MultiQueryRetriever
+
+multiquery - retriever = MultiQueryRetriever.from_llm(
+    retriever = vectorstore.as_retriever(
+        search_kwargs = {
+            "k" : 5
+        },
+    ),
+    llm = ChatOpenAI()
+)
+
+# MMR
+
+MMR → Focuses on selecting relevant + diverse doc.
+
+query
+↓
+Retrieve
+↓
+Relevant + less redundant
+doc.
+
+MQR → Focuses on creating multiple versions of the query to improve retrieval coverage.
+
+one query
+↓
+multiple queries
+↓
+Retrieve
+↓
+Combined Relevant
+Documents.
