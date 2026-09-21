@@ -1196,3 +1196,69 @@ Retrieve
 ↓
 Combined Relevant
 Documents.
+
+
+# Contextual Compression Retriever →
+
+> Retrieves only the relevant part
+
+The contextual compression retriever in langchain is an advanced retriever that improves retrieval quality by compressing documents after retrieval - keeping only the relevant content based on the user's query.
+
+For example:
+
+Query → What is photosynthesis?
+
+Retrieved document (by a traditional retriever):
+
+> "The Grand canyon is a famous natural site. Photosynthesis is how plants convert light into energy. Many tourists visit every year."
+
+Problem:-
+
+(i) The retriever returns the entire paragraph.
+
+(ii) Only 1 sentence is actually relevant to the query.
+
+(iii) The rest is irrelevant noise that wastes the context window and may confuse the LLM.
+
+## Working →
+
+(i) Base Retriever retrieves N doc.
+
+(ii) A compressor (usually an LLM) is applied to each doc.
+
+(iii) The compressor keeps only the parts relevant to the query.
+
+(iv) Irrelevant content is discarded.
+
+query → Retriever (k = 2)
+
+↓  
+
+D₁ → LLM → D'₁
+
+D₂ → LLM → D'₂
+
+> Create two things
+>
+> → base_retriever
+>
+> → base_compressor
+
+```python
+from langchain_classic.retrievers import ContextualCompressionRetriever
+from langchain_classic.retrievers.document_compressors import LLMChainExtractor
+
+base_retriever = vectorstore.as_retriever(
+    search_kwargs = {
+        "k": 5
+    }
+)
+
+llm = ChatOpenAI()
+
+compressor = LLMChainExtractor.from_llm(llm)
+
+compressor_retriever = ContextualCompressionRetriever(
+    base_retriever = base_retriever,
+    base_compressor = compressor
+)
