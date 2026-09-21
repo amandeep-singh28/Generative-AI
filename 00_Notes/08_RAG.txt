@@ -934,3 +934,49 @@ vector_store.delete(
 )
 
 - Can delete documents from the vector store.
+
+
+# Retrievers
+
+A retriever is a component that takes a query and retrieves relevant documents.
+
+## Working
+
+User Query
+    ↓
+Retriever
+    ↓
+Relevant Documents
+
+## Example
+
+Suppose our vector store contains:
+
+- Document 1: "Python is a programming language."
+- Document 2: "India is a country in Asia."
+- Document 3: "ML uses data to learn patterns."
+
+Now suppose the user asks:
+
+"What is Machine Learning?"
+
+The retriever searches for relevant information and retrieves:
+
+- Document 3
+
+## Why Do We Need a Retriever?
+
+If the vector store can already search for similar documents, why do we need a retriever?
+
+Because the retriever gives us a standard interface for retrieval.
+
+- Vector Store → Actual search/storage mechanism.
+- Retriever → Standard interface for getting relevant documents.
+
+## Simple Way to Understand
+
+- Vector Store = Library
+  - It contains the books and has the search system.
+- Retriever = Librarian
+  - You give the librarian a request: "Find me books about Machine Learning."
+  - The librarian handles the retrieval and gives you the relevant books.
