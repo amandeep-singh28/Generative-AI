@@ -1062,3 +1062,60 @@ Relevant Documents
 ## LCEL Flow
 
 Retriever → Prompt → LLM
+
+# MMR (Maximum Marginal Relevance) →
+
+It is a retrieval strategy that selects documents that are:
+
+- relevant to the user's query
+- Different from each other.
+
+So, instead of returning several documents that contain almost the same information, MMR tries to give us relevant and diverse documents.
+
+## Why do we need MMR?
+
+Suppose our vector store has:-
+
+Doc1 = Python is a programming lang...
+Doc2 = Python is widely used for progr...
+Doc3 = Python is popular for data science...
+Doc4 = Java is an object-oriented lang...
+
+Query → "What is Python"
+
+Normal similarity search might return:
+
+Document 1
+
+Document 2
+
+Document 3
+
+All three are relevant, but they are very similar.
+
+MMR tries to avoid this redundancy and may select:
+
+Doc 1 → Python basics  
+Doc 2 → Python in DS  
+Doc 3 → Comparison/different perspective
+
+Normal similarity search asks:-
+
+> "Which docs are most similar to my query?"
+
+MMR asks:
+
+> "Which docs are relevant to my query AND different from the docs I've already selected?"
+
+MMR ⇒ Relevance + Diversity
+
+> "First is highly relevant, and subsequent docs should remain relevant while adding different info."
+
+```python
+retriever = vectorstore.as_retriever(
+    search_type = "mmr",
+    search_kwargs = {
+        "k" : 3,
+        "lambda_mult" : 1 # if 0, than it will behave normally But if >0 that it will give diverse results.
+    }
+)
