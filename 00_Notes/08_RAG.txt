@@ -980,3 +980,85 @@ Because the retriever gives us a standard interface for retrieval.
 - Retriever = Librarian
   - You give the librarian a request: "Find me books about Machine Learning."
   - The librarian handles the retrieval and gives you the relevant books.
+
+  # Vector Store Retriever and `as_retriever()`
+
+retriever = vector_store.as_retriever()
+
+We already have a vector store.
+
+Vector Store
+↓
+Contains our documents + embeddings
+
+When we call `as_retriever()`, LangChain creates a retriever that uses the vector store as its backend.
+
+## Important Distinction
+
+### Direct Vector Store Search
+
+vector_store.similarity_search("What is ML?")
+
+Here, we directly ask the vector store to search.
+
+### Using `as_retriever()`
+
+retriever = vector_store.as_retriever()
+
+Here, we interact with the retriever, which uses the vector store underneath.
+
+So, `as_retriever()` converts a vector store into a retriever interface.
+
+# Retriever as a Runnable
+
+A retriever is also a runnable and includes methods like:
+
+retriever.invoke(query)
+
+Since it is a runnable, it can also be used in LCEL:
+
+chain = retriever | prompt | llm
+
+# Types of Retrievers
+
+## 1. Retriever Based on Data Source
+
+Retrievers can be classified based on where they retrieve information from.
+
+### Wikipedia Retriever
+
+It retrieves relevant information from Wikipedia based on the user's query.
+
+### Vector Store Retriever
+
+It retrieves relevant documents from a vector store using vector similarity/search.
+
+### Arxiv Retriever
+
+It retrieves relevant research papers/information from arXiv based on the query.
+
+## 2. Search Strategies
+
+Apart from the data sources, retrievers can also use different search/retrieval strategies.
+
+Common strategies include:
+
+1. MMR - Maximal Marginal Relevance
+2. Multi-Query Retrieval
+3. Contextual Compression
+
+# Quick Flow
+
+Vector Store
+↓
+as_retriever()
+↓
+Retriever
+↓
+invoke(query)
+↓
+Relevant Documents
+
+## LCEL Flow
+
+Retriever → Prompt → LLM
