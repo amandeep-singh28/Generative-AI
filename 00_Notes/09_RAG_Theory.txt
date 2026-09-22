@@ -141,3 +141,86 @@ You keep the base weights frozen or partially frozen and update only a small sub
 (iv) Evaluate and safety test
 
 Measure exact match, factuality, and hallucination rate against held out data; red team for safety.
+
+
+General Problems with Fine-tuning
+1. 💰 High Cost
+
+Fine-tuning large models requires significant:
+
+GPU resources
+Computing power
+Training time
+
+For large LLMs, this can become expensive.
+
+2. 👨‍💻 Requires Expertise
+
+Fine-tuning isn't simply:
+
+Give data → Train → Done
+
+It requires people with knowledge of:
+
+Machine Learning
+Deep Learning
+Model training
+Data preparation
+Hyperparameter tuning
+Evaluation
+
+So a company may need ML/AI engineers and infrastructure expertise.
+
+3. 📊 Requires High-Quality Training Data
+
+You need a suitable dataset for fine-tuning.
+
+The data often needs to be:
+
+Relevant
+High quality
+Properly formatted
+Clean
+Representative of the desired task/domain
+
+Preparing this data can itself take significant time and effort.
+
+4. ⏳ Time-Consuming
+
+The process can involve:
+
+Collect Data
+     ↓
+Clean Data
+     ↓
+Prepare Dataset
+     ↓
+Fine-tune Model
+     ↓
+Evaluate
+     ↓
+Tune Again
+
+So it can take considerable time.
+
+5. 🔄 Difficult to Update
+
+If the information changes frequently, you may need to fine-tune the model again.
+
+For example:
+
+New Information
+      ↓
+Prepare new data
+      ↓
+Fine-tune again
+      ↓
+Evaluate again
+
+This makes continuously changing knowledge difficult to maintain.
+
+6. ⚠️ Doesn't Guarantee Accuracy
+
+Fine-tuning can improve a model's behavior and domain knowledge, but it doesn't guarantee that every generated answer will be correct.
+
+The model can still hallucinate.
