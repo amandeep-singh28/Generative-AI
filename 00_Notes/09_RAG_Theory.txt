@@ -329,3 +329,32 @@ Now classify:-
 "The product is okay."
 
 The model learns the pattern from the examples in the prompt.
+
+# Emergent properties in LLMs →
+
+An emergent property is a new ability that appears in a model when the model becomes sufficiently large or capable, even though the ability was not explicitly programmed.
+
+## How did it come? →
+
+GPT-1
+↓
+GPT-2
+↓
+GPT-3 (175B)
+↓
+Larger models
++
+more training
+↓
+New capabilities
+appear
+
+As model became:
+
+→ larger  
+→ trained on more data  
+→ more computationally capable
+
+They started showing abilities that were much weaker or not observed in smaller models.
+
+**Emergent →** A new behaviour appears from the combination of many underlying capabilities.
