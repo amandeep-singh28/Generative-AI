@@ -73,3 +73,71 @@ Fine tune the model on newer data → model can learn updated information, but f
 ### (iii) Hallucinations →
 
 Fine tune the model using high quality, correct examples → can reduce certain hallucinations, but cannot completely eliminate them.
+
+
+# Methods to adapt a pre-trained LLM →
+
+After a model is pre-trained, we can further train it to improve its knowledge, task performance, or behaviour.
+
+There are three methods:- (many more also)
+
+- Supervised Fine tuning (SFT)
+- Continued pre training
+- RLHF (Reinforcement learning through human feedback)
+
+## (i) Supervised Fine-Tuning (SFT) →
+
+In this, we train the model using labelled data containing a prompt input and the desired output.
+
+Pre trained model
+↓
+Labelled dataset
+(prompt → desired o/p)
+↓
+SFT
+↓
+Adapted model
+
+## (ii) Continued Pre training →
+
+Unlike SFT, the data does not necessarily need labelled input-output pairs.
+
+Pre-trained model
+↓
+Additional unlabeled data
+↓
+Continued pre-training
+↓
+Adapted model
+
+## (iii) RLHF (Reinforcement learning from human feedback) →
+
+Here, humans provide feedback about the model's responses, and this feedback is used to improve the model's behavior.
+
+Pre-trained model
+↓
+Model response
+↓
+Human feedback
+↓
+Reinforcement learning
+↓
+Better - aligned model
+
+## Steps:- (Supervised FT)
+
+(i) Collect data
+
+A few hundred - few hundred - thousand carefully curated examples (prompts → desired outputs)
+
+(ii) Choose a method
+
+Full-parameter FT, LoRA / QLoRA, or parameter-efficient adapters.
+
+(iii) Train for a few epochs
+
+You keep the base weights frozen or partially frozen and update only a small subset (LoRA) or all weights (full FT)
+
+(iv) Evaluate and safety test
+
+Measure exact match, factuality, and hallucination rate against held out data; red team for safety.
