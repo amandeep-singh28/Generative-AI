@@ -1,0 +1,75 @@
+# RAG Theory Complete →
+
+A normal LLM is first pre-trained on a large amount of data.
+
+Large training data
+↓
+Pre training
+↓
+LLM
+
+But after training, the model has some limitations:
+
+## (i) Unable to access private data →
+
+Suppose you have a company private information.
+
+A general pre-trained LLM doesn't automatically know this information.
+
+Because the data was:
+
+→ not part of its original training data.
+
+## (ii) Unable to give recent information →
+
+A model learns from data available during its training:
+
+for example:-
+
+Training data
+↓
+2024
+↓
+LLM trained
+
+Then something happens in 2025 and 2026.
+
+The model wasn't trained on those events.
+
+## (iii) Hallucinations →
+
+An LLM doesn't always "know" whether a generated statement is actually true.
+
+It generate text based on patterns it learned.
+
+Sometimes it produces an answer that sounds correct but is actually incorrect.
+
+for example:-
+
+Question: Who invented xyz technology?
+
+The model might answer:
+
+> "xyz techn. was invented by John Smith in 1987".
+
+But maybe John Smith never invented it.
+
+That's a hallucination:
+
+These problems can be solved by FINE TUNING upto an extent:-
+
+## How FINE TUNING helps:-
+
+> teach the model additional knowledge but it doesn't guarantee perfect accuracy.
+
+### (i) Private data →
+
+Fine tune the model on private/domain-specific data → model becomes familiar with that info, but it may not remember everything accurately.
+
+### (ii) Recent information →
+
+Fine tune the model on newer data → model can learn updated information, but frequent updates require repeated fine tuning.
+
+### (iii) Hallucinations →
+
+Fine tune the model using high quality, correct examples → can reduce certain hallucinations, but cannot completely eliminate them.
