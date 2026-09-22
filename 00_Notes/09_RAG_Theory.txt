@@ -281,3 +281,51 @@ It can then generate → POSITIVE
 (iii) Flexible
 
 (iv) Easy to experiment
+
+# Types of In-context learning
+
+There are three important forms:-
+
+(i) Zero shot →
+
+Give only instructions, no examples.
+
+For example:-
+
+Classify this review as Positive or Negative:
+
+"I love this product".
+
+---
+
+(ii) One shot →
+
+Give one example.
+
+For example:-
+
+"I love this product." → Positive
+
+Now classify:-
+
+"This product is terrible."
+
+---
+
+(iii) Few-shot →
+
+Give multiple examples.
+
+For example:-
+
+"I love this product." → Positive
+
+"This is terrible." → Negative
+
+"The product is amazing." → Positive
+
+Now classify:-
+
+"The product is okay."
+
+The model learns the pattern from the examples in the prompt.
