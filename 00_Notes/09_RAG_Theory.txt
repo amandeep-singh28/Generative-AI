@@ -224,3 +224,60 @@ This makes continuously changing knowledge difficult to maintain.
 Fine-tuning can improve a model's behavior and domain knowledge, but it doesn't guarantee that every generated answer will be correct.
 
 The model can still hallucinate.
+
+# [unclear] adapted to maintain
+
+# In-Context Learning (ICL) →
+
+It means giving the model instructions or examples inside the prompt so that it can understand what you want and perform the task without changing its parameters or training the model.
+
+Pre-trained LLM
+↓
+Prompt + Examples
+↓
+Response
+
+The model is not being trained. It is simply using the information provided in the current context to generate the answer.
+
+→
+
+For example:-
+
+Input :- I love this movie  
+Output :- Positive
+
+Input :- This movie was terrible.  
+Output :- Negative
+
+Input :- The movie was amazing.  
+Output :- [unclear]
+
+The model sees the examples and understand the pattern.
+
+Input → Sentiment
+
+It can then generate → POSITIVE
+
+## How's it different from Fine Tuning →
+
+| Fine tuning | In-context learning |
+|---|---|
+| You train the model further | You don't train the model |
+| Pre-trained | Pre-trained model |
+| ↓ | ↓ |
+| Training dataset | Prompt + examples |
+| ↓ | ↓ |
+| Training | Response |
+| ↓ | |
+| New model parameters | |
+| The model's parameters/weights are updated | The model's parameters remain unchanged. |
+
+## How's ICL better than Fine Tuning →
+
+(i) No training cost.
+
+(ii) No specialized training expertise.
+
+(iii) Flexible
+
+(iv) Easy to experiment
