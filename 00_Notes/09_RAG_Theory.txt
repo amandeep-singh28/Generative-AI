@@ -435,3 +435,92 @@ Paste those matching chunks directly into a prompt template alongside with the u
 ## (iv) Generation (The final answer)
 
 Pass the combined prompt to the LLM so, it generates an answer based only on your retrieved data.
+
+
+# Indexing →
+
+It is the process of preparing your knowledge base so that it can be efficiently searched at query time.
+
+This step consists of 4 sub steps:-
+
+## (i) Document Ingestion →
+
+You load your source knowledge into memory.
+
+For example:-
+
+- PDF reports, word documents.
+- YouTube transcripts, blog papers.
+- GitHub repos, internal wikis.
+- SQL records, scraped webpages.
+
+Tools:-
+
+- LangChain loaders (PyPDFLoader, YouTubeLoader, WebBaseLoader, GitLoader, etc.).
+
+```text
+WWW → Document Loader → Document
+(ii) Text Chunking →
+
+Break large documents into small, semantically meaningful chunks.
+
+Why chunk?
+LLMs have context limits.
+Smaller chunks are more focused
+↓
+Better semantic search
+
+Tools:-
+
+RecursiveCharacterTextSplitter
+MarkdownHeaderTextSplitter
+SemanticChunker
+WWW → Document Loader → Document
+                         ↓
+                     Text Splitter
+                    ↙    ↓    ↘
+                Chunk  Chunk  Chunk
+(iii) Embedding Generation →
+
+Convert each chunk into a dense vector that captures its meaning.
+
+Why embeddings?
+
+We store embeddings along with the original text because embeddings enable semantic similarity search, while the original text is needed as the actual context given to the LLM.
+
+Tools:-
+
+OpenAI Embeddings
+SentenceTransformer Embeddings, etc.
+WWW → Document Loader → Document
+                         ↓
+                     Text Splitter
+                    ↙    ↓    ↘
+                Chunk  Chunk  Chunk
+                  ↓      ↓      ↓
+              Embedding Model
+                  ↓      ↓      ↓
+              [0.5, 0.7]  [-0.2, 1.2]  [1.5, 2.5]
+(iv) Storage in a Vector Store →
+
+Store the vectors along with the original chunk text + metadata in a vector database.
+
+Vector DB options:-
+
+Local: FAISS, Chroma
+Cloud: Pinecone, Milvus, Qdrant, Weaviate
+WWW → Document Loader → Document
+                         ↓
+                     Text Splitter
+                    ↙    ↓    ↘
+                Chunk  Chunk  Chunk
+                  ↓      ↓      ↓
+              Embedding Model
+                  ↓      ↓      ↓
+              [1.1, 2.2]  [3.5, 6.0]  [0.2, 1.5]  [-2, -5.1]
+                    \       |       |       /
+                     \      |       |      /
+                       → Vector Store ←
+                              ↓
+                    External Knowledge
+                         Base
