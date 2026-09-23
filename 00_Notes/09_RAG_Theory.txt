@@ -524,3 +524,49 @@ WWW → Document Loader → Document
                               ↓
                     External Knowledge
                          Base
+
+# Retrieval →
+
+Retrieval is the real-time process of finding the most relevant pieces of information from a pre-built index (created during indexing) based on the user's question.
+
+## (i) Step 1 - User gives a query →
+
+The user asks a question.
+
+The query is sent to the retriever.
+
+## (ii) Step 2 - Convert query into an embedding →
+
+The query is converted into a vector using the embedding model.
+
+```text
+Query
+↓
+Embedding model
+↓
+Query Embedding
+INDEXING
+Chunks → Embeddings → Vector Store
+RETRIEVAL
+Query → Query Embedding → Search Vector Store
+(iii) Step 3 - Semantic Search →
+
+Now, the query embedding is compared with the embeddings already stored in the vector store.
+
+The system looks for vectors that are semantically similar to the query.
+
+(iv) Step 4 - Return most relevant chunks →
+
+The vector store returns the relevant chunks.
+
+These becomes the CONTEXT.
+
+Query
+↓
+Retriever
+↓
+Semantic Search
+↓
+Vector Store
+↓
+Most Relevant Chunks
