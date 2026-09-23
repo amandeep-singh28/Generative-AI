@@ -570,3 +570,36 @@ Semantic Search
 Vector Store
 ↓
 Most Relevant Chunks
+
+# Augmentation →
+
+It is the process of adding the retrieved relevant context to the user's query to create an enriched prompt for the LLM.
+
+For example:-
+
+"""
+You are a helpful assistant.
+
+Answer the question ONLY from the provided context. If the context is insufficient, just say you don't know.
+
+{context}
+
+Question: {question}
+"""
+
+```text
+Query
+ ↓
+Retriever
+ ↓
+Semantic
+Search
+ ↓
+Vector
+Store
+ ↓
+Retrieved relevant chunks
+        +
+      Query
+        ↓
+      Prompt
