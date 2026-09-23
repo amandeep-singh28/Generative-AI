@@ -412,3 +412,26 @@ Prompt
 LLM
 ↓
 Response
+
+# Understanding RAG architecture →
+
+There are 4 core phases of RAG:-
+
+## (i) Indexing (The prep work)
+
+- Load: Read the file (e.g. PDF)
+- Chunk: Cut text into small paragraphs (Text splitter)
+- Embeddings: Convert chunks into no's/vectors
+- Store: Save vectors in a database (vector store).
+
+## (ii) Retrieval (The search)
+
+When a user asks a question, convert the question to a vector and find the top 2-3 matching chunks in the DB.
+
+## (iii) Augmentation (The prompt assembly)
+
+Paste those matching chunks directly into a prompt template alongside with the user's question.
+
+## (iv) Generation (The final answer)
+
+Pass the combined prompt to the LLM so, it generates an answer based only on your retrieved data.
