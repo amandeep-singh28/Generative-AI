@@ -358,3 +358,57 @@ As model became:
 They started showing abilities that were much weaker or not observed in smaller models.
 
 **Emergent →** A new behaviour appears from the combination of many underlying capabilities.
+
+# RAG Concept →
+
+RAG provides additional external information as context and injects it into the prompt along with the user's query. The LLM then uses this context to generate the response.
+
+Query
++
+Context
+↓
+Prompt → LLM → Response
+
+Two types of knowledge available to an LLM:
+
+(i) Parametric knowledge
+
+Knowledge learned during model training.
+
+(ii) Contextual knowledge
+
+Information provided in the current prompt.
+
+Parametric knowledge → learned by the model.
+
+Context → provided at query time.
+
+## ICL vs RAG →
+
+→ In-context Learning
+
+In ICL, we give the LLM examples in the prompt so that it understands how to perform a task.
+
+Examples
+↓
+Prompt
+↓
+LLM
+↓
+Response
+
+- RAG (Retrieval Augment Generation)
+
+In RAG, instead of mainly giving example tasks, we provide relevant background information, facts, documents, manuals, etc.
+
+External information
+↓
+Context
+↓
+Query + Context
+↓
+Prompt
+↓
+LLM
+↓
+Response
