@@ -603,3 +603,33 @@ Retrieved relevant chunks
       Query
         ↓
       Prompt
+
+# Generation →
+
+Generation is the final step where a large language model (LLM) uses the user's query and the retrieved and augmented context to generate a response.
+
+```text
+Retrieved Context
++
+Query
+↓
+Prompt
+↓
+LLM
+↓
+Response
+
+The LLM uses:
+
+External knowledge
+Parametric knowledge
+External
+Knowledge
+        ↓
+Retrieved Context + Query
+        ↓
+      Prompt
+        ↓
+       LLM
+        ↓
+    Response
