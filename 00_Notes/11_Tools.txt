@@ -99,3 +99,47 @@ Tools execute the selected operation.
 |---|---|
 | Reasoning & Decision making | Action |
 | LLM decide which action req: | Tools execute the selected oper. |
+
+
+# Built-in Tools
+
+A built-in tool is a tool that LangChain already provides for you - it's prebuilt, production-ready and requires minimal or no setup.
+
+You don't have to write the function logic yourself - you just import and use it.
+
+(i) DuckDuckGo search run - web search via DuckDuckGo
+
+(ii) Wikipedia query run - Wikipedia summary
+
+(iii) Python REPL Tool - Run raw python code
+
+(iv) Shell Tool - Run shell commands
+
+(v) Requests Get Tool - make HTTP get requests
+
+(vi) Gmail send message Tool - Send Gmails
+
+(vii) Slack send message Tool - Post message to Slack
+
+(viii) SQL Database query Tool - Run SQL queries
+
+```python
+from langchain_community.tools import DuckDuckGoSearchRun
+
+search_tool = DuckDuckGoSearchRun()
+
+results = search_tool.invoke("Tell me about today news")
+
+
+from langchain_community.tools import ShellTool
+
+shell_tool = ShellTool()
+
+results = shell_tool.invoke('whoami')
+
+
+shell_tool.name
+
+shell_tool.description
+
+shell_tool.args
