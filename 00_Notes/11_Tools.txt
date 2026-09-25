@@ -1,0 +1,39 @@
+# Tools in LangChain
+
+A tool is just a Python function (or API) that is packaged in a way the LLM can understand and call when needed.
+
+For example:-
+
+```python
+def multiply(a,b):
+    return a x b
+```
+
+A human can call this function directly, but an LLM doesn't automatically know how to execute it.
+
+LangChain makes this function available to the LLM as a Tool, with a name, description, and input schema.
+
+---
+
+## Why do we need Tools?
+
+LLM(s) are great at:-
+
+i) Reasoning → Understands questions and determines what information or action is needed.
+
+ii) Language Generation → Generates explanations, summaries, and responses.
+
+But an LLM cannot reliably do the following:-
+
+- Access live data, such as current weather.
+- Perform exact calculations.
+- Call external APIs.
+- Execute Python code or query a database.
+
+For example:-
+
+If you ask: What is the current weather of Haridwar?
+
+The LLM may know general facts about Haridwar,
+
+but it doesn't automatically have access to live weather data.
