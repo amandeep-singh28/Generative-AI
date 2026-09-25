@@ -37,3 +37,65 @@ If you ask: What is the current weather of Haridwar?
 The LLM may know general facts about Haridwar,
 
 but it doesn't automatically have access to live weather data.
+
+# Types of Tools in LangChain
+
+There are two types of tools:-
+1. Built-in tools
+2. Custom Tools
+
+## (i) Built-in Tools
+
+Prebuilt tools provided by LangChain integrations or external libraries that can be directly used to perform specific tasks.
+
+(a) Search Tool → Searches the web for information.
+
+(b) Wikipedia Tool → Retrieves information from Wikipedia.
+
+(c) Python REPL → Executes Python code.
+
+(d) SQL Tool → Executes SQL queries on a database.
+
+## (ii) Custom Tools
+
+Tools created by developers using their own Python functions, APIs, or business logic to perform specific tasks.
+
+For example:- Creating a tool to calculate the square of a number.
+
+From langchain_core.tools import tool
+
+@tool
+def square(number: int) -> int:
+    """Calculate the square of a number."""
+    return number ** 2
+
+square.invoke({
+    "number": 25
+})
+
+# How Tools fit into the Agent Ecosystem
+
+An AI agent is an LLM-powered system that can autonomously decide what actions to take and use external tools or APIs to achieve a goal.
+
+→ LLMs understand the user request.
+
+→ Agent decides what to do.
+
+→ Tools perform the required actions.
+
+→ Agent uses the results to produce the final answer.
+
+There are two components of an Agent:-
+
+## (i) Reasoning and Decision making:
+
+LLM decide which action is required.
+
+## (ii) Action
+
+Tools execute the selected operation.
+
+| AI agent (LLM + decision making) | Tools |
+|---|---|
+| Reasoning & Decision making | Action |
+| LLM decide which action req: | Tools execute the selected oper. |
