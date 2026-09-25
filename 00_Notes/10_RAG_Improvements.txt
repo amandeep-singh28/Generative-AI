@@ -1,0 +1,82 @@
+# RAG Improvements Roadmap
+
+## 1. UI-Based Enhancements
+
+Improve how users interact with your RAG application.
+
+- Build a user-friendly interface using Streamlit or another frontend.
+- Allow users to ask questions and view responses conveniently.
+
+## 2. Evaluation
+
+Measure how well your RAG system performs.
+
+| Heading | Meaning |
+|---|---|
+| Ragas | Evaluate RAG quality using metrics such as faithfulness, answer relevancy, context precision, and context recall. |
+| LangSmith | Trace, debug, monitor, and evaluate LangChain execution and LLM responses. |
+
+## 3. Indexing
+
+Improve how documents are processed and stored before retrieval.
+
+- **Document Ingestion:** Load documents from different sources and prepare them for processing.
+- **Text Splitting:** Improve chunk sizes, overlap, and splitting strategies.
+- **Vector Store:** Store and manage embeddings efficiently for retrieval.
+
+## 4. Retrieval
+
+Improve how relevant information is fetched for a user's query.
+
+### A. Pre-Retrieval
+
+Improvements before searching the vector store.
+
+| Heading | Meaning |
+|---|---|
+| Query rewriting using LLM | Rephrase the user's question to make retrieval more effective. |
+| Multi-query generation | Generate multiple versions of the question to retrieve information from different perspectives. |
+| Domain-aware routing | Route the query to the appropriate document collection or retriever based on its domain. |
+
+### B. During Retrieval
+
+Improvements while retrieving documents.
+
+| Heading | Meaning |
+|---|---|
+| MMR | Retrieve relevant but diverse documents instead of redundant ones. |
+| Hybrid Retrieval | Combine keyword-based search with semantic/vector search. |
+| Reranking | Reorder retrieved documents according to their relevance to the query. |
+
+### C. Post-Retrieval
+
+Improvements after retrieving documents.
+
+- **Contextual Compression:** Remove irrelevant information from retrieved documents and retain the parts useful for answering.
+
+## 5. Augmentation
+
+Improve how retrieved information is provided to the LLM.
+
+- **Prompt Templating:** Structure instructions, context, and questions using appropriate prompt templates.
+- **Answer Grounding:** Ensure answers are based on the retrieved context rather than unsupported information.
+- **Context Window Optimization:** Fit the most useful context within the model's token limit and avoid unnecessary text.
+
+## 6. Generation
+
+Improve the final answer produced by the LLM.
+
+- **Answer with Citation:** Include sources or references supporting the generated answer.
+- **Guardrail:** Apply rules to restrict unsupported, irrelevant, or inappropriate outputs.
+
+## 7. System Design
+
+Expand the RAG system's overall architecture and capabilities.
+
+| Heading | Meaning |
+|---|---|
+| Multimodal | Handle multiple data types, such as text, images, and audio. |
+| Agent-based | Use agents to decide which tools or retrieval actions to perform. |
+| Memory-based | Maintain conversation history or relevant past interactions to support follow-up questions. |
+
+In short: These are the seven main improvement areas shown in your screenshots. They cover the complete journey from preparing documents to retrieving information, generating answers, evaluating quality, and designing a larger RAG application.
