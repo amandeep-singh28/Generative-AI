@@ -143,3 +143,130 @@ shell_tool.name
 shell_tool.description
 
 shell_tool.args
+
+# Custom Tools
+
+A custom tool is a tool that you define yourself.
+
+## Use them when:
+(i) You want to call your own APIs.
+(ii) You want to encapsulate business logic.
+(iii) You want the LLM to interact with your database, product or app.
+
+There are three ways to create a custom tool:
+(i) Using @tool decorator
+(ii) Using StructuredTool and Pydantic
+(iii) Using BaseTool class
+
+## Using @tool decorator
+
+Step 1 → Create a function  
+Step 2 → Add type hints  
+Step 3 → Add Tool (@) decorator
+
+from langchain_core.tools import tool
+
+@tool
+def multiply(a: int, b: int) -> int:
+    """Multiply two numbers."""
+
+    return a * b
+
+# It is not compulsory to give description but it is highly recommended.
+
+# @tool → It is used to turn a function into a tool that the AI can see.
+
+result = multiply.invoke({
+    "a": 5,
+    "b": 5
+})
+
+## Using Structured Tool and Pydantic (more strict way)
+
+→ Pydantic: A Python library used to define data schemas and validate inputs.
+
+- BaseModel → defines the input schema.
+- Field → specifies description and validation rules.
+
+→ Structured Tool: Converts a Python function into a LangChain tool with structured inputs.
+
+from pydantic import BaseModel, Field
+from langchain_core.tools import StructuredTool
+
+class AddInput(BaseModel):
+    a: int = Field(required=True, description="The first no. to add")
+    b: int = Field(required=True, description="The second no. to add")
+
+def add_func(a: int, b: int) -> int:
+    return a + b
+
+add_tool = StructuredTool.from_function(
+    func=add_func,
+    name="addition",
+    description="Add 2 numbers",
+    args_schema=AddInput
+)
+
+## Using BaseTool class
+
+It is the abstract base class for all tools in LangChain.
+
+It defines the core structure and interface that any tool must follow, whether it's a simple one-line or a fully customized function.
+
+- All other tools like @tool, StructuredTool are built on top of BaseTool.
+
+from langchain_core.tools import BaseTool
+from typing import Type
+
+class MultiplyInput(BaseModel):
+    a: int = Field(..., description="First number")
+    b: int = Field(..., description="Second number")
+
+class MultiplyTool(BaseTool):
+    name: str = "multiply"  # name of tool
+    description: str = "Multiply two nos"
+    args_schema: Type[BaseModel] = MultiplyInput
+
+    def _run(self, a: int, b: int) -> int:
+        return a * b
+
+multiply_tool = MultiplyTool()  # create object
+
+result = multiply_tool.invoke({
+    "a": 5,
+    "b": 5
+})
+
+## Toolkits
+
+A toolkit is just a collection (bundle) of related tools that serve a common purpose — packaged together for convenience and reusability.
+
+In LangChain:
+
+A toolkit might be:
+- Google Drive Toolkit
+- And it can contain the following tools:
+
+    → Google Drive Create File Tool: Upload file
+    → Google Drive Search Tool: Search file
+    → GoogleDrive Read File Tool: Read contents of file
+
+from langchain_core.tools import tool
+
+@tool
+def add() -> int:
+    pass
+
+@tool
+def multiply() -> int:
+    pass
+
+class MathToolkit:
+    # name of your toolkit
+
+    def get_tools(self):
+        return [add, multiply]
+
+toolkit = MathToolkit()  # create object and then you can use it
+
+tools = toolkit.get_tools()  # print list of tools that you have created
