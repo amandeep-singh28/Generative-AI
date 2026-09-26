@@ -270,3 +270,46 @@ class MathToolkit:
 toolkit = MathToolkit()  # create object and then you can use it
 
 tools = toolkit.get_tools()  # print list of tools that you have created
+
+# Tool Binding
+
+Tool Binding is the step where you register tools with a language model (LLM) so that:
+
+(i) The LLM knows what tools are available.
+
+(ii) It knows what each tool does (via description).
+
+(iii) It knows what input format to use.
+
+We use the bind_tools() method to provide tool definitions to the model.
+
+## Why do we need Tool Binding?
+
+Suppose we create a multiplication tool:
+
+from langchain_core.tools import tool
+
+@tool
+def multiply(a: int, b: int) -> int:
+    """
+    Multiply two numbers.
+    """
+    return a * b
+
+Now, if we ask an LLM:
+
+llm.invoke("What is 10 multiplied by 20?")
+
+The LLM may simply generate an answer based on its own knowledge. It is not automatically connected to our Python function.
+
+To allow it to request the tool, we use tool binding.
+
+## Using bind_tools()
+
+llm_with_tools = llm.bind_tools([multiply])
+
+response = llm_with_tools.invoke(
+    "What is 10 multiplied by 20?"
+)
+
+print(response)
