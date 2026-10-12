@@ -383,3 +383,35 @@ tool_call = response.tool_calls[0]
 result = multiply.invoke(tool_call["args"])
 
 Here the actual Python function works.
+
+→ Note: Tool Binding and Tool Calling
+
+After binding tools to an LLM using bind_tools(), the LLM decides whether to use a tool based on the user's query.
+
+Example 1: Normal conversation
+
+result1 = llm_with_tools.invoke("Hi, how are you")
+
+print(result1)
+
+result1.content
+
+result1.tool_calls
+
+result1.content → Contains the normal text response from the LLM.
+
+result1.tool_calls → An empty list because the LLM does not need a tool to answer this query.
+
+Example 2: Tool-related query
+
+result2 = llm_with_tools.invoke("Can you multiply 3 with 10")
+
+print(result2)
+
+result2.content
+
+result2.tool_calls
+
+result2.content → May be empty because the LLM is generating a tool-call request instead of a normal text response.
+
+result2.tool_calls → Contains the requested tool's name and arguments.
