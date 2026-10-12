@@ -415,3 +415,55 @@ result2.tool_calls
 result2.content → May be empty because the LLM is generating a tool-call request instead of a normal text response.
 
 result2.tool_calls → Contains the requested tool's name and arguments.
+
+## Tool Message in LangChain
+
+**Tool Message:** A message that contains the result returned by an executed tool. It is linked to the corresponding tool call using a tool call ID.
+
+### Workflow
+
+**1. Tool Binding**
+```python
+llm_with_tools = llm.bind_tools([multiply])
+```
+Makes the tool available to the LLM.
+
+**2. Tool Calling**
+```python
+result = llm_with_tools.invoke(
+    "Multiply 3 by 10"
+)
+```
+The LLM generates a tool-call request containing the tool name and arguments.
+
+**3. Tool Execution**
+```python
+tool_result = multiply.invoke(
+    result.tool_calls[0]
+)
+```
+Executes the requested tool and returns a `ToolMessage`.
+
+**4. Update Message History**
+```python
+messages.append(result)
+messages.append(tool_result)
+```
+Stores both the AI tool-call request and the tool result in the conversation history.
+
+**5. Generate Final Response**
+```python
+result = llm_with_tools.invoke(messages)
+print(result.content)
+```
+The LLM uses the tool result to generate the final response.
+
+### Important Points
+
+- `AIMessage` → Contains the LLM response and may include tool calls.
+- `ToolMessage` → Contains the tool execution result.
+- `tool_calls` → Contains the tool name, arguments, and call ID.
+- `ToolMessage.tool_call_id` → Connects the tool result to its corresponding tool call.
+- The tool must be executed before its result can be returned as a `ToolMessage`.
+
+**Remember:** Binding → Calling → Execution → Tool Message → Final Response.
