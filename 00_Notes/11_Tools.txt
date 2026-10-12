@@ -313,3 +313,73 @@ response = llm_with_tools.invoke(
 )
 
 print(response)
+
+
+# Tool Calling in LangChain
+
+There are 4 main steps:-
+(i) Tool Creation
+(ii) Tool Binding
+(iii) Tool Calling
+(iv) Tool Execution
+
+## (i) Tool Creation
+
+Creating a Python function that performs a specific task and making it available as a LangChain tool.
+
+from langchain_core.tools import tool
+
+@tool
+def multiply(a: int, b: int) -> int:
+    """Multiply two numbers."""
+    return a * b
+
+Here, we define the actual logic for multiplication.
+
+Tool name: multiply
+
+Arguments: a, b
+
+Functionality: Returns a * b
+
+## (ii) Tool Binding
+
+Connecting the tool definitions to an LLM so the model knows which tool it can request.
+
+llm_with_tools = llm.bind_tools([multiply])
+
+This provides the LLM with the tool's name, description and argument schema.
+
+**Binding does not execute the tool!**
+
+## (iii) Tool Calling
+
+The LLM decides whether a tool is needed and generates a structured request containing the tool name and arguments.
+
+response = llm_with_tools.invoke(
+    "Multiply 3 by 10"
+)
+
+print(response.tool_calls)
+
+Possible output:-
+
+[
+    {
+        "name": "multiply",
+        "args": {"a": 3, "b": 10},
+        "type": "tool_call"
+    }
+]
+
+The LLM has executed the multiply tool, but the function has not necessarily executed yet.
+
+## (iv) Tool Execution
+
+Your Python application executes the requested function and obtains its result.
+
+tool_call = response.tool_calls[0]
+
+result = multiply.invoke(tool_call["args"])
+
+Here the actual Python function works.
