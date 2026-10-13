@@ -1,0 +1,33 @@
+# AI Agent in LangChain
+
+An AI agent is a system that uses an LLM to decide what actions to take, uses tools to perform those actions, observes the results, and continues until it can complete the user's goal or determine that it cannot.
+
+For example:-
+
+Suppose you ask:
+
+Research the latest developments in LangChain, read a relevant article, and give me a summary with sources.
+
+A basic LLM might answer from the information it already knows. An agent can decide to:
+
+(i) Search the web for recent LangChain development.
+
+(ii) Examine the search results.
+
+(iii) Select a relevant article.
+
+(iv) Read its content using a tool.
+
+(v) Summarize the information.
+
+Five characteristics of an AI agent are:-
+
+(i) Goal driven
+
+(ii) Autonomous planning
+
+(iii) Tool using
+
+(iv) Context aware
+
+(v) Adaptive
