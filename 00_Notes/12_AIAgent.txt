@@ -31,3 +31,24 @@ Five characteristics of an AI agent are:-
 (iv) Context aware
 
 (v) Adaptive
+
+- Is an AI agent just an LLM? (No)
+
+An LLM is the reasoning and language-generation component. An agent system combines the LLM with tools, instructions, and an execution mechanism.
+
+- Working
+
+User request: "Find recent LangChain updates and summarize one useful source."
+
+Receive the goal
+    ↓
+Decide what to do
+    ↓
+Execute the tool
+    ↓
+Observe the result
+and decide again
+    ↓
+Produce the final answer
+
+Think | decide → Act → Observe → Decide again → Finish.
