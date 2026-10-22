@@ -1,0 +1,78 @@
+# LangGraph
+
+## Generative AI
+
+It is a branch of AI that can create new content. It learns patterns from data and uses those patterns to generate something new — such as text, images, audio, code or videos.
+
+For example:
+1. LLM-based apps like ChatGPT.
+2. Diffusion models for images.
+3. Code-generating LLMs like CodeLlama.
+4. TTS models like ElevenLabs. (Text to Speech — TTS)
+5. Video generation models like Sora.
+
+## Traditional AI vs Generative AI
+
+Traditional AI learns patterns from existing data and uses them to make predictions or decisions.
+
+Historical customer data
+↓
+ML model
+↓
+Prediction
+
+Generative AI learns patterns in its training data and uses them to generate new samples.
+
+Traditional AI → often predicts or classifies.
+Generative AI → creates new content.
+LangGraph → coordinates workflow execution.
+
+# Introduction to Agentic AI
+
+## A normal LLM call looks like this:
+
+User prompt
+↓
+LLM generate response
+↓
+Final answer
+
+## An agentic AI workflow can look like this:
+
+User prompt
+↓
+LLM decides what action is needed
+↓
+Tool call (if required)
+↓
+Tool result returned to LLM
+↓
+Final answer
+
+An agentic system can choose actions towards a goal and adapt what it does based on the situation or results.
+
+Goal → Decide → Act → Evaluate → Decide Again
+
+If the AI can select between different actions based on the situation, that is agentic behaviour.
+
+**Definition:** Agentic AI is an AI that takes a goal, decides what actions to take, and works toward completing that goal with minimal human guidance.
+
+## For example:
+
+→ Generative AI
+
+"Why might a data pipeline fail?"
+
+The AI generates an explanation based on its knowledge.
+
+→ Agentic AI
+
+"Investigate why my data pipeline failed."
+
+The AI might:
+1. Examine the logs.
+2. Decide what diagnostic to run.
+3. Analyze the result.
+4. Try another diagnostic (if required).
+
+(Working towards a goal by choosing and adapting actions)
