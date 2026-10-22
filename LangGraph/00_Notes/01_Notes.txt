@@ -104,3 +104,39 @@ Agentic AI can work in a cycle, it observes results, decides what to do next, an
 (v) Adaptability
 
 (vi) Context awareness
+
+## (i) Autonomy
+
+Agentic AI can work towards a goal without requiring a human to tell it every single step.
+
+- **Without autonomy**
+
+  You tell the AI to inspect the logs, then tell it to check the logs, then tell it to check the databases, then tell it what to do next.
+
+- **With autonomy**
+
+  You gave it the goal, and it chooses the next step within the permissions and rules you have defined.
+
+- **Autonomy can be controlled**
+
+  Autonomy does not mean giving AI unlimited freedom.
+
+  (i) Permission scope
+
+  (ii) Human in the loop (HITL)
+
+  Human approval is needed.
+
+  (iii) Override controls.
+
+  Human can interrupt or change what the AI is doing.
+
+- **Autonomy can be dangerous**
+
+  Imagine a recruitment AI that can act independently. If its rules or decisions are flawed, it might:
+
+  (i) Send job offers with incorrect salary details.
+
+  (ii) Unfairly shortlisting students.
+
+Autonomy means the AI can act independently, but its permissions, decisions, and actions should be controlled appropriately.
