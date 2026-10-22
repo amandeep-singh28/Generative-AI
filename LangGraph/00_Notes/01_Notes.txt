@@ -76,3 +76,31 @@ The AI might:
 4. Try another diagnostic (if required).
 
 (Working towards a goal by choosing and adapting actions)
+
+**Imp**
+
+## Note
+
+(i) Is a tool necessary for agentic AI? No
+
+(ii) Can tools make an agent more capable? Yes
+
+(iii) Does using a tool automatically make AI agentic? No
+
+(iv) What is the key idea? The AI can choose and adapt its actions towards a goal.
+
+Agentic AI can work in a cycle, it observes results, decides what to do next, and continues investigating based on what it learns.
+
+## Key Characteristics of Agentic AI
+
+(i) Autonomous
+
+(ii) Goal oriented
+
+(iii) Planning
+
+(iv) Reasoning
+
+(v) Adaptability
+
+(vi) Context awareness
