@@ -140,3 +140,81 @@ Agentic AI can work towards a goal without requiring a human to tell it every si
   (ii) Unfairly shortlisting students.
 
 Autonomy means the AI can act independently, but its permissions, decisions, and actions should be controlled appropriately.
+
+
+## (ii) Goal Oriented
+
+Being goal oriented means that the AI system operates with a persistent objective in mind and continuously directs its actions to achieve that objective, rather than just responding to isolated prompts.
+
+→ Goals act as a compass for autonomy.
+
+→ Goals can come with constraints. {SHMC backed engineer from Andhra only?}
+
+→ Goals are stored in core memory.
+
+→ Goals can be altered.
+
+## (iii) Planning
+
+Planning means breaking a big goal into smaller actions and choosing a suitable way to achieve it.
+
+### Step 1 → Generate Multiple Plans
+
+AI considers different ways to achieve the same goal.
+
+Plan A → Post job on LinkedIn.
+
+Plan B → Use employee referrals.
+
+### Step 2 → Evaluate Each Plan
+
+- Cost?
+- Efficiency?
+- Risk?
+- Constraints?
+
+### Step 3 → Select the Best Plan
+
+AI chooses a plan based on evaluation.
+
+**Two ways**
+
+↓  
+
+**Multiple plans**
+
+AI considers alternatives (Plan A, Plan B).
+
+**Strategic planning**
+
+Execute the plan, examine the result and revise its plan (if necessary).
+
+## (iv) Reasoning
+
+It means analyzing information, connecting facts, and using them to reach a conclusion or make a decision.
+
+**Planning**
+
+↳ Decides what steps to take.
+
+**Reasoning**
+
+↳ Analyzes information to reach conclusions.
+
+## (v) Adaptability
+
+*Changing your approach based on new info*
+
+It means the AI can change its approach when it receives new information or when its current approach doesn't work.
+
+## (vi) Context Awareness
+
+The AI understands the current situation by using relevant information from the task, previous task and available memory.
+
+It is implemented through memory.
+
+↓                         ↓
+
+**STM**                  **LTM**
+
+(Short term memory)      (Long term memory)
