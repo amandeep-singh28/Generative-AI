@@ -251,3 +251,37 @@ LangGraph makes complex workflows easier to organize and manage.
 
 LangGraph makes state management easier by providing a shared state that nodes can read and update.
 
+---
+
+## Challenge 3: Event-Driven Execution
+
+Workflow
+
+↓  
+**Sequential (LangChain)**
+
+**Event-Driven (LangGraph)**
+
+### In LangChain:
+
+In this, a chain executes completely without pauses, such as:
+
+Prompt → LLM → Prompt → LLM
+
+### In LangGraph:
+
+Nodes can execute conditionally, loop back, or pause for human input.
+
+**For example:**
+
+Suppose we have created a hiring website. We have posted a JD and we want to stop the registration after 7 days.
+
+---
+
+## Challenge 4: Fault Tolerance
+
+**Meaning:** To handle failures without losing all of its progress.
+
+- **In LangChain:** If a step fails, you need to handle that error. In a long chain, managing failures and recovery across multiple steps is complicated.
+- **In LangGraph:** Each task is a node connected to edges. You can configure retries, save checkpoints, and control what happens when a particular node fails.
+
