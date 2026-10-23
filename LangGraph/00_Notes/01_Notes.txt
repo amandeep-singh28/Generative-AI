@@ -285,3 +285,32 @@ Suppose we have created a hiring website. We have posted a JD and we want to sto
 - **In LangChain:** If a step fails, you need to handle that error. In a long chain, managing failures and recovery across multiple steps is complicated.
 - **In LangGraph:** Each task is a node connected to edges. You can configure retries, save checkpoints, and control what happens when a particular node fails.
 
+---
+
+## Challenge 5: Human in the Loop (HITL)
+
+**Meaning:** A human reviews, approves, or provides input before an AI workflow continues.
+
+- **In LangChain:** You generally need to build the human interaction and waiting mechanism into your application.
+- **In LangGraph:** You can use interrupts to pause a workflow, wait for human input, and resume execution afterward.
+
+LangGraph makes HITL easier to implement by allowing workflows to pause and resume while preserving state through checkpointing.
+
+---
+
+## Challenge 6: Nested Workflows
+
+- **Meaning:** Breaking a large workflow into smaller, reusable workflows, each responsible for a specific task.
+
+- **In LangChain:** You can combine chains, but coordinating complex workflows with their own state, branching, and loops can become difficult.
+
+- **In LangGraph:** You can use subgraphs → graphs nested inside a larger graph → to organize complex workflows into manageable parts.
+
+LangGraph subgraphs help organize complex workflows into smaller, reusable components that are easier to maintain and test.
+
+## Challenge 7: Observability
+- Meaning: The ability to monitor a workflow and understand what happens during its execution.
+- In LangChain: You can use logging and tracing tools, but tracking complex workflows across multiple components may require extra setup.
+- In LangGraph: You can inspect node execution, state updates, and workflow paths. Tools like LangSmith help trace and debug executions.
+- Example: If an incident investigation produces an incorrect diagnosis, you can trace which node retrieved the evidence, what a diagnostic node returned, and where the workflow went wrong.
+Key takeaway: Observability helps you understand, monitor, and debug an AI workflow by showing what happened at each step.
