@@ -218,3 +218,36 @@ It is implemented through memory.
 **STM**                  **LTM**
 
 (Short term memory)      (Long term memory)
+
+
+# Why LangGraph is Useful?
+
+## Challenge 1: Control Flow Complexity
+
+### (i) Challenges in Complex LangChain Workflows:
+
+- Conditional branching: Choose paths based on conditions.
+- Loops: Repeat steps until a condition is met.
+- Jumps: Return to earlier steps or move to another step.
+
+### (ii) How LangGraph Helps:
+
+- Nodes: Perform tasks.
+- Edges: Define the next step.
+- State: Store information shared between steps.
+- Less glue code: Extra code needed to connect different components.
+
+LangGraph makes complex workflows easier to organize and manage.
+
+---
+
+## Challenge 2: Handling State
+
+- **State:** A dictionary that stores the current information of a workflow as key-value pairs.
+- **Purpose:** Keeps track of progress and shares information between workflow steps.
+
+- **In LangChain:** Managing and updating shared information across a complex workflow may require extra glue code.
+- **In LangGraph:** State is a core concept. A node reads the current state and returns updates to it.
+
+LangGraph makes state management easier by providing a shared state that nodes can read and update.
+
