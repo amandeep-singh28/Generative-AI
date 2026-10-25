@@ -416,3 +416,40 @@ On the basis of query, the LLM will respond.
 ↓
 
 Output.
+
+### (iii) Parallelization
+
+**Step 1: Input**
+- The user provides a query.
+- Query distributed to multiple LLM calls.
+
+**Step 2: Parallel LLM Calls**
+- LLM calls work on separate tasks parallelly.
+- Each call generates its own output.
+
+**Step 3: Aggregator (with/without LLM calls)**
+- It combines the result from different LLM calls.
+
+**Step 4: Output**
+- Combined result is returned to the user.
+
+**Flow:**
+
+Input
+  ↓
+  ├── LLM Call 1 ──┐
+  ├── LLM Call 2 ──┼──→ Aggregator → Output
+  └── LLM Call 3 ──┘
+
+Aggregator:
+- Can be used with or without LLM call (depending upon the tasks).
+
+**For example:**
+
+Customer Feedback
+
+  ├── Identify +ve feedback
+  ├── Identify -ve feedback
+  └── Neutral
+
+Combine all findings in one report.
