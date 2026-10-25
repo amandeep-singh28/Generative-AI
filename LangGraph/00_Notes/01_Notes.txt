@@ -494,3 +494,33 @@ Analyze about a specific company.
 - About salary.
 - About career growth opportunities.
 - About reviews.
+
+### (vi) Evaluator Optimizer
+
+**Step 1: Input**
+- User provides a query.
+
+**Step 2: LLM Call Generator**
+- It produces an initial response.
+
+**Step 3: LLM Call Evaluator**
+- It checks the correctness, quality, and completeness of the result.
+
+**Step 4: Decision**
+- Two outcomes:
+  - Accepted → Next step (final output).
+  - Rejected → Feedback and problems are sent to the generator.
+
+**Step 5: Improvement Loop**
+- The generator uses the feedback and produces a revised solution.
+
+**Workflow:**
+
+Input → LLM Call Generator → LLM Call Evaluator
+
+- Accepted → Output
+- Rejected + Feedback → Generator → Revised Solution → Evaluator
+
+**Example:**
+
+Python Code → Checks Edge Cases / Identifies Code Bugs → Revise → Output
