@@ -557,3 +557,81 @@ Generates the answer.
 **Updated State:**  
 - Question → "What is ML?"
 - Answer → "ML enables systems to learn from data."
+
+
+# 1. Reducers in LangGraph
+
+## Example 1: Updating State
+
+Consider a workflow where the input contains two numbers, `a` and `b`.
+
+**Workflow:**
+
+Input (`a`, `b`) → Sum → Multiply by 2 → Result
+
+For example:
+- First number (`a`) = 5
+- Second number (`b`) = 6
+- Sum = 5 + 6 = 11
+- Final result = 11 × 2 = 22
+
+**Question:** What should we store in the state?
+
+We can store the first number, the second number, and the result.
+
+### Why Do We Need Reducers?
+
+In most cases, updating the state works as expected. However, in certain scenarios, simply updating the state may not work as intended.
+
+For example, consider a chatbot.
+
+### Example 2: Chatbot Conversation
+
+Suppose a user sends the following message:
+
+**Human:** Hi, my name is Amandeep.
+
+The message is passed to the LLM, which generates a response.
+
+**LLM:** Hi, how can I help you?
+
+If the state stores only the latest message, the previous message may be replaced. As a result, the chatbot may lose the conversation context.
+
+To maintain the conversation history, we need a way to append new messages instead of replacing the existing ones.
+
+This is where **reducers** play an important role.
+
+## Role of Reducers
+
+- A reducer determines how a particular state key should be updated.
+- It defines whether new data should replace, merge with, or be added to the existing value.
+- Each state key can have its own reducer.
+- Reducers help maintain conversation history and other accumulated information throughout the workflow.
+
+**Example:**
+- Without a reducer: The latest message may replace the previous message.
+- With an appropriate reducer: The new message is appended to the existing conversation history.
+
+**Important:** In LangGraph, the `add_messages` reducer is commonly used to manage message history. It supports adding new messages and updating existing messages with matching IDs.
+
+## Example: Chatbot State
+
+**Initial State:**
+- Message: "Hi, my name is Amandeep."
+
+↓
+
+**LLM Node:**
+- Generates a response: "Hi, how can I help you?"
+
+↓
+
+**Updated State:**
+- Human: "Hi, my name is Amandeep."
+- AI: "Hi, how can I help you?"
+
+The state retains the conversation history, allowing subsequent nodes to access the previous messages.
+
+## Key Takeaway
+
+**Reducers define how updates to individual state keys are applied, helping LangGraph manage information correctly throughout a workflow.**
