@@ -524,3 +524,36 @@ Input → LLM Call Generator → LLM Call Evaluator
 **Example:**
 
 Python Code → Checks Edge Cases / Identifies Code Bugs → Revise → Output
+
+### Components of LangGraph
+
+**(i) Graph**
+- The overall structure that defines how different tasks connect and execute.
+
+**(ii) Nodes**
+- Individual tasks or functions performed in the workflow.
+
+**(iii) Edges**
+- Connections that define where execution goes next, from one node to another.
+
+**(iv) State**
+- A shared data structure that stores information about the current workflow.
+- Nodes can read the existing state and update it as the workflow executes.
+- The updated state allows information to be passed between nodes.
+- It is accessible throughout the workflow and can be modified by nodes.
+
+**Example:**
+
+**Initial State:**  
+Question → "What is ML?"
+
+↓  
+
+**LLM Node:**  
+Generates the answer.
+
+↓
+
+**Updated State:**  
+- Question → "What is ML?"
+- Answer → "ML enables systems to learn from data."
