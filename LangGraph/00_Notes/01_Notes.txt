@@ -453,3 +453,44 @@ Customer Feedback
   └── Neutral
 
 Combine all findings in one report.
+
+
+### (iv) Orchestrator-Workers
+
+**Step 1: Input**
+- User provides query.
+
+**Step 2: Orchestrator**
+- It analyzes the request.
+- Main task → Smaller task.
+- Decides which task should be assigned to sub LLMs.
+
+**Step 3: Workers (LLM Calls 1, 2 & 3)**
+- Each worker handles a task.
+
+**Step 4: Synthesizer**
+- Collect the worker's output.
+- Combines the results / may use LLM.
+
+**Step 5: Output**
+- Final result returned to user.
+
+**Flow:**
+
+Input → Orchestrator
+- LLM Call 1 ──┐
+- LLM Call 2 ──┼──→ Synthesizer → Output
+- LLM Call 3 ──┘
+
+In this workflow, it depends upon the query what other LLMs task would be at runtime.
+
+But in Parallelization, we already know about the task that we are going to do and then we accordingly divide those tasks to sub LLMs.
+
+**For example:**
+
+Analyze about a specific company.
+
+- The first LLM call might search about work culture.
+- About salary.
+- About career growth opportunities.
+- About reviews.
