@@ -380,3 +380,39 @@ Input → Topic → Report (LLM Call 1) → Check → Summary (LLM Call 2) → O
 
 - **Check:** Words not > 5000
 - **Gate:** [unclear]
+
+### (ii) Routing
+
+**Step 1: Input**
+- The user provides a query.
+
+**Step 2: LLM Call Router**
+- The router analyzes the input and decides which path is appropriate.
+- It directs the request to the selected LLM call.
+
+**Step 3: Selected LLM Call**
+- The chosen LLM processes the request.
+- Different LLM calls may handle different tasks.
+
+**Step 4: Output**
+- The selected path produces the response.
+
+**Flow:**
+
+Input → LLM Call Router
+
+- LLM Call 1 → Output
+- LLM Call 2 → Output
+- LLM Call 3 → Output
+
+**For example:**
+
+Customer Chatbot (Refund queries, Technical queries & Sales queries)
+
+↓  
+
+On the basis of query, the LLM will respond.
+
+↓
+
+Output.
