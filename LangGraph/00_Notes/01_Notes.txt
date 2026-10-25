@@ -347,3 +347,36 @@ You'll still use LangChain components like:
 - `Tools`, etc.
 
 LangGraph handles **workflow orchestration**, while LangChain provides the **building blocks** for each step in that workflow.
+
+# LangGraph Core Concepts
+
+## (i) LLM Workflows
+
+Workflow → Series of tasks that are implemented to achieve a specific goal.
+
+LLM Workflows → Series of tasks that use one or more LLM calls to achieve a goal.
+
+- Each step in a workflow performs a distinct task, such as prompting, reasoning, tool calling, memory access or decision making.
+- Workflows can be linear, parallel, branched or looped, allowing for complex behaviours like retries, multi-agent communication, or tool-augmented reasoning.
+
+### Common Workflows
+
+#### (i) Prompt Chaining
+
+We talked multiple times to LLM in this workflow.
+
+**Flow:**
+
+Input → LLM Call 1 → Output 1 → Gate
+
+Gate checks whether Output 1 satisfies a particular condition or not.
+
+- **Pass:** Gate → LLM Call 2 → Output 2 → LLM Call 3 → Output
+- **Fail:** Gate → Exit
+
+#### Example: Fan-Out [unclear]
+
+Input → Topic → Report (LLM Call 1) → Check → Summary (LLM Call 2) → Output
+
+- **Check:** Words not > 5000
+- **Gate:** [unclear]
