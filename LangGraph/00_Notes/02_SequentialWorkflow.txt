@@ -1,0 +1,176 @@
+# Sequential Workflows in LangGraph
+
+From `langgraph.graph`, we import `StateGraph`, `START`, and `END`.
+
+## 1. First Workflow — BMI Calculator
+
+### Workflow
+
+**Input → Calculate BMI → Output**
+
+**Input:** Height and Weight
+
+**State stores:**
+1. `weight_kg` — Weight in kilograms.
+2. `height_m` — Height in meters.
+3. `bmi_result` — Calculated BMI value.
+
+### Overall Steps
+
+1. Define the state.
+2. Define the graph.
+3. Add nodes.
+4. Add edges.
+5. Compile the graph.
+6. Execute the graph.
+
+---
+
+## 2. Define the State
+
+We use `TypedDict` to define the structure of the state.
+
+```python
+from typing import TypedDict
+
+class BMIState(TypedDict):
+    weight_kg: float
+    height_m: float
+    bmi_result: float
+```
+
+**Explanation:** `BMIState` defines the data that flows through the graph. The node receives the state, calculates the BMI, and returns the updated state.
+
+---
+
+## 3. Define the Node Function
+
+```python
+def calculate_bmi(state: BMIState) -> BMIState:
+    weight = state["weight_kg"]
+    height = state["height_m"]
+
+    bmi = weight / (height ** 2)
+
+    state["bmi_result"] = round(bmi, 2)
+
+    return state
+```
+
+**Explanation:**
+- Reads the weight and height from the state.
+- Calculates BMI using the formula:
+
+  **BMI = Weight (kg) / Height (m)²**
+
+- Rounds the result to two decimal places.
+- Returns the updated state.
+
+---
+
+## 4. Define the Graph
+
+```python
+from langgraph.graph import StateGraph, START, END
+
+graph = StateGraph(BMIState)
+```
+
+**Explanation:** `StateGraph(BMIState)` creates a graph that uses `BMIState` as its state schema.
+
+---
+
+## 5. Add Nodes
+
+```python
+graph.add_node("calculate_bmi", calculate_bmi)
+```
+
+**Explanation:** Adds the `calculate_bmi` node to the graph and associates it with the `calculate_bmi()` function.
+
+---
+
+## 6. Add Edges
+
+```python
+graph.add_edge(START, "calculate_bmi")
+graph.add_edge("calculate_bmi", END)
+```
+
+**Explanation:**
+- `START` → `calculate_bmi`: Execution begins with the BMI calculation node.
+- `calculate_bmi` → `END`: Execution finishes after the calculation.
+
+---
+
+## 7. Compile the Graph
+
+```python
+workflow = graph.compile()
+```
+
+**Explanation:** Compiles the graph into an executable workflow.
+
+---
+
+## 8. Execute the Graph
+
+```python
+initial_state = {
+    "weight_kg": 70,
+    "height_m": 1.93
+}
+
+final_state = workflow.invoke(initial_state)
+
+print(final_state)
+```
+
+**Explanation:**
+- `initial_state` provides the input data.
+- `workflow.invoke(initial_state)` executes the graph.
+- `final_state` contains the state returned by the workflow.
+
+### Expected Output
+
+```python
+{
+    'weight_kg': 70,
+    'height_m': 1.93,
+    'bmi_result': 18.79
+}
+```
+
+---
+
+## 9. Display the Graph
+
+To visualize the workflow in a Jupyter Notebook:
+
+```python
+from IPython.display import Image, display
+
+display(Image(workflow.get_graph().draw_mermaid_png()))
+```
+
+This displays the graph as a diagram.
+
+### Graph Structure
+
+```text
+    START
+      |
+      v
+ calculate_bmi
+      |
+      v
+     END
+```
+
+---
+
+## Key Takeaway
+
+A **sequential workflow** executes nodes in a predefined order. In this example, LangGraph starts the workflow, executes the BMI calculation node, updates the state, and finishes the execution.
+
+The graph contains one processing node, with `START` and `END` defining its entry and exit points.
