@@ -1,0 +1,73 @@
+# Parallel Workflows in LangGraph
+29/10/26
+
+## (i) Cricket
+
+- Runs
+- Balls
+- 4s
+- 6s
+
+Metrics:
+- Strike Rate
+- Runs in boundary %
+- BPB (Balls per boundary)
+
+These can be calculated parallelly.
+
+### Workflow Diagram
+
+START
+  ├── Strike Rate ──┐
+  ├── b% ───────────┼──> Summary ──> END
+  └── bpb ──────────┘
+
+### State
+
+1. Runs
+2. Balls
+3. Fours
+4. Sixes
+5. SR (Runs / balls) × 100
+6. BPB (balls / (fours + sixes))
+7. Boundary-percent ((fours × 4 + sixes × 6) / runs) × 100
+8. Summary
+
+## Code
+
+class CricketState(TypedDict):
+    runs: int
+    balls: int
+    fours: int
+    sixes: int
+    strike_rate: float
+    balls_per_boundary: float
+    boundary_percentage: float
+    summary: str
+
+def cal_strike_rate(state: CricketState) -> CricketState:
+    state["strike_rate"] = (state["runs"] / state["balls"]) * 100
+    return {"strike_rate": state["strike_rate"]}
+
+    # Partial state update
+
+def cal_balls_per_boundary():
+    ...
+
+def cal_boundary_percentage():
+    ...
+
+def print_summary(state: CricketState, ...) -> CricketState:
+    state["summary"] = f"""
+        Strike rate : {state["strike_rate"]}
+        BPB : {state["balls_per_boundary"]}
+        Bound. perc. : {state["boundary_perc"]}
+        ...
+    """
+    return {"summary": state["summary"]}
+
+## Why partial state update in parallel workflows?
+
+In parallel workflows, multiple nodes may execute simultaneously. If each node returns the entire state, they may overwrite each other's updates.
+
+Each node should return only the field it updates.
