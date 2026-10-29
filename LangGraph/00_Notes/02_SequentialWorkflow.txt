@@ -174,3 +174,90 @@ This displays the graph as a diagram.
 A **sequential workflow** executes nodes in a predefined order. In this example, LangGraph starts the workflow, executes the BMI calculation node, updates the state, and finishes the execution.
 
 The graph contains one processing node, with `START` and `END` defining its entry and exit points.
+
+# LLMs and LangGraph
+
+Input → LLM → LLM → Blog
+
+Input → LLM → Output
+
+(Question) → (Answer)
+
+START → generate → gen_blog → END
+              ↓
+        Prompt + chaining
+
+State:
+1. topic
+2. outline
+3. final_blog
+
+## Hugging Face
+
+from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
+
+os.environ["HF_TOKEN"] = "D / hugging face-cache"
+
+llm = HuggingFaceEndpoint(
+    model_id = "Qwen/Qwen2.5-3B-Instruct",
+    task = "text-generation",
+    pipeline_kwargs = {
+        "max_new_tokens": 500,
+        "temperature": 0.5
+    }
+)
+
+model = ChatHuggingFace(
+    llm=llm
+)
+
+→
+
+## LLM State
+
+class LLMState(TypedDict):
+    question: str
+    answer: str
+
+def llm_qa(state: LLMState) -> LLMState:
+    question = state["question"]
+    prompt = f"Answer the following question {question}"
+    answer = llm.invoke(prompt)
+    state["answer"] = answer
+    return state
+
+graph = StateGraph(LLMState)
+
+graph.add_node("LLM_question", llm_qa)
+graph.add_edge(START, "LLM_question")
+graph.add_edge("LLM_question", END)
+
+workflow = graph.compile()
+
+initial_state = {
+    "question": "What is the capital of India"
+}
+
+final_state = workflow.invoke(initial_state)
+
+## Blog State
+
+class BlogState(TypedDict):
+    topic: str
+    outline: str
+    final_blog: str
+
+def create_outline(state: BlogState) -> BlogState:
+    topic = state["topic"]
+    prompt = f"Generate an outline on {topic}"
+    answer = llm.invoke(prompt)
+    state["outline"] = answer
+    return state
+
+def create_blog(state: BlogState) -> BlogState:
+    topic = state["topic"]
+    outline = state["outline"]
+    prompt = f"Generate a small blog on the following {topic}. Follow this outline for structured result {outline}"
+    answer = llm.invoke(prompt)
+    state["final_blog"] = answer
+    return state
