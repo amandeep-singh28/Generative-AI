@@ -1,0 +1,101 @@
+# Conditional Workflows in LangGraph
+30/10/26
+
+It is a workflow in which the next step depends on a condition or decision.
+
+For example:
+
+START
+  ↓
+Evaluate Essay
+  ↓
+Check Score
+  ↙              ↘
+Score >= 80      Score < 80
+  ↓                ↓
+Approve          Improve
+Essay            Essay
+  ↓                ↓
+END              END
+
+If we are adding a conditional edge then there must be a function.
+
+## (i) Quadratic Equation Workflow
+
+ax² + bx + c = 0
+
+↳ Always 2 roots
+
+→ First we find Discriminant: b² - 4ac = d
+
+Type of roots depend upon the discriminant value.
+
+### (a) d > 0
+2 real roots
+
+r1 = (-b + √d) / 2a
+
+r2 = (-b - √d) / 2a
+
+### (b) d = 0
+(1 repeated root)
+
+r1 = -b / 2a
+
+### (c) d < 0
+(no real roots)
+
+## Workflow Diagram
+
+START (a, b, c)
+  ↓
+Show Equation → ax² + bx + c
+  ↓
+Calculate Discriminant → b² - 4ac
+  ├── d < 0 → No real roots ──────┐
+  ├── d > 0 → Real roots ─────────┤
+  └── d = 0 → Repeated roots ─────┤
+                                   ↓
+                                  END
+
+## State
+
+1. a (int)
+2. b (int)
+3. c (int)
+4. equation (str)
+5. discriminant (float)
+6. final_result (str)
+
+def no_real_roots():
+    ...
+
+def real_roots():
+    ...
+
+def repeated_roots():
+    ...
+
+## Conditional Function
+
+def check_condition(state: QuadraticState) -> Literal["no_real_roots", "real_roots", "repeated_roots"]:
+    if state["discriminant"] < 0:
+        return "no_real_roots"
+    elif state["discriminant"] > 0:
+        return "real_roots"
+    else:
+        return "repeated_roots"
+
+This will redirect to the conditional edge.
+
+## Graph
+
+graph = StateGraph(QuadraticState)
+
+graph.add_conditional_edges("calc_discriminant", check_condition)
+
+Here the "edge_name" would be returned and it will execute the node.
+
+graph.add_edge("no_real_roots", END)
+graph.add_edge("real_roots", END)
+graph.add_edge("repeated_roots", END)
