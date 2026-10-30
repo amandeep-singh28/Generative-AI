@@ -99,3 +99,166 @@ Here the "edge_name" would be returned and it will execute the node.
 graph.add_edge("no_real_roots", END)
 graph.add_edge("real_roots", END)
 graph.add_edge("repeated_roots", END)
+
+# LLM-Based Review Handling Workflow
+
+## 1. Overview
+
+**Review → Find Sentiment → Conditional Routing**
+
+- If the sentiment is positive, generate a positive response.
+- If the sentiment is negative, run a diagnosis and generate an appropriate response.
+
+## 2. State
+
+The workflow maintains the following state fields:
+
+1. `review`
+2. `sentiment`
+3. `diagnosis`
+4. `final_response`
+
+## 3. Workflow Diagram
+
+```text
+             START
+               |
+        find_sentiment
+               |
+        Conditional Edge
+          /         \
+      Negative     Positive
+         |             |
+   run_diagnosis   positive_response
+         |
+   negative_response
+          \          /
+              END
+```
+
+## 4. Structured Output Schemas
+
+Two schemas are required for structured output.
+
+### 4.1 Sentiment Schema
+
+```python
+class SentimentSchema(BaseModel):
+    sentiment: Literal["positive", "negative"] = Field(
+        description="Sentiment of review"
+    )
+```
+
+### 4.2 Diagnosis Schema
+
+```python
+class DiagnosisSchema(BaseModel):
+    issue_type: Literal[
+        "UX", "Performance", "Bug", "Support", "Other"
+    ] = Field(
+        description="The category of issue mentioned in the review"
+    )
+
+    tone: Literal[
+        "angry", "frustrated", "disappointed", "calm"
+    ] = Field(
+        description="The emotional tone expressed by the user"
+    )
+
+    urgency: Literal["low", "medium", "high"] = Field(
+        description="How urgent or critical the issue appears to be"
+    )
+```
+
+### 4.3 Review State
+
+```python
+class ReviewState(TypedDict):
+    review: str
+    sentiment: Literal["positive", "negative"]
+    diagnosis: dict
+    final_response: str
+```
+
+## 5. Workflow Functions
+
+### 5.1 Find Sentiment
+
+```python
+def find_sentiment(...):
+    ...
+```
+
+Identifies whether the customer review has positive or negative sentiment.
+
+### 5.2 Check Sentiment
+
+```python
+def check_sentiment(
+    state: ReviewState
+) -> Literal["positive_response", "run_diagnosis"]:
+
+    if state["sentiment"] == "positive":
+        return "positive_response"
+    else:
+        return "run_diagnosis"
+```
+
+The returned value determines which conditional edge is executed.
+
+### 5.3 Positive Response
+
+```python
+def positive_response(...):
+    ...
+```
+
+Generates a warm thank-you message in response to the review and kindly asks the user to leave feedback on the website.
+
+### 5.4 Run Diagnosis
+
+```python
+def run_diagnosis(...):
+    ...
+```
+
+For negative reviews, identifies:
+- Issue type
+- Tone of the review
+- Urgency
+
+### 5.5 Negative Response
+
+```python
+def negative_response(...):
+    ...
+```
+
+Generates an empathetic and helpful resolution message based on the diagnosis.
+
+## 6. Conditional Workflow
+
+The workflow uses conditional routing to decide the next step.
+
+```text
+START
+  |
+find_sentiment
+  |
+  +---- Positive ----> positive_response ----> END
+  |
+  +---- Negative ----> run_diagnosis
+                            |
+                      negative_response
+                            |
+                           END
+```
+
+## 7. Key Concepts
+
+- **Structured Output:** Ensures that the LLM returns data according to a predefined schema.
+- **Pydantic:** Defines and validates structured output fields.
+- **StateGraph:** Defines the workflow and its nodes.
+- **Conditional Edges:** Determine the next node based on the output of a routing function.
+- **Partial State Updates:** Nodes return only the state fields they update.
+- **LLM-Based Diagnosis:** Extracts issue type, emotional tone, and urgency from negative reviews.
