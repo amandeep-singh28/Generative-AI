@@ -1,0 +1,51 @@
+# Iterative Looping Workflow in LangGraph
+
+**Date:** 31/10/2026
+
+## 1. Definition
+
+An iterative workflow is a workflow in which a task is repeated multiple times, with each iteration using the updated state or results from the previous iteration.
+
+## 2. Example
+
+- An LLM generates an answer.
+- Another step evaluates the answer's quality.
+- If the answer is poor, the LLM generates an improved version.
+- The answer is evaluated again.
+- The process repeats until the answer meets the required quality.
+
+**This is an iterative workflow.**
+
+## 3. Workflow Diagram
+
+```text
+              START
+                |
+             Generate
+                |
+             Evaluate <──────────┐
+                |                |
+          ┌─────┴──────┐         |
+          |            |         |
+      Approved    Needs Improvement
+          |            |         |
+         END        Optimize ─────┘
+```
+
+### Components
+
+- **START:** Receives the topic.
+- **Generate:** An LLM generates an answer or post.
+- **Evaluate:** Another LLM evaluates the generated answer against evaluation criteria.
+- **Optimize:** Another LLM improves the answer if it needs improvement.
+- **END:** The workflow terminates when the answer is approved.
+
+## 4. Workflow Logic
+
+1. Receive the topic as input.
+2. Generate an answer using an LLM.
+3. Evaluate the answer using another LLM.
+4. If the answer is approved, terminate the workflow.
+5. If the answer needs improvement, optimize it using another LLM.
+6. Send the improved answer back to the evaluation step.
+7. Repeat until the answer meets the required quality.
