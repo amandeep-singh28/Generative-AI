@@ -22,7 +22,7 @@ class Review(BaseModel):
         description="A brief summary of the review"
     )
 
-    sentiment: Literal["pos", "neg"] = Field(
+    sentiment: Literal["pos", "neg", "neutral"] = Field(
         description="Return sentiment of the review either negative, positive or neutral"
     )
 

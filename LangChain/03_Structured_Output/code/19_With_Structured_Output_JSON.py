@@ -27,7 +27,7 @@ json_schema = {
     },
     "sentiment": {
       "type": "string",
-      "enum": ["pos", "neg"],
+      "enum": ["pos", "neg", "neutral"],
       "description": "Return sentiment of the review either negative, positive or neutral"
     },
     "pros": {
