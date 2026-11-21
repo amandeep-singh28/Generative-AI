@@ -89,3 +89,25 @@ Compile Graph with Checkpointer
      Continue Workflow
 ```
 
+Working of Persistence
+When we use the concept of persistence, it does not save only the "final state values".
+
+It saves "intermediate values" too.
+
+For example:
+START
+  |
+  | State: name = "a"
+  |
+Node 1 → name: b
+  |
+Node 2 → name: c
+  |
+END → Final State (name: c)
+
+
+It saves intermediate values also.
+
+If the workflow crashes at Node B, LangGraph can use the latest saved checkpoint to resume from that point, rather than restarting from the beginning.
+
+(Biggest advantage - Fault Tolerance)
