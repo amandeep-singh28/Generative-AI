@@ -111,3 +111,33 @@ It saves intermediate values also.
 If the workflow crashes at Node B, LangGraph can use the latest saved checkpoint to resume from that point, rather than restarting from the beginning.
 
 (Biggest advantage - Fault Tolerance)
+
+Checkpoints in Persistence
+1. Introduction
+The concept of persistence can be implemented by checkpoints in LangGraph.
+
+A checkpoint is a saved snapshot of the graph's state at a particular point in execution.
+
+It is the component that saves and retrieves these checkpoints.
+2. Checkpoint Flowchart
+                  START (checkpoint)
+                         |
+                         v
+                    Node 1 (checkpoint)
+                   /       |       \
+                  /        |        \
+                 v         v         v
+              Node 2    Node 3    Node 4
+                                  (checkpoint)
+                  \        |        /
+                   \       |       /
+                    v      v      v
+                         END
+                     (checkpoint)
+
+
+- The graph contains multiple execution paths.
+- Checkpoints are created at specific points in the graph's execution.
+- The execution of one or more nodes forms a superstep.
+3. Superstep
+A superstep is a graph execution round in which one or more nodes execute.
