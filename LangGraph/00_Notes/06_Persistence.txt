@@ -141,3 +141,126 @@ It is the component that saves and retrieves these checkpoints.
 - The execution of one or more nodes forms a superstep.
 3. Superstep
 A superstep is a graph execution round in which one or more nodes execute.
+
+Example of Checkpointers in LangGraph
+1. State
+In LangGraph, the state stores the important data that is shared between nodes during graph execution.
+
+For this example, the state contains a variable named numbers, which stores a list of integers.
+state = {    "numbers": []}
+
+
+
+As the graph executes, each node updates the state by adding a number to the list.
+2. Workflow Diagram
+                   START
+                 (CP 1)
+          numbers: [1] → Save
+                     |
+                     v
+                  Node 1
+                 (CP 2)
+          numbers: [1, 2] → Save
+                     |
+          +----------+----------+
+          |          |          |
+          v          v          v
+       Node 3     Node 2     Node 4
+        [3]        [4]        [5]
+          |          |          |
+          +----------+----------+
+                     |
+                     v
+                    END
+                 (CP 4)
+              Final State
+        numbers: [1, 2, 3, 4, 5]
+                     |
+                    Save
+
+
+Note: The diagram represents the flow and state values from your notes. Nodes 2, 3, and 4 are shown as branches that can execute in parallel.
+3. Working of Checkpointers
+A checkpointer is a component in LangGraph that saves and retrieves the state of a graph at specific points during execution.
+
+The saved state is called a checkpoint.
+
+In this example, the graph saves the state at four checkpoints:
+Step 1: Start — Checkpoint 1
+The graph starts execution with the initial state.
+numbers = [1]
+
+
+
+The first checkpoint is created, and the state is saved.
+CP 1 → numbers: [1] → Save
+
+
+Step 2: Node 1 — Checkpoint 2
+Node 1 executes and adds the number 2 to the existing list.
+numbers = [1, 2]
+
+
+
+The updated state is saved as the second checkpoint.
+CP 2 → numbers: [1, 2] → Save
+
+
+Step 3: Node 2, Node 3, and Node 4
+After Node 1, the graph branches into three nodes.
+
+Each node adds a different number to the state.
+- Node 2 adds 4.
+- Node 3 adds 3.
+- Node 4 adds 5.
+The nodes are represented as parallel branches in the graph.
+
+Once the branches complete, their updates are combined into the shared state.
+numbers = [1, 2, 3, 4, 5]
+
+
+
+The updated state is saved as Checkpoint 3.
+CP 3 → numbers: [1, 2, 3, 4, 5] → Save
+
+
+Step 4: End — Checkpoint 4
+After all the nodes finish their execution, the graph reaches the End node.
+
+The final state is:
+numbers = [1, 2, 3, 4, 5]
+
+
+
+The final state is saved as Checkpoint 4.
+CP 4 → Final State → Save
+
+
+4. How Persistence Works
+Persistence in LangGraph allows the graph to save and restore its state across different invocations.
+
+The checkpointer stores the graph's state as checkpoints.
+
+If the workflow crashes while executing Node 2, the graph can resume from the latest available checkpoint rather than starting from the beginning.
+
+For example:
+START
+  |
+  v
+Node 1
+  |
+  v
+Checkpoint 2
+  |
+  v
+Node 2 → Workflow crashes
+
+
+When the graph is invoked again with the same thread_id, LangGraph can retrieve the saved checkpoint and continue execution from that point.
+
+This is useful because:
+- The graph does not need to repeat all previously completed work.
+- The previously saved state is preserved.
+- The workflow can recover from failures.
+- The graph can resume execution from the latest checkpoint.
+Biggest advantage: Fault Tolerance
