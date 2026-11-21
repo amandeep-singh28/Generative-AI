@@ -1,0 +1,91 @@
+# Introduction to Persistence in LangGraph
+
+**Date:** 21/11/2026
+
+## 1. What is Persistence?
+
+Persistence in LangGraph refers to the ability to save and restore the state of a workflow over time.
+
+### Concepts Studied
+
+#### (i) Concept of Graph
+
+- A high-level goal is divided into a set of tasks.
+- A set of tasks is represented as a graph.
+- Every node represents a task.
+- Edges between nodes define the execution order.
+
+#### (ii) Concept of State
+
+Before building any workflow, we maintain a state.
+
+- **State:** Important data stored in a dictionary.
+- For example, if we are building a chatbot, we can store `"messages"` in the state.
+- All the values in the state are accessible to every node.
+- Every node can read and update the state.
+
+**State → Every node (R/W)**
+
+## 2. State During Graph Execution
+
+Whenever we invoke a graph, its state is available only during that execution.
+
+Once the graph reaches the end, the state is not automatically saved for the next invocation.
+
+### Example
+
+```text
+START
+  |
+Node 1
+  |
+Node 2
+  |
+END
+```
+
+## 3. Persistence Using Checkpointers
+
+To retain the state across invocations, we use persistence.
+
+LangGraph uses a **checkpointer** to save the graph's state as checkpoints.
+
+When we invoke the graph again with the same `thread_id`, it can load the saved state and continue the workflow.
+
+### Important Points
+
+- A checkpointer saves the graph's state.
+- The saved state can be accessed during a later invocation.
+- The same `thread_id` is used to identify the conversation or workflow.
+- The graph can continue from its saved state.
+
+## 4. Accessing the History of a Graph
+
+1. Compile the graph with a checkpointer.
+2. Invoke the graph for the first time.
+3. Use the same `thread_id` when invoking the graph again.
+4. Access the history of the previously compiled graph.
+
+### Workflow
+
+```text
+Compile Graph with Checkpointer
+             |
+             v
+      Invoke Graph
+       (First Time)
+             |
+             v
+      Save Checkpoint
+             |
+             v
+      Invoke Graph Again
+       (Same thread_id)
+             |
+             v
+      Load Saved State
+             |
+             v
+     Continue Workflow
+```
+
