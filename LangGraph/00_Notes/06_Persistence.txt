@@ -264,3 +264,20 @@ This is useful because:
 - The workflow can recover from failures.
 - The graph can resume execution from the latest checkpoint.
 Biggest advantage: Fault Tolerance
+
+Threads in LangGraph Persistence
+A thread is a unique sequence of graph executions associated with a thread_id. It allows LangGraph to organize and retrieve saved state for a particular conversation or workflow.
+How it works
+1. First invocation: Invoke the graph with a thread_id, such as "user-123". With a checkpointer configured, LangGraph saves checkpoints for that thread.
+2. Next invocation: Invoke the graph again using the same thread_id. LangGraph can load the latest checkpoint and continue with the saved state.
+3. Different thread: Use a different thread_id, such as "user-456". This creates a separate state history, independent of "user-123".
+Example
+config = {"configurable": {"thread_id": "user-123"}}graph.invoke({"message": "Hi"}, config)graph.invoke({"message": "What did I just say?"}, config)
+
+
+
+Both invocations use the same thread, so the second can access state saved from the first—provided the graph has a checkpointer and the state is retained in it.
+
+Important: A thread is not an operating-system thread or a single graph execution. It is an identifier for the saved state history across multiple invocations.
+
+Notebook summary: A thread_id identifies a thread in LangGraph persistence. Using the same thread_id lets the graph retrieve that thread’s saved checkpoints across invocations; a different thread_id keeps a separate state history.
